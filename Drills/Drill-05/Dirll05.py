@@ -6,8 +6,8 @@ gox = True
 goy = True
 open_canvas()
 character = load_image('animation_sheet.png')
-x = 682
-y = 336
+x = 712
+y = 349
 frame = 0
 # 0 이면 + + 1 이면 - - 2 이면 - + 3 이면 + -
 count = 0
@@ -54,27 +54,29 @@ def three_point():
     pass
 def four_point():
     global direction, count, direction, gox, goy, x, y
-    direction = 3
-    if x >= 715:
-        gox = False
-    if y <= 136:
-        goy = False
-    if (gox == False and goy == False):
-        count = 4
-        gox = True
-        goy = True
+    if count == 3 :
+        direction = 3
+        if x >= 715 :
+            gox = False
+        if y <= 136 :
+            goy = False
+        if (gox == False and goy == False):
+            count = 4
+            gox = True
+            goy = True
     pass
 def five_point():
     global direction, count, direction, gox, goy, x, y
-    direction = 2
-    if x <= 316:
-        gox = False
-    if y >= 225:
-        goy = False
-    if (gox == False and goy == False):
-        count = 5
-        gox = True
-        goy = True
+    if count == 4 :
+        direction = 2
+        if x <= 316 :
+            gox = False
+        if y >= 225 :
+            goy = False
+        if (gox == False and goy == False):
+            count = 5
+            gox = True
+            goy = True
 
     pass
 def six_point():
@@ -132,6 +134,18 @@ def nine_point():
     pass
 def return_point():
     global direction, count, direction, gox, goy, x, y
+    if count == 9 :
+        if x <= 203:
+            gox = False
+        if y >= 535:
+            goy = False
+
+        direction = 2
+        if (gox == False and goy == False):
+            count = 0
+            gox = True
+            goy = True
+
     pass
 
 def direction_point():
@@ -161,16 +175,17 @@ def goto_x_y():
             y -= 2
 pass
 while running:
-    clear_canvas()
-    #one_point()
-    #two_point()
+    #clear_canvas()
+   # one_point()
+   # two_point()
     #three_point()
-    #four_point()
+   # four_point()
     #five_point()
     #six_point()
     #seven_point()
     #eight_point()
-    nine_point()
+    #nine_point()
+    return_point()
     goto_x_y()
 
     character.clip_draw(frame * 100, 100 * right_or_left, 100, 100, x, y)
