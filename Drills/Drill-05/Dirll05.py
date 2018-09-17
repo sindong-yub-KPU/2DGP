@@ -6,8 +6,8 @@ gox = True
 goy = True
 open_canvas()
 character = load_image('animation_sheet.png')
-x = 715
-y = 136
+x = 510
+y = 92
 frame = 0
 # 0 이면 + + 1 이면 - - 2 이면 - + 3 이면 + -
 count = 0
@@ -79,9 +79,29 @@ def five_point():
     pass
 def six_point():
     global direction, count, direction, gox, goy, x, y
+    if count == 5 :
+        direction = 3
+        if x >= 510 :
+            gox = False
+        if y <= 92 :
+            goy = False
+        if (gox == False and goy == False):
+            count = 6
+            gox = True
+            goy = True
     pass
 def seven_point():
     global direction, count, direction, gox, goy, x, y
+    if count == 6 :
+        direction = 0
+        if x >= 692 :
+            gox = False
+        if y >= 518 :
+            goy = False
+        if (gox == False and goy == False):
+            count = 7
+            gox = True
+            goy = True
     pass
 def eight_point():
     global direction, count, direction, gox, goy, x, y
@@ -125,7 +145,9 @@ while running:
     #two_point()
     #three_point()
     #four_point()
-    five_point()
+    #five_point()
+    #six_point()
+    seven_point()
     goto_x_y()
 
     character.clip_draw(frame * 100, 100 * right_or_left, 100, 100, x, y)
