@@ -6,8 +6,8 @@ gox = True
 goy = True
 open_canvas()
 character = load_image('animation_sheet.png')
-x = 712
-y = 349
+x = 203
+y = 535
 frame = 0
 # 0 이면 + + 1 이면 - - 2 이면 - + 3 이면 + -
 count = 0
@@ -174,20 +174,28 @@ def goto_x_y():
         if goy == True:
             y -= 2
 pass
+def right_left_direction():
+    global direction, right_or_left
+    if direction == 0 or direction == 3:
+        right_or_left = 1
+    if direction == 1 or direction == 2:
+        right_or_left = 0
+    pass
 while running:
-    #clear_canvas()
-   # one_point()
-   # two_point()
-    #three_point()
-   # four_point()
-    #five_point()
-    #six_point()
-    #seven_point()
-    #eight_point()
-    #nine_point()
+
+    clear_canvas()
+    one_point()
+    two_point()
+    three_point()
+    four_point()
+    five_point()
+    six_point()
+    seven_point()
+    eight_point()
+    nine_point()
     return_point()
     goto_x_y()
-
+    right_left_direction()
     character.clip_draw(frame * 100, 100 * right_or_left, 100, 100, x, y)
     delay(0.02)
     update_canvas()
