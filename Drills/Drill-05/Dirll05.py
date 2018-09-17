@@ -119,6 +119,16 @@ def eight_point():
     pass
 def nine_point():
     global direction, count, direction, gox, goy, x, y
+    if count == 8 :
+        direction = 0
+        if x >= 712 :
+            gox = False
+        if y >= 349 :
+            goy = False
+        if (gox == False and goy == False):
+            count = 9
+            gox = True
+            goy = True
     pass
 def return_point():
     global direction, count, direction, gox, goy, x, y
@@ -158,7 +168,9 @@ while running:
     #four_point()
     #five_point()
     #six_point()
-    seven_point()
+    #seven_point()
+    #eight_point()
+    nine_point()
     goto_x_y()
 
     character.clip_draw(frame * 100, 100 * right_or_left, 100, 100, x, y)
