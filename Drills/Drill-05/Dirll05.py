@@ -155,24 +155,24 @@ def goto_x_y():
     global direction , count , direction , gox , goy ,x ,y
     if direction == 0:
         if gox == True:
-            x += 2
+            x += 1
         if goy == True:
-            y += 2
+            y += 1
     elif direction == 1:
         if gox == True:
-            x -= 2
+            x -= 1
         if goy == True:
-            y -= 2
+            y -= 1
     elif direction == 2:
         if gox == True:
-            x -= 2
+            x -= 1
         if goy == True:
-            y += 2
+            y += 1
     elif direction == 3:
         if gox == True:
-            x += 2
+            x += 1
         if goy == True:
-            y -= 2
+            y -= 1
 def right_left_direction():
     global direction, right_or_left
     if direction == 0 or direction == 3:
@@ -196,7 +196,7 @@ while running:
     goto_x_y()
     right_left_direction()
     character.clip_draw(frame * 100, 100 * right_or_left, 100, 100, x, y)
-    delay(0.02)
+    delay(0.005)
     update_canvas()
     frame = (frame + 1) % 8
 
