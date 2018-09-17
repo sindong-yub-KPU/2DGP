@@ -25,7 +25,7 @@ def one_point ():
             count = 1
             gox = True
             goy = True
-    pass
+
 def two_point ():
     global direction, count, direction, gox, goy, x, y
     if count == 1 :
@@ -38,7 +38,7 @@ def two_point ():
             count = 2
             gox = True
             goy = True
-    pass
+
 def three_point():
     global direction, count, direction, gox, goy, x, y
     if count == 2 :
@@ -51,7 +51,7 @@ def three_point():
             count = 3
             gox = True
             goy = True
-    pass
+
 def four_point():
     global direction, count, direction, gox, goy, x, y
     if count == 3 :
@@ -64,7 +64,7 @@ def four_point():
             count = 4
             gox = True
             goy = True
-    pass
+
 def five_point():
     global direction, count, direction, gox, goy, x, y
     if count == 4 :
@@ -78,7 +78,7 @@ def five_point():
             gox = True
             goy = True
 
-    pass
+
 def six_point():
     global direction, count, direction, gox, goy, x, y
     if count == 5 :
@@ -91,7 +91,7 @@ def six_point():
             count = 6
             gox = True
             goy = True
-    pass
+
 def seven_point():
     global direction, count, direction, gox, goy, x, y
     if count == 6 :
@@ -104,7 +104,7 @@ def seven_point():
             count = 7
             gox = True
             goy = True
-    pass
+
 def eight_point():
     global direction, count, direction, gox, goy, x, y
     if count == 7 :
@@ -118,7 +118,7 @@ def eight_point():
             count = 8
             gox = True
             goy = True
-    pass
+
 def nine_point():
     global direction, count, direction, gox, goy, x, y
     if count == 8 :
@@ -131,7 +131,7 @@ def nine_point():
             count = 9
             gox = True
             goy = True
-    pass
+
 def return_point():
     global direction, count, direction, gox, goy, x, y
     if count == 9 :
@@ -146,7 +146,7 @@ def return_point():
             gox = True
             goy = True
 
-    pass
+
 
 def direction_point():
     global direction
@@ -173,14 +173,13 @@ def goto_x_y():
             x += 2
         if goy == True:
             y -= 2
-pass
 def right_left_direction():
     global direction, right_or_left
     if direction == 0 or direction == 3:
         right_or_left = 1
     if direction == 1 or direction == 2:
         right_or_left = 0
-    pass
+
 while running:
 
     clear_canvas()
