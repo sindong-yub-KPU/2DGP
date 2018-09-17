@@ -6,8 +6,8 @@ gox = True
 goy = True
 open_canvas()
 character = load_image('animation_sheet.png')
-x = 510
-y = 92
+x = 682
+y = 336
 frame = 0
 # 0 이면 + + 1 이면 - - 2 이면 - + 3 이면 + -
 count = 0
@@ -105,6 +105,17 @@ def seven_point():
     pass
 def eight_point():
     global direction, count, direction, gox, goy, x, y
+    if count == 7 :
+        direction = 1
+        if x <= 682 :
+            gox = False
+        if y <= 336 :
+            goy = False
+
+        if (gox == False and goy == False):
+            count = 8
+            gox = True
+            goy = True
     pass
 def nine_point():
     global direction, count, direction, gox, goy, x, y
