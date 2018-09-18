@@ -11,7 +11,7 @@ frame = 0
 
 
 def handle_events():
-    global running
+    global running #루프 제어 변수
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
