@@ -20,6 +20,10 @@ def handle_events():
             go_x,go_y = event.x , KPU_HEIGHT -1 - event.y
 
 
+    pass
+
+
+
 
 
 
