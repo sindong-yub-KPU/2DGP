@@ -33,7 +33,7 @@ while(True):
     clear_canvas();
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     character.clip_draw(frame * 100, 100*direction, 100, 100, character_x, character_y)
-    px = point[((p_count + 1) % 10)]
+    px = point[((p_count + 1) % 20)]
     character_x, character_y = move_characeter(move, point[p_count % 20], point[((p_count + 1) % 20)])
 
     if (px[0] - character_x > 0):
