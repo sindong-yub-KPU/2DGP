@@ -18,6 +18,7 @@ def move_characeter(i , p1, p2):
     x = (1 - t) * p1[0] + t*p2[0]
     y = (1 - t) * p1[1] + t*p2[1]
     return x , y
+    pass
 def Re_Init():
     global move , p_count
     if(move == 100):
