@@ -22,14 +22,16 @@ def Re_Init():
     global move , p_count
     if(move == 100):
         move = 0
-       
+
 move =0
+p_count = 0
 while(True):
 
     clear_canvas();
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
-
+    px = point[((p_count + 1) % 10)]
+    character_x, character_y = move_characeter(move, point[p_count % 10], point[((p_count + 1) % 10)])
 
     move = move + 2
     events = get_events()
