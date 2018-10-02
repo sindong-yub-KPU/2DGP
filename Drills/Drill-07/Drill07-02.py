@@ -1,11 +1,9 @@
 from pico2d import *
 import random
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
+point = [(random.randint(100,KPU_WIDTH - 100), random.randint(100,KPU_HEIGHT - 100))for i in range(20) ]
 
-
-character_x = 0
-character_y = 0
-
+character_x , character_y  = point[0]
 
 
 
@@ -21,7 +19,6 @@ def move_characeter(i , p1, p2):
     y = (1 - t) * p1[1] + t*p2[1]
     return x , y
 
-
 while(True):
 
     clear_canvas();
@@ -29,7 +26,7 @@ while(True):
     character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
 
 
-    move = move + 2
+    
     events = get_events()
     update_canvas()
     frame = (frame + 1) % 8
