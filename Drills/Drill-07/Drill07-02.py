@@ -1,7 +1,7 @@
 from pico2d import *
 import random
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
-point = [(random.randint(100,KPU_WIDTH - 100), random.randint(100,KPU_HEIGHT - 100))for i in range(20) ]
+point = [(random.randint(100,KPU_WIDTH - 150), random.randint(150,KPU_HEIGHT - 150))for i in range(20) ]
 
 character_x , character_y  = point[0]
 
@@ -23,7 +23,7 @@ def Re_Init():
     if(move == 100):
         move = 0
         p_count = p_count + 1
-
+    pass
 
 move =0
 p_count = 0
