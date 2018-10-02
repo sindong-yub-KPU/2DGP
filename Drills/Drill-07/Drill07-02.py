@@ -14,6 +14,12 @@ kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
 frame = 0
 
+def move_characeter(i , p1, p2):
+
+    t = i / 100
+    x = (1 - t) * p1[0] + t*p2[0]
+    y = (1 - t) * p1[1] + t*p2[1]
+    return x , y
 
 
 while(True):
@@ -23,12 +29,12 @@ while(True):
     character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
 
 
-
+    move = move + 2
     events = get_events()
     update_canvas()
     frame = (frame + 1) % 8
 
-    
+
 
     delay(0.02)
 
