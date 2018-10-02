@@ -18,7 +18,12 @@ def move_characeter(i , p1, p2):
     x = (1 - t) * p1[0] + t*p2[0]
     y = (1 - t) * p1[1] + t*p2[1]
     return x , y
-
+def Re_Init():
+    global move , p_count
+    if(move == 100):
+        move = 0
+       
+move =0
 while(True):
 
     clear_canvas();
@@ -26,12 +31,12 @@ while(True):
     character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
 
 
-    
+    move = move + 2
     events = get_events()
     update_canvas()
     frame = (frame + 1) % 8
 
-
+    Re_Init()
 
     delay(0.02)
 
