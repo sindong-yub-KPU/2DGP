@@ -27,11 +27,12 @@ def Re_Init():
 
 move =0
 p_count = 0
+direction = 0
 while(True):
 
     clear_canvas();
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100, 100, 100, character_x, character_y)
+    character.clip_draw(frame * 100, 100*direction, 100, 100, character_x, character_y)
     px = point[((p_count + 1) % 10)]
     character_x, character_y = move_characeter(move, point[p_count % 20], point[((p_count + 1) % 20)])
 
