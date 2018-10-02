@@ -38,8 +38,8 @@ mouse_point = load_image('hand_arrow.png')
 running = True
 dir = 0
 stand = 0
-character_x = 500
-character_y = 500
+character_x = 50
+character_y = 900
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
 frame = 0
 hide_cursor()
