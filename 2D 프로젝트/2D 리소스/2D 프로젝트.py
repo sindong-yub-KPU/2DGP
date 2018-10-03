@@ -7,17 +7,20 @@ open_canvas(GAME_WIDTH, GAME_HEIGHT)
 class Main_UI:
     def __init__(self) :
         self.Main_Screen = load_image('main_image.png')
-        self.Main_bar_green = load_image('loading_bar_green.png')
-        self.Main_bar_Red = load_image('loading_bar_red.png')
+        self.Main_bar = load_image('SelectorAdventureButton.png')
 
-        self.bgm = load_music('Main_UI_music.mp3')
-        self.bgm = load_music()
+
+        self.bgm = load_music('Plants vs Zombies Soundtrack. [Main Menu].mp3')
+        self.bgm.set_volume(64)
+        self.bgm.repeat_play()
 
     def main_darw(self):
-
+        frame = 0
+        bar_size_x = 332
+        bar_size_y = 292
         clear_canvas()
         self.Main_Screen.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2,1400,600 )
-        self.Main_bar_green.draw(GAME_WIDTH/2 , GAME_HEIGHT/5)
+        self.Main_bar.clip_draw(0, 146 * frame , 332 , bar_size_y//2 , GAME_WIDTH//2 , GAME_HEIGHT//4)
         update_canvas()
 
 
