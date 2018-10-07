@@ -4,10 +4,7 @@
     <list default="true" id="6ec378d7-94fc-477e-9673-3d35b764c1d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/2D 프로젝트.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/2D 프로젝트.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/Plants vs Zombies Soundtrack. [Main Menu].mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/SelectorAdventureButton.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/UraniwaNi.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/main_image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drills/Drill-07/Drill07 - 03.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill-07/Drill07 - 03.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,22 +16,22 @@
     <session id="-582776150">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2307" />
+          <entry key="py" value="3246" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2307" />
+          <entry key="Python" value="3246" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -58,8 +55,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2D 리소스/2D 프로젝트.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="1296">
+              <caret line="81" column="4" lean-forward="true" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -91,6 +88,12 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>esc</find>
+      <find>print</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -101,9 +104,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="625" />
-    <option name="y" value="106" />
+    <option name="y" value="105" />
     <option name="width" value="1115" />
     <option name="height" value="830" />
   </component>
@@ -144,6 +147,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\programming\2DGP\2D 프로젝트\2D 리소스" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -199,15 +207,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="840" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.120290816" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.120290816" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24504249" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24504249" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -228,7 +236,9 @@
     <entry file="file://$PROJECT_DIR$/2D 리소스/메인화면 이미지.png" />
     <entry file="file://$PROJECT_DIR$/2D 리소스/loading_bar_red.png" />
     <entry file="file://$PROJECT_DIR$/2D 리소스/loading_bar_green.png" />
-    <entry file="file://$PROJECT_DIR$/2D 리소스/SelectorAdventureButton.png">
+    <entry file="file://$PROJECT_DIR$/2D 리소스/SelectorAdventureButton.png" />
+    <entry file="file://$PROJECT_DIR$/2D 리소스/main_image.png" />
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Mainresource/icono.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/.gitignore">
@@ -237,13 +247,7 @@
     <entry file="file://$PROJECT_DIR$/2D 리소스/.gitattributes">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/main_image.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/Zombies/BoomDie.atlas/BoomDie1_0.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Mainresource/icono.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/Mainresource/areyousure.png">
@@ -251,8 +255,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/2D 프로젝트.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="1296">
+          <caret line="81" column="4" lean-forward="true" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
         </state>
       </provider>
     </entry>

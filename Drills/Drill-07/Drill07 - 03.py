@@ -1,7 +1,7 @@
 from pico2d import *
 import random
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
-point = [(random.randint(100,KPU_WIDTH - 100), random.randint(100,KPU_HEIGHT - 100))for i in range(10) ]
+point = [(random.randint(100,KPU_WIDTH - 100), random.randint(200,KPU_HEIGHT - 100))for i in range(10) ]
 
 print(point)
 
@@ -78,7 +78,7 @@ while(True):
         direction = 1
     if (px[0] - character_x < 0):
         direction = 0
-    move = move + 2
+    move = move + 1
     events = get_events()
     update_canvas()
     frame = (frame + 1) % 8
