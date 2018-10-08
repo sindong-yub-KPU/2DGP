@@ -51,16 +51,15 @@ def draw_point(p):
     turtle.dot(5, random.random(), random.random(), random.random())
 
 def draw_curve_2_points(p1,p2,p3 ):
+    draw_big_point(p1)
+    draw_big_point(p2)
+    draw_big_point(p3)
 
-
-
-    for i in range(0, 100 + 1, 2):
-
-        t = i / 100
-        x = (2 * t ** 2 - 3 * t + 1) * p1[0] + (-4 * t ** 2 + 4 * t) * p2[0] + (2 * t ** 2 - t) * p3[0]
-        y = (2 * t ** 2 - 3 * t + 1) * p1[1] + (-4 * t ** 2 + 4 * t) * p2[1] + (2 * t ** 2 - t) * p3[1]
-        draw_point((x, y))
-
+    for i in range(0 , 100 , 2):
+        t = i/100
+        x = (2 *t** 2 -3 * t + 1 ) * p1[0] + (-4 * t ** 2 + 4 * t ) * p2[0] + (2 * t ** 2 - t) * p3[0]
+        y = (2 *t ** 2 - 3 * t +1 ) * p1[1] + (-4 * t ** 2 + 4 * t ) * p2[1] + (2 * t * 2 - t)
+        draw_point((x,y))
 
     draw_point(p3)
     pass
@@ -107,7 +106,7 @@ def draw_curve_4_points(p1, p2, p3, p4):
     draw_point(p3)
 
     # draw p3-p4
-    for i in range(50, 100, 2):
+    for i in range(50, 100, 1):
         t = i / 100
         x = (2*t**2-3*t+1)*p2[0]+(-4*t**2+4*t)*p3[0]+(2*t**2-t)*p4[0]
         y = (2*t**2-3*t+1)*p2[1]+(-4*t**2+4*t)*p3[1]+(2*t**2-t)*p4[1]
@@ -145,7 +144,7 @@ def draw_curve_5_points(p1, p2, p3, p4 , p5):
         draw_point((x, y))
 
     draw_point(p4)
-    for i in range(50, 100, 2):
+    for i in range(50, 100, 1):
         t = i / 100
         x = (2*t**2 - 3*t + 1) * p3[0] + (-4*t**2 + 4*t) * p4[0] + (2*t**2 - t) * p5[0]
         y = (2*t**2 - 3*t + 1) * p3[1] + (-4*t**2 + 4*t) * p4[1] + (2 *t**2 - t) * p5[1]
@@ -157,7 +156,7 @@ def draw_curve_5_points(p1, p2, p3, p4 , p5):
 
 prepare_turtle_canvas()
 while(True):
-    draw_curve_5_points((-300, 200), (400,350), (300, -300) , (-200 , -200) , (-300,200))
+    draw_curve_5_points((-350, -100), (-50,200), (150, -100) , (350 , 300) , (-350 , - 100))
 
 
 
