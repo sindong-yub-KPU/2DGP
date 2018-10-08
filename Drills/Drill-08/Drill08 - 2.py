@@ -17,6 +17,13 @@ frame = 0
 
 
 
+def Re_Init(where):
+
+    global move , p_count
+
+    if (move == 100):
+        move = 0
+        p_count = p_count + 1
 
 move = 0
 p_count = 0
@@ -28,12 +35,19 @@ while(True):
     clear_canvas();
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * direction, 100, 100, character_x, character_y)
+    Re_Init(where)
+    px = point[((p_count + 1) % 10)]
 
 
 
 
 
-
+    print(p_count)
+    print(move)
+    if(px[0] - character_x > 0):
+        direction = 1
+    if (px[0] - character_x < 0):
+        direction = 0
     move = move + 1
     events = get_events()
     update_canvas()
