@@ -16,6 +16,17 @@ character_x , character_y  = point[0]
 frame = 0
 
 
+def NO_START_END_move_charceter(i,p1, p2, p3, p4):
+
+
+
+    # draw p1-p2
+    t = i / 100
+    x = ((-t ** 3 + 2 * t ** 2 - t) * p1[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[0] + ( -3 * t ** 3 + 4 * t ** 2 + t) * p3[0] + (t ** 3 - t ** 2) * p4[0]) / 2
+    y = ((-t ** 3 + 2 * t ** 2 - t) * p1[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[1] + (-3 * t ** 3 + 4 * t ** 2 + t) * p3[1] + (t ** 3 - t ** 2) * p4[1]) / 2
+    return x , y
+
+    # draw p4-p5
 
 def Re_Init(where):
 
@@ -38,6 +49,8 @@ while(True):
     Re_Init(where)
     px = point[((p_count + 1) % 10)]
 
+
+    character_x, character_y = NO_START_END_move_charceter(move, point[(p_count - 1) % 10], point[(p_count ) % 10], point[(p_count + 1) % 10] , point[(p_count + 2) % 10])
 
 
 
