@@ -3,7 +3,17 @@ running = True
 import random
 open_canvas()
 class ball:
-    pass
+    def __init__(self):
+
+        self.x , self.y = random.randint(30 , 750) , 600
+        self.right = random.randint(0, 1)
+        if(self.right == 0):
+            self.ball_image = load_image('ball21x21.png')
+        if(self.right == 1):
+            self.ball_image = load_image('ball41x41.png')
+
+        self.fall = random.randint(2 , 10)
+
 
 class Boy:
     def __init__(self):
