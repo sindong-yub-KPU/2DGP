@@ -1,6 +1,6 @@
 from pico2d import*
-running = True
 import random
+running = True
 open_canvas()
 class ball:
     def __init__(self):
