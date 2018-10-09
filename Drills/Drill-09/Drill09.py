@@ -5,7 +5,7 @@ open_canvas()
 class ball:
     def __init__(self):
 
-        self.x , self.y = random.randint(30 , 750) , 600
+        self.x , self.y = random.randint(20 , 800) , 600
         self.right = random.randint(0, 1)
         if(self.right == 0):
             self.ball_image = load_image('ball21x21.png')
@@ -17,7 +17,17 @@ class ball:
 
         self.ball_image.draw(self.x , self.y)
 
-
+    def update(self):
+        if(self.right == 0):
+            if(self.y > 70):
+                self.y -= self.fall
+            elif (self.y < 70):
+                self.y += (70 - self.y)
+        if(self.right == 1):
+            if (self.y > 70 + 25 / 2 ):
+                self.y -= self.fall
+            elif (self.y < 70 + 25 /2 ):
+                self.y += ((70 + 25/2) - self.y)
 
 class Boy:
     def __init__(self):
@@ -45,11 +55,10 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
-i = 0
 
 team = [Boy() for i in range(11)]
 balls = [ball() for i in range(20)]
-print(type(team))
+
 while(running):
     handle_events()
     clear_canvas()
@@ -57,9 +66,10 @@ while(running):
     for boy in team:
         boy.draw()
         boy.update()
+
     for ball in balls:
         ball.draw()
-
+        ball.update()
     delay(0.02)
     update_canvas()
 
