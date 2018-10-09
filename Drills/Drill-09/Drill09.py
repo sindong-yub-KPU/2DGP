@@ -13,6 +13,10 @@ class ball:
             self.ball_image = load_image('ball41x41.png')
 
         self.fall = random.randint(2 , 10)
+    def draw(self):
+
+        self.ball_image.draw(self.x , self.y)
+
 
 
 class Boy:
@@ -42,7 +46,7 @@ def handle_events():
             running = False
 
 i = 0
-running_Boy = Boy()
+
 team = [Boy() for i in range(11)]
 balls = [ball() for i in range(20)]
 print(type(team))
@@ -53,7 +57,8 @@ while(running):
     for boy in team:
         boy.draw()
         boy.update()
-
+    for ball in balls:
+        ball.draw()
 
     delay(0.02)
     update_canvas()
