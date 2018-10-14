@@ -13,6 +13,7 @@ class Main_UI:
         self.Main_bar = load_image('Mainresource/SelectorAdventureButton.png')
         self.Main_object = load_image('Mainresource/icono.png');
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
+        pass
 
 
         self.bgm = load_music('Mainresource/Plants vs Zombies Soundtrack. [Main Menu].mp3')
