@@ -28,7 +28,13 @@ def handle_events():
             elif (event.type , event.key) == (SDL_KEYDOWN , SDLK_p):
                 game_framework.pop_state()
 def update():
+    global frame
+    frame = (frame + 1) % 300
     pass
+
+
+
+
 def pause():
     pass
 
@@ -37,4 +43,8 @@ def resume():
     pass
 
 def draw():
-    pass
+    clear_canvas()
+
+    image.clip_draw(225,250, 450,450, 400, 300)
+
+    update_canvas()
