@@ -44,7 +44,9 @@ def resume():
 
 def draw():
     clear_canvas()
-
-    image.clip_draw(225,250, 450,450, 400, 300)
+    if(frame > 100):
+        image.clip_draw(225,250, 450,430, 400, 300)
+    main_state.boy.draw()
+    main_state.grass.draw()
 
     update_canvas()
