@@ -1,5 +1,6 @@
 from pico2d import *
-
+import game_framework
+import Tutorial_state
 GAME_WIDTH = 1400
 GAME_HEIGHT = 600
 
@@ -72,6 +73,26 @@ class Main_UI:
             self.Main_object_esc.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2, 510, 380 )
 
         update_canvas()
-    def update(self):
-        pass
+def update():
+    pass
+def enter():
+    global Main_UI
 
+    Main_UI = Main_UI()
+    pass
+def draw():
+    global Main_UI
+    Main_UI.draw()
+def exit():
+    global Main_UI
+    del (Main_UI)
+
+def handle_events():
+    global Main_UI
+    global game_running
+    Main_UI.handle_events()
+    if(game_running == False):
+        game_framework.quit()
+    if(change_screen == 1):
+        game_framework.change_state(Tutorial_state)
+    pass
