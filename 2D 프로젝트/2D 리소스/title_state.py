@@ -2,7 +2,7 @@ from pico2d import *
 
 GAME_WIDTH = 1400
 GAME_HEIGHT = 600
-open_canvas(GAME_WIDTH, GAME_HEIGHT)
+
 game_start = False
 game_menu = False
 game_running = True
@@ -20,7 +20,7 @@ class Main_UI:
         self.bgm.set_volume(64)
         self.bgm.repeat_play()
 
-    def mouse_event(self):
+    def handle_events(self):
         global game_running
         global game_start
         global change_screen
@@ -57,7 +57,7 @@ class Main_UI:
                     game_menu = False
 
 
-    def main_darw(self):
+    def draw(self):
         if(game_start == True):
             frame = 0
         if(game_start  == False):
@@ -72,9 +72,6 @@ class Main_UI:
             self.Main_object_esc.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2, 510, 380 )
 
         update_canvas()
+    def update(self):
+        pass
 
-GAME_UI = Main_UI()
-
-while(game_running):
-    GAME_UI.main_darw()
-    GAME_UI.mouse_event()
