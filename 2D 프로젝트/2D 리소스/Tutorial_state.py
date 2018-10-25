@@ -17,6 +17,7 @@ class Tutorial:
         self.Tutorial_GAME_START = load_music('Tutorial/Tutorial_GAME_START.mp3') # 게임 스타트 음악
         self.font = load_font('Tutorial/ConsolaMalgun.ttf', 30)
         self.Tutorial_Start_logo = load_image('Tutorial/Turtorial_Start.png')
+        self.cards = load_image('Tutorial/cards.png')
         self.intro_music.set_volume(64)
         self.intro_music.repeat_play()
         self.frame = 0 # 화면을 옮겨주는 프레임
@@ -53,9 +54,10 @@ class Tutorial:
         #200 # 800  게임 시작시
         #도로에 좀비들을 아이들 상태로 그려줘야함
 
-        self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 800 , 600 , 700 , 300, 1400, 600 )
-        self.board.clip_draw(0 , 0 ,557 , 109  , 280, 560 ,  557 , 80)
-        self.font.draw(20, 530, '%d' % self.sun_value)
+        self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 800 , 600 , 700 , 300, 1400, 600 ) #맵을 그려줌
+        self.board.clip_draw(0 , 0 ,557 , 109  , 280, 560 ,  557 , 80) #보드판
+        self.font.draw(20, 530, '%d' % self.sun_value) # 가지고 있는 돈의 값
+        self.cards.clip_draw(0 , 485 , 64, 90 , 140 , 560 , 64, 70)
         if(game_menu == True):
             self.Main_object_esc.draw(1400//2 ,600//2, 510, 380 )
         if(self.order < 4):
