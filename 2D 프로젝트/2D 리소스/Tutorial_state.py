@@ -1,10 +1,12 @@
 import game_framework
+from Zombies import *
 from pico2d import*
 
 
 name = "Tutorial"
 tutorial = None
 game_menu = None
+Zombies = None
 class Tutorial:
     def __init__(self):
         self.Tutorial_Map = load_image('Tutorial/Tutorial_map.png')
@@ -42,22 +44,35 @@ class Tutorial:
                     game_menu = False
 
     def draw(self):
-
+        global Zombie
         clear_canvas()
         #처음 시작시는 0 으로 바꿔줌 # 700 까지 올려주고 다시 200으로 내려줌
         #글자 써줘야함
         #200 # 800  게임 시작시
         #도로에 좀비들을 아이들 상태로 그려줘야함
-        self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 800 , 600 , 700 , 300,1400,600 )
+
+        self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 700 , 600 , 700 , 300, 1400, 600 )
         self.board.clip_draw(0 , 0 ,557 , 109  , 280, 560 ,  557 , 80)
         if(game_menu == True):
             self.Main_object_esc.draw(1400//2 ,600//2, 510, 380 )
         if(self.order < 4):
             self.font.draw(600, 50, 'My house...')
+
+
+
+        for Zombie in Zombies:
+
+            Zombie.draw(self.order)
+
         update_canvas()
         delay(0.02)
 
+
     def update(self):
+        global Zombie
+        for Zombie in Zombies:
+            Zombie.update()
+
         if(self.idle_time >= 50 and self.order == 0):
             self.order = 1
         if(self.order == 0):
@@ -67,7 +82,7 @@ class Tutorial:
             self.frame = self.frame + 3
             if(self.frame >= 600):
                 self.order = 2
-                print(0)
+
         elif (self.order == 2):
             if(self.idle_time > 100):
                 self.order = 3
@@ -83,11 +98,21 @@ class Tutorial:
             self.order = 5
 
 
+def creat_Zombie():
+    global Zombies
+
+    new_zombie = Zombie() # 새로운 좀비 객체에 할당
+    Zombies.append(new_zombie) # 리스트에 추가해줌
 
 
 def enter():
     global tutorial
+    global Zombies
+
+    Zombies = []
     tutorial = Tutorial()
+    for i in range(5):
+        creat_Zombie()
     pass
 def update():
     global tutorial
