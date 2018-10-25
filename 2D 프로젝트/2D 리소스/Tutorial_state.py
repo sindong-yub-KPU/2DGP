@@ -75,6 +75,7 @@ class Tutorial:
         elif(self.order == 3):
             self.frame = self.frame - 3
             if(self.frame <= 200):
+
                 self.order = 4
         elif(self.order == 4):
             self.Tutorial_Start.set_volume(64)
