@@ -4,7 +4,7 @@ import time
 
 
 class Zombie:
-    WALK, ATTACK ,DIE ,END = 1, 2, 3 ,4
+    WALK, ATTACK ,DIE ,END ,IDLE = 1, 2, 3 ,4 , 5
     Basic_Zombies = None
     start_frame = 0
     order = 0
@@ -12,6 +12,7 @@ class Zombie:
         self.x, self.y = random.randint(1800 , 1900) , random.randint(100 , 450)
         self.frame =random.randint(0, 11)
         self.total_frame = 0.0
+        self.state = self.IDLE
         if Zombie.Basic_Zombies == None:
             Zombie.Basic_Zombies = load_image('Tutorial/basic_zombie_idle.png')
 
@@ -26,11 +27,17 @@ class Zombie:
 
 
 
-    def draw(self , order):
-        if(order  < 2):
-            self.start_frame = self.start_frame + 2.2
-        if(order >= 3):
-            self.start_frame = self.start_frame - 4
 
-        self.Basic_Zombies.clip_draw(self.frame * 166  ,0 , 81 ,120 , self.x - self.start_frame , self.y)
+    def draw(self , order):
+        if(self.state == self.IDLE):
+            if (order < 2):
+                self.start_frame = self.start_frame + 3
+            if (order >= 3):
+                self.start_frame = self.start_frame - 4
+
+            self.Basic_Zombies.clip_draw(self.frame * 166, 0, 81, 120, self.x - self.start_frame, self.y)
+        if(self.state == self.WALK):
+
+
+
         print(self.start_frame)

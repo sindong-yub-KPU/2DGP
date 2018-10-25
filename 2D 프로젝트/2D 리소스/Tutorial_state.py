@@ -85,7 +85,7 @@ class Tutorial:
             self.idle_time = self.idle_time + 1
 
         elif(self.order == 1):
-            self.frame = self.frame + 2
+            self.frame = self.frame + 3
             if(self.frame >= 600):
                 self.order = 2
 
@@ -133,7 +133,11 @@ def enter():
     pass
 def update():
     global tutorial
+    global Zombies
     tutorial.update()
+    if(tutorial.order >= 5):
+        for i in range(5):
+            Zombies[i].state = 1
 
 def draw():
     global tutorial
