@@ -8,6 +8,7 @@ game_start = False
 game_menu = False
 game_running = True
 change_screen = 0
+soundtime = 0
 class Main_UI:
     def __init__(self) :
         self.Main_Screen = load_image('Mainresource/main_image.png')
@@ -16,7 +17,7 @@ class Main_UI:
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
         pass
 
-
+        self.start_music = load_music('start_sound.mp3')
         self.bgm = load_music('Mainresource/Plants vs Zombies Soundtrack. [Main Menu].mp3')
         self.bgm.set_volume(64)
         self.bgm.repeat_play()
@@ -51,6 +52,8 @@ class Main_UI:
                   # 게임 시작
                 if( game_start == False):
                     change_screen = 1
+                    self.start_music.set_volume(64)
+                    self.start_music.repeat_play()
                 if (event.x < 674  and event.x > 490 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_running = False
 
@@ -74,6 +77,12 @@ class Main_UI:
 
         update_canvas()
 def update():
+    global soundtime
+    if(change_screen == 1):
+        soundtime = soundtime + 1
+        delay(0.02)
+        if(soundtime > 140):
+            game_framework.change_state(Tutorial_state)
     pass
 def enter():
     global Main_UI
@@ -93,6 +102,8 @@ def handle_events():
     Main_UI.handle_events()
     if(game_running == False):
         game_framework.quit()
-    if(change_screen == 1):
-        game_framework.change_state(Tutorial_state)
+
+    pass
+def pause():
+
     pass

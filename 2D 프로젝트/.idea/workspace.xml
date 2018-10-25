@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec378d7-94fc-477e-9673-3d35b764c1d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/2D 리소스/Plants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2D 리소스/game_framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/game_framework.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/mygame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2D 리소스/start_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/start_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2D 리소스/title_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/title_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drills/Drill-10/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill-10/main_state.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,37 +20,38 @@
     <session id="-582776150">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="3" />
+          <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="5109" />
+          <entry key="py" value="7272" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="5109" />
+          <entry key="Python" value="7272" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitattributes" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="png" value="12" />
-          <entry key="py" value="7" />
+          <entry key="png" value="22" />
+          <entry key="py" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="12" />
+          <entry key="Image" value="22" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="7" />
+          <entry key="Python" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -56,17 +60,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2D 리소스/Mainresource/SelectorAdventureButton.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+            <state relative-caret-position="120">
+              <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="12" />
+            <state relative-caret-position="843">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -85,10 +84,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+                <marker date="1540451588012" expanded="true" signature="3209:3248" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/Plants.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="360">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <marker date="1540401429662" expanded="true" signature="73:79" ph="..." />
@@ -98,45 +110,29 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2D 리소스/Baisc_plants.png">
+        <entry file="file://$PROJECT_DIR$/2D 리소스/마우스.png">
           <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="33" column="32" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="33" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-                <marker date="1540394508520" expanded="true" signature="2848:2887" ph="..." />
-              </folding>
-            </state>
-          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            <state relative-caret-position="312">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1540403465700" expanded="true" signature="94:99" ph="..." />
-                <marker date="1540403465700" expanded="true" signature="283:345" ph="..." />
-                <marker date="1540403465700" expanded="true" signature="703:714" ph="..." />
+                <marker date="1540453356519" expanded="true" signature="110:115" ph="..." />
+                <marker date="1540453356519" expanded="true" signature="778:1682" ph="..." />
+                <marker date="1540453356519" expanded="true" signature="3177:3187" ph="..." />
+                <marker date="1540453356519" expanded="true" signature="3200:3205" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2D 리소스/game_framework.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/Tutorial_map.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -145,8 +141,17 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2D 리소스/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/board.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2D 리소스/game_framework.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="92" column="22" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -163,6 +168,7 @@
       <find>esc</find>
       <find>print</find>
       <find>up</find>
+      <find>change</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -172,18 +178,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/2D 리소스/2D 프로젝트.py" />
-        <option value="$PROJECT_DIR$/2D 리소스/start_state.py" />
         <option value="$PROJECT_DIR$/Plants.py" />
         <option value="$PROJECT_DIR$/2D 리소스/Plants.py" />
+        <option value="$PROJECT_DIR$/2D 리소스/game_framework.py" />
+        <option value="$PROJECT_DIR$/2D 리소스/start_state.py" />
         <option value="$PROJECT_DIR$/2D 리소스/title_state.py" />
         <option value="$PROJECT_DIR$/2D 리소스/mygame.py" />
         <option value="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="960" />
-    <option name="width" value="960" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="173" />
+    <option name="width" value="1747" />
     <option name="height" value="1033" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -222,6 +229,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/programming/2DGP/2D 프로젝트/2D 리소스/mygame.py" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
@@ -316,12 +324,12 @@
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.120290816" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.120290816" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32947975" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24504249" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24504249" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.14022663" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -344,13 +352,7 @@
     <entry file="file://$PROJECT_DIR$/2D 리소스/loading_bar_green.png" />
     <entry file="file://$PROJECT_DIR$/2D 리소스/SelectorAdventureButton.png" />
     <entry file="file://$PROJECT_DIR$/2D 리소스/main_image.png" />
-    <entry file="file://$PROJECT_DIR$/2D 리소스/2D 프로젝트.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/2D 프로젝트.py" />
     <entry file="file://$PROJECT_DIR$/2D 리소스/Mainresource/areyousure.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -372,13 +374,40 @@
     <entry file="file://$PROJECT_DIR$/2D 리소스/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/kpu_credit.png">
+    <entry file="file://C:/Python 3.7/Lib/site-packages/pico2d/pico2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="282" column="31" lean-forward="true" selection-start-line="282" selection-start-column="31" selection-end-line="282" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Baisc_plants.png">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/Tutorial_map.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/board.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/마우스.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Plants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <marker date="1540401429662" expanded="true" signature="73:79" ph="..." />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="12" />
+        <state relative-caret-position="843">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -387,55 +416,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/game_framework.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Baisc_plants.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Plants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <marker date="1540401429662" expanded="true" signature="73:79" ph="..." />
-          </folding>
+        <state relative-caret-position="387">
+          <caret line="92" column="22" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        <state relative-caret-position="120">
+          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/kpu_credit.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="33" column="32" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="33" selection-end-column="32" />
+        <state relative-caret-position="268">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <marker date="1540394508520" expanded="true" signature="2848:2887" ph="..." />
+            <marker date="1540451588012" expanded="true" signature="3209:3248" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        <state relative-caret-position="312">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1540403465700" expanded="true" signature="94:99" ph="..." />
-            <marker date="1540403465700" expanded="true" signature="283:345" ph="..." />
-            <marker date="1540403465700" expanded="true" signature="703:714" ph="..." />
+            <marker date="1540453356519" expanded="true" signature="110:115" ph="..." />
+            <marker date="1540453356519" expanded="true" signature="778:1682" ph="..." />
+            <marker date="1540453356519" expanded="true" signature="3177:3187" ph="..." />
+            <marker date="1540453356519" expanded="true" signature="3200:3205" ph="..." />
           </folding>
         </state>
       </provider>
