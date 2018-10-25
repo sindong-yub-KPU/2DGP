@@ -15,7 +15,8 @@ class Main_UI:
         self.Main_bar = load_image('Mainresource/SelectorAdventureButton.png')
         self.Main_object = load_image('Mainresource/icono.png');
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
-        pass
+        self.Main_UI = load_image('Mainresource/Main_UI.png')
+
 
         self.start_music = load_music('start_sound.mp3')
         self.bgm = load_music('Mainresource/Plants vs Zombies Soundtrack. [Main Menu].mp3')
@@ -72,6 +73,7 @@ class Main_UI:
         self.Main_Screen.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2, 1400, 600 )
         self.Main_bar.clip_draw(0, 146 * frame , 332 , bar_size_y//2 , GAME_WIDTH//2 , GAME_HEIGHT//4)
         self.Main_object.draw(GAME_WIDTH//2  + 200,GAME_HEIGHT//4, 256, 256 )
+        self.Main_UI.draw(700 , 450)
         if(game_menu == True):
             self.Main_object_esc.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2, 510, 380 )
 

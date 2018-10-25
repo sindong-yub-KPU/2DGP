@@ -4,11 +4,8 @@
     <list default="true" id="6ec378d7-94fc-477e-9673-3d35b764c1d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/game_framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/game_framework.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/mygame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/start_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/start_state.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/title_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/title_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill-10/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill-10/main_state.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,12 +28,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="7272" />
+          <entry key="py" value="7506" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="7272" />
+          <entry key="Python" value="7506" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -62,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            <state relative-caret-position="216">
+              <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -74,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="843">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="336">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -83,14 +80,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+            <state relative-caret-position="316">
+              <caret line="80" column="13" lean-forward="true" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-                <marker date="1540451588012" expanded="true" signature="3209:3248" ph="..." />
+                <marker date="1540455040495" expanded="true" signature="3296:3335" ph="..." />
               </folding>
             </state>
           </provider>
@@ -114,17 +111,17 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="288">
+              <caret line="81" column="26" lean-forward="true" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1540453356519" expanded="true" signature="110:115" ph="..." />
-                <marker date="1540453356519" expanded="true" signature="778:1682" ph="..." />
-                <marker date="1540453356519" expanded="true" signature="3177:3187" ph="..." />
-                <marker date="1540453356519" expanded="true" signature="3200:3205" ph="..." />
+                <marker date="1540454097478" expanded="true" signature="110:115" ph="..." />
+                <marker date="1540454097478" expanded="true" signature="850:1754" ph="..." />
+                <marker date="1540454097478" expanded="true" signature="3431:3441" ph="..." />
+                <marker date="1540454097478" expanded="true" signature="3454:3459" ph="..." />
               </folding>
             </state>
           </provider>
@@ -181,14 +178,14 @@
         <option value="$PROJECT_DIR$/Plants.py" />
         <option value="$PROJECT_DIR$/2D 리소스/Plants.py" />
         <option value="$PROJECT_DIR$/2D 리소스/game_framework.py" />
+        <option value="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" />
+        <option value="$PROJECT_DIR$/2D 리소스/mygame.py" />
         <option value="$PROJECT_DIR$/2D 리소스/start_state.py" />
         <option value="$PROJECT_DIR$/2D 리소스/title_state.py" />
-        <option value="$PROJECT_DIR$/2D 리소스/mygame.py" />
-        <option value="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="173" />
     <option name="width" value="1747" />
     <option name="height" value="1033" />
@@ -324,12 +321,12 @@
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.120290816" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.120290816" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32947975" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24504249" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24504249" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.14022663" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -393,6 +390,9 @@
     <entry file="file://$PROJECT_DIR$/2D 리소스/마우스.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/kpu_credit.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/Plants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -404,12 +404,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="843">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="288">
+          <caret line="81" column="26" lean-forward="true" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+            <marker date="1540454097478" expanded="true" signature="110:115" ph="..." />
+            <marker date="1540454097478" expanded="true" signature="850:1754" ph="..." />
+            <marker date="1540454097478" expanded="true" signature="3431:3441" ph="..." />
+            <marker date="1540454097478" expanded="true" signature="3454:3459" ph="..." />
           </folding>
         </state>
       </provider>
@@ -423,38 +427,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        <state relative-caret-position="216">
+          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/kpu_credit.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        <state relative-caret-position="316">
+          <caret line="80" column="13" lean-forward="true" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <marker date="1540451588012" expanded="true" signature="3209:3248" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1540453356519" expanded="true" signature="110:115" ph="..." />
-            <marker date="1540453356519" expanded="true" signature="778:1682" ph="..." />
-            <marker date="1540453356519" expanded="true" signature="3177:3187" ph="..." />
-            <marker date="1540453356519" expanded="true" signature="3200:3205" ph="..." />
+            <marker date="1540455040495" expanded="true" signature="3296:3335" ph="..." />
           </folding>
         </state>
       </provider>

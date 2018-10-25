@@ -11,6 +11,7 @@ class Tutorial:
         self.board = load_image('Tutorial/board.png')
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
         self.intro_music = load_music('Tutorial/intro_music.mp3')
+        self.Tutorial_Start = load_music('Tutorial/Tutorial_start.mp3')
         self.font = load_font('Tutorial/ConsolaMalgun.ttf', 30)
         self.intro_music.set_volume(64)
         self.intro_music.repeat_play()
@@ -51,7 +52,8 @@ class Tutorial:
         self.board.clip_draw(0 , 0 ,557 , 109  , 280, 560 ,  557 , 80)
         if(game_menu == True):
             self.Main_object_esc.draw(1400//2 ,600//2, 510, 380 )
-        self.font.draw(600, 50, 'My house...')
+        if(self.order < 4):
+            self.font.draw(600, 50, 'My house...')
         update_canvas()
         delay(0.02)
 
@@ -74,7 +76,10 @@ class Tutorial:
             self.frame = self.frame - 3
             if(self.frame <= 200):
                 self.order = 4
-
+        elif(self.order == 4):
+            self.Tutorial_Start.set_volume(64)
+            self.Tutorial_Start.repeat_play()
+            self.order = 5
 
 
 
