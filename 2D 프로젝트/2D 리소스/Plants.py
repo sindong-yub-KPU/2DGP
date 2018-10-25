@@ -5,11 +5,6 @@ font = None
 
 class plants:
 
-    PIXEL_PER_METER = (10.0 / 0.3)# 10 pixel 30 cm
-    RUN_SPEED_KMPTH = 20.0  # Km / Hour
-    RUN_SPEED_MPM = (RUN_SPEED_KMPTH * 1000.0 / 60.0)
-    RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
-    RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
     def __init__(self ,mouse_x,mouse_y):
         self.x , self.y = int(mouse_x) , int(mouse_y)

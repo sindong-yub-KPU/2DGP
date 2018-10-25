@@ -13,15 +13,17 @@ class Tutorial:
         self.board = load_image('Tutorial/board.png')
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
         self.intro_music = load_music('Tutorial/intro_music.mp3')
-        self.Tutorial_Start = load_music('Tutorial/Tutorial_start.mp3')
+        self.Tutorial_Start = load_music('Tutorial/Tutorial_start.mp3') # 초반 도입 음악
+        self.Tutorial_GAME_START = load_music('Tutorial/Tutorial_GAME_START.mp3') # 게임 스타트 음악
         self.font = load_font('Tutorial/ConsolaMalgun.ttf', 30)
+        self.Tutorial_Start_logo = load_image('Tutorial/Turtorial_Start.png')
         self.intro_music.set_volume(64)
         self.intro_music.repeat_play()
         self.frame = 0 # 화면을 옮겨주는 프레임
         self.order = 0 # frame을 움직여야할 상태값
         self.idle_time = 0 # 화면 정지 시간
         self.str = "우리들의 집" # 글자 출력
-
+        self.sun_value = 200
 
         #self.arrow('Tutorial/arrow.png')
         pass
@@ -51,16 +53,18 @@ class Tutorial:
         #200 # 800  게임 시작시
         #도로에 좀비들을 아이들 상태로 그려줘야함
 
-        self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 700 , 600 , 700 , 300, 1400, 600 )
+        self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 800 , 600 , 700 , 300, 1400, 600 )
         self.board.clip_draw(0 , 0 ,557 , 109  , 280, 560 ,  557 , 80)
+        self.font.draw(20, 530, '%d' % self.sun_value)
         if(game_menu == True):
             self.Main_object_esc.draw(1400//2 ,600//2, 510, 380 )
         if(self.order < 4):
             self.font.draw(600, 50, 'My house...')
+        if(self.order == 4):
+            self.Tutorial_Start_logo.draw(700, 300)
 
 
-
-        for Zombie in Zombies:
+        for Zombie in Zombies: #리스트에 있는 좀비들을 그려준다
 
             Zombie.draw(self.order)
 
@@ -79,7 +83,7 @@ class Tutorial:
             self.idle_time = self.idle_time + 1
 
         elif(self.order == 1):
-            self.frame = self.frame + 3
+            self.frame = self.frame + 2
             if(self.frame >= 600):
                 self.order = 2
 
@@ -88,14 +92,26 @@ class Tutorial:
                 self.order = 3
             self.idle_time = self.idle_time + 1
         elif(self.order == 3):
-            self.frame = self.frame - 3
-            if(self.frame <= 200):
+            self.frame = self.frame - 2
+            if(self.frame <= 250):
 
                 self.order = 4
         elif(self.order == 4):
-            self.Tutorial_Start.set_volume(64)
-            self.Tutorial_Start.repeat_play()
-            self.order = 5
+            if (self.idle_time > 130):
+                self.Tutorial_Start.set_volume(64)
+                self.Tutorial_Start.repeat_play()
+                self.order = 5
+            self.idle_time = self.idle_time + 1
+
+        elif(self.order == 5):
+            self.idle_time = self.idle_time + 1
+            if (self.idle_time > 160):
+                self.Tutorial_GAME_START.set_volume(64)
+                self.Tutorial_GAME_START.repeat_play()
+                self.order = 6
+
+
+
 
 
 def creat_Zombie():
@@ -104,15 +120,14 @@ def creat_Zombie():
     new_zombie = Zombie() # 새로운 좀비 객체에 할당
     Zombies.append(new_zombie) # 리스트에 추가해줌
 
-
 def enter():
     global tutorial
     global Zombies
 
-    Zombies = []
+    Zombies = [] # 객체 초기화
     tutorial = Tutorial()
-    for i in range(5):
-        creat_Zombie()
+    for i in range(5): # 객체 생성
+        creat_Zombie() #리스트에 좀비들을 집어넣어줌
     pass
 def update():
     global tutorial
