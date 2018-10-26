@@ -7,10 +7,11 @@ class plant:
 
 
     def __init__(self):
-        self.x , self.y =0,0
+        self.x , self.y = 0, 0
         self.frame = random.randint(0 , 12 )
         self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
-        self.total_frame, self.frame = 0.0 , 0.0
+        self.frame = random.randint(0, 11)
+        self.total_frame = random.randint(0, 10)
 
 
     def update(self):
@@ -27,4 +28,5 @@ class plant:
             self.basic_plants_image.clip_draw( 0, 0, 71, 80, mouse_x + 10 , 600 - mouse_y)
 
     def draw(self):
-        self.basic_plants_image.clip_draw(self.frame * 70 ,  71 , 80 , 120 , self.x , self.y )
+        print(self.x)
+        self.basic_plants_image.clip_draw(self.frame * 70 ,  0 , 80 , 120 , self.x , self.y )

@@ -11,6 +11,7 @@ Zombies = None
 Plants = None
 Plants_Card = None
 current_time = 0
+Plant_Count =0
 Zombie_Count = 0
 mouse_x = 0
 mouse_y = 0
@@ -40,6 +41,7 @@ class Tutorial:
     def handle_events(self):
         global game_menu
         global mouse_x , mouse_y
+        global Plant_Count
         events = get_events()
         for event in events:
 
@@ -59,8 +61,18 @@ class Tutorial:
 
                 if(event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 ):
                     self.select_card = 1
-                elif(event.button == SDL_BUTTON_RIGHT):
+                if(event.button == SDL_BUTTON_RIGHT):
                     self.select_card = 0 # 오른쪽 버튼을 누르면 초기화
+                if(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
+                    #여기서부턴 튜토리얼 대지 영역
+                    for i in range(9):
+                        if(event.x >= i * 140 and event.x <=  i* 140 + 140):
+                            creat_plant()
+                            Plants[Plant_Count].x = int(i * 140 + 70)
+                            Plants[Plant_Count].y = int(277)
+                            Plant_Count = Plant_Count + 1
+                            self.select_card = 0
+                            break
 
 
 
@@ -88,7 +100,7 @@ class Tutorial:
 
         # 식물을 위치시킬 곳을 그려줌
         for i in range (9):
-            draw_rectangle(i * 140 , 330 , i* 140 + 140 , 225) # 상자 평균적인 위치 
+            draw_rectangle(i * 140 , 330 , i* 140 + 140 , 225) # 상자 평균적인 위치
         #draw_rectangle(0 , 330 , 150 , 225) # 150
         #draw_rectangle(150, 330,280, 225)  # 130
         # draw_rectangle(280, 330,440, 225)  # 160
@@ -104,6 +116,8 @@ class Tutorial:
         for Zombie in Zombies: #리스트에 있는 좀비들을 그려준다
 
             Zombie.draw(self.order)
+        for plant in Plants:
+            plant.draw()
 
         update_canvas()
         delay(0.02)
@@ -171,7 +185,7 @@ class Tutorial:
 def enter():
     global mouse_x, mouse_y
     global tutorial
-    global Zombies , Plant ,Plants_Card
+    global Zombies , Plants ,Plants_Card
     Plants_Card = plant()
     Plants = [] # 객체 초기화
     Zombies = []
@@ -186,6 +200,10 @@ def creat_Zombie():  # 좀비 생성
     new_zombie = Zombie()
 
     Zombies.append(new_zombie) # 리스트에 추가해줌
+def creat_plant(): # 식물 생성
+    global Plants
+    new_Plant = plant()
+    Plants.append(new_Plant)
 
 def create(): # 모든 걸 만드는 부분
     global current_time
