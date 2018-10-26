@@ -10,6 +10,7 @@ Zombies = []
 current_time = 0
 Zombie_Count = 0
 class Tutorial:
+
     def __init__(self):
         self.Tutorial_Map = load_image('Tutorial/Tutorial_map.png')
         self.board = load_image('Tutorial/board.png')
@@ -27,7 +28,7 @@ class Tutorial:
         self.idle_time = 0 # 화면 정지 시간
         self.str = "우리들의 집" # 글자 출력
         self.sun_value = 200
-
+        self.select_card = 0 #무슨 카드를 선택했는지 아는 변수
         #self.arrow('Tutorial/arrow.png')
         pass
     def handle_events(self):
@@ -48,6 +49,11 @@ class Tutorial:
                 if (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_menu = False
 
+                if(event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 ):
+                    self.select_card = 1
+                    print(self.select_card)
+
+
 
 
     def draw(self):
@@ -61,7 +67,7 @@ class Tutorial:
         self.Tutorial_Map.clip_draw(0 + self.frame, 0 , 800 , 600 , 700 , 300, 1400, 600 ) #맵을 그려줌
         self.board.clip_draw(0 , 0 ,557 , 109  , 280, 560 ,  557 , 80) #보드판
         self.font.draw(20, 530, '%d' % self.sun_value) # 가지고 있는 돈의 값
-        self.cards.clip_draw(0 , 485 , 64, 90 , 140 , 560 , 64, 70)
+        self.cards.clip_draw(0 , 485 , 64, 90 , 140 , 560 , 64, 70) # 카드
         if(game_menu == True):
             self.Main_object_esc.draw(1400//2 ,600//2, 510, 380 )
         if(self.order < 4):
@@ -135,7 +141,7 @@ class Tutorial:
                 Zombies[i].state = 1
                 Zombies[i].y = 300
                 self.order = 7
-        elif(self.order == 7):
+        elif(self.order == 7): #좀비를 다 알려줬다면 좀비들이 이제 등장
             for i in range(0 , Zombie_Count):
                 Zombies[i].x = Zombies[i].x - 1
 
@@ -158,13 +164,13 @@ def enter():
 
 
 
-def creat_Zombie():
+def creat_Zombie():  # 좀비 생성
     global Zombies
     new_zombie = Zombie()
 
     Zombies.append(new_zombie) # 리스트에 추가해줌
 
-def create():
+def create(): # 모든 걸 만드는 부분
     global current_time
     global Zombies , Zombie_Count
     if(current_time % 200 == 199):
