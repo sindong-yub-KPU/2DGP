@@ -48,6 +48,8 @@ class Tutorial:
                 if (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_menu = False
 
+
+
     def draw(self):
 
         clear_canvas()
@@ -67,6 +69,16 @@ class Tutorial:
         if(self.order == 4):
             self.Tutorial_Start_logo.draw(700, 300)
 
+        # 식물을 위치시킬 곳을 그려줌
+        draw_rectangle(0 , 330 , 150 , 225) # 150
+        draw_rectangle(150, 330,280, 225)  # 130
+        draw_rectangle(280, 330,440, 225)  # 160
+        draw_rectangle(440, 330, 580, 225) # 140
+        draw_rectangle(580, 330, 710, 225) # 130
+        draw_rectangle(710, 330, 860, 225) # 150
+        draw_rectangle(860, 330, 990, 225)# 140
+        draw_rectangle(990, 330, 1140, 225) # 150
+        draw_rectangle(1140, 330,1300, 225) # 160
 
         for Zombie in Zombies: #리스트에 있는 좀비들을 그려준다
 
@@ -158,7 +170,7 @@ def create():
     if(current_time % 200 == 199):
         creat_Zombie()
         Zombie_Count = Zombie_Count + 1
-        Zombies[5 + Zombie_Count].state = 1
+        Zombies[4 + Zombie_Count].state = 1
 
 
 
