@@ -46,10 +46,12 @@ class Zombie:
 
             self.Basic_Zombies.clip_draw(self.frame * 166, 0, 81, 120, self.x - self.start_frame, self.y)
         if(self.state == self.WALK):
-            self.Basic_Zombies_Walk.clip_draw(self.frame * 166 , 0 , 81 , 128 , self.x  , self.y)
+            self.Basic_Zombies_Walk.clip_draw(self.frame * 166 , 0 , 90 , 128 , self.x  , self.y)
 
     def Walk(self):
         self.y = 300
         self.state = self.WALK
+    def Attack(self):
+        pass
 
 

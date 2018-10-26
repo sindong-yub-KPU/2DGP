@@ -10,6 +10,7 @@ class plant:
         self.x , self.y = 0, 0
         self.frame = random.randint(0 , 12 )
         self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
+
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 10)
         self.state = self.IDLE
@@ -29,3 +30,5 @@ class plant:
     def draw(self): # 식물을 그려준다
         print(self.x)
         self.basic_plants_image.clip_draw(self.frame * 70 ,  0 , 70 , 90 , self.x , self.y , )
+    def attack(self):
+        pass

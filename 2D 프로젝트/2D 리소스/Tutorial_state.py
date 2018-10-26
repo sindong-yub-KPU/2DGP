@@ -33,7 +33,7 @@ class Tutorial:
         self.order = 0 # frame을 움직여야할 상태값
         self.idle_time = 0 # 화면 정지 시간
         self.str = "우리들의 집" # 글자 출력
-        self.sun_value = 200
+        self.sun_value = 200 # 자원량
         self.select_card = 0 #무슨 카드를 선택했는지 아는 변수
 
         #self.arrow('Tutorial/arrow.png')
@@ -59,10 +59,12 @@ class Tutorial:
                 if (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_menu = False
 
-                if(event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 ):
+                if(event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 and self.sun_value >= 100):
                     self.select_card = 1
+                    self.sun_value  = self.sun_value - 100
                 if(event.button == SDL_BUTTON_RIGHT):
                     self.select_card = 0 # 오른쪽 버튼을 누르면 초기화
+                    self.sun_value = self.sun_value + 100
                 if(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                     #여기서부턴 튜토리얼 대지 영역
                     for i in range(9):
