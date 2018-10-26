@@ -1,4 +1,5 @@
 import game_framework
+from Plants import *
 from Zombies import *
 from pico2d import*
 
@@ -6,9 +7,13 @@ from pico2d import*
 name = "Tutorial"
 tutorial = None
 game_menu = None
-Zombies = []
+Zombies = None
+Plants = None
+Plants_Card = None
 current_time = 0
 Zombie_Count = 0
+mouse_x = 0
+mouse_y = 0
 class Tutorial:
 
     def __init__(self):
@@ -29,10 +34,12 @@ class Tutorial:
         self.str = "우리들의 집" # 글자 출력
         self.sun_value = 200
         self.select_card = 0 #무슨 카드를 선택했는지 아는 변수
+
         #self.arrow('Tutorial/arrow.png')
         pass
     def handle_events(self):
         global game_menu
+        global mouse_x , mouse_y
         events = get_events()
         for event in events:
             if (event.type == SDL_QUIT or event.key == SDLK_ESCAPE):  # 게임 나가기
@@ -57,7 +64,7 @@ class Tutorial:
 
 
     def draw(self):
-
+        global mouse_x, mouse_y
         clear_canvas()
         #처음 시작시는 0 으로 바꿔줌 # 700 까지 올려주고 다시 200으로 내려줌
         #글자 써줘야함
@@ -85,6 +92,8 @@ class Tutorial:
         draw_rectangle(860, 330, 990, 225)# 140
         draw_rectangle(990, 330, 1140, 225) # 150
         draw_rectangle(1140, 330,1300, 225) # 160
+
+        Plants_Card.draw_card(self.select_card , mouse_x , mouse_y)
 
         for Zombie in Zombies: #리스트에 있는 좀비들을 그려준다
 
@@ -154,10 +163,12 @@ class Tutorial:
 
 
 def enter():
+    global mouse_x, mouse_y
     global tutorial
-    global Zombies
-
-    Zombies = []  # 객체 초기화
+    global Zombies , Plant ,Plants_Card
+    Plants_Card = plant()
+    Plants = [] # 객체 초기화
+    Zombies = []
     tutorial = Tutorial()
     for i in range(5):  # 객체 생성
         creat_Zombie()  # 리스트에 좀비들을 집어넣어줌
