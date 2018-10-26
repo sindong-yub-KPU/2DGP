@@ -2,17 +2,17 @@ import game_framework
 from Plants import *
 from Zombies import *
 from pico2d import*
-
+from Sun import*
 
 name = "Tutorial"
 tutorial = None
 game_menu = None
 Zombies = None
+Sun = None
 Plants = None
 Plants_Card = None
 current_time = 0
-Plant_Count =0
-Zombie_Count = 0
+Sun_Count , Plant_Count  , Zombie_Count = 0 , 0 , 0
 mouse_x = 0
 mouse_y = 0
 class Tutorial:
@@ -41,7 +41,7 @@ class Tutorial:
     def handle_events(self):
         global game_menu
         global mouse_x , mouse_y
-        global Plant_Count
+        global Plant_Count , Sun_Count
         events = get_events()
         for event in events:
 
@@ -56,16 +56,16 @@ class Tutorial:
                 if (event.x < 674  and event.x > 490 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_framework.quit()
 
-                if (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
+                elif (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_menu = False
 
-                if(event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 and self.sun_value >= 100):
+                elif(event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 and self.sun_value >= 100):
                     self.select_card = 1
                     self.sun_value  = self.sun_value - 100
-                if(event.button == SDL_BUTTON_RIGHT):
+                elif(event.button == SDL_BUTTON_RIGHT):
                     self.select_card = 0 # 오른쪽 버튼을 누르면 초기화
                     self.sun_value = self.sun_value + 100
-                if(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
+                elif(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                     #여기서부턴 튜토리얼 대지 영역
                     for i in range(9):
                         if(event.x >= i * 140 and event.x <=  i* 140 + 140):
@@ -75,6 +75,13 @@ class Tutorial:
                             Plant_Count = Plant_Count + 1
                             self.select_card = 0
                             break
+                elif(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 600 and event.y >= 0 and event.y <= 600)
+                    #for i in range(0  , Sun_Count):
+                       # if(event.x < Sun[i].x - 50 and event.x > Sun )
+                    pass
+
+
+
 
 
 
@@ -120,7 +127,8 @@ class Tutorial:
             Zombie.draw(self.order)
         for plant in Plants:
             plant.draw()
-
+        for Sun_shine in Sun:
+            Sun_shine.draw()
         update_canvas()
         delay(0.02)
 
@@ -133,6 +141,8 @@ class Tutorial:
             Zombie.update() # 좀비 프레임 업데이트
         for plant in Plants:
             plant.update()
+        for Sun_shine in Sun:
+            Sun_shine.update()
         if(self.idle_time >= 50 and self.order == 0): # 처음에 좀비 어떤 종류인지 알려줌
             self.order = 1
 
@@ -188,16 +198,20 @@ class Tutorial:
 def enter():
     global mouse_x, mouse_y
     global tutorial
-    global Zombies , Plants ,Plants_Card
+    global Zombies , Plants ,Plants_Card , Sun
     Plants_Card = plant()
     Plants = [] # 객체 초기화
     Zombies = []
+    Sun = []
     tutorial = Tutorial()
     for i in range(5):  # 객체 생성
         creat_Zombie()  # 리스트에 좀비들을 집어넣어줌
 
-
-
+def creat_Sun():
+    global Sun
+    new_Sun = Sun_shine()
+    Sun.append(new_Sun)
+    print(12)
 def creat_Zombie():  # 좀비 생성
     global Zombies
     new_zombie = Zombie()
@@ -210,11 +224,16 @@ def creat_plant(): # 식물 생성
 
 def create(): # 모든 걸 만드는 부분
     global current_time
-    global Zombies , Zombie_Count
+    global Zombies , Zombie_Count , Sun_Count
     if(current_time % 200 == 199):
         creat_Zombie()
         Zombie_Count = Zombie_Count + 1
         Zombies[4 + Zombie_Count].state = 1
+    if(current_time % 100 == 99 ):
+        creat_Sun()
+        Sun_Count = Sun_Count + 1
+
+
 
 
 

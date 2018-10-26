@@ -12,7 +12,7 @@ class plant:
         self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
 
         self.frame = random.randint(0, 11)
-        self.total_frame = random.randint(0, 10)
+        self.total_frame = random.randint(0, 4)
         self.state = self.IDLE
     def update(self):
         if (self.state == self.IDLE):
@@ -28,7 +28,7 @@ class plant:
             self.basic_plants_image.clip_draw( 0, 0, 71, 80, mouse_x + 10 , 600 - mouse_y)
 
     def draw(self): # 식물을 그려준다
-        print(self.x)
+
         self.basic_plants_image.clip_draw(self.frame * 70 ,  0 , 70 , 90 , self.x , self.y , )
     def attack(self):
         pass
