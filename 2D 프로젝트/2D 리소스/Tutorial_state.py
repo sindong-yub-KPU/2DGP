@@ -75,10 +75,16 @@ class Tutorial:
                             Plant_Count = Plant_Count + 1
                             self.select_card = 0
                             break
-                elif(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 600 and event.y >= 0 and event.y <= 600)
-                    #for i in range(0  , Sun_Count):
-                       # if(event.x < Sun[i].x - 50 and event.x > Sun )
-                    pass
+                elif(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 600 and event.y >= 0 and event.y <= 600):
+
+                    for i in range(Sun_Count):
+                        print(i)
+                        if(event.x > Sun[i].x - 50 and event.x < Sun[i].x + 50  and GAME_HEIGHT - event.y - 1 > Sun[i].y -50 and GAME_HEIGHT - event.y - 1 < Sun[i].y + 50  ):
+                            del Sun[i]  # 자원을 클릭 하면 삭제 해줌
+                            Sun_Count = Sun_Count - 1 # 자원의 개수 빼준다 .
+                            self.sun_value = self.sun_value + 30 # 자원 증가
+                            break
+
 
 
 

@@ -4,7 +4,7 @@ import random
 class Sun_shine:
     Sun_image = None
     def __init__(self):
-        self.x , self.y = random.randint(0 , 600) , 600
+        self.x , self.y = random.randint(30 , 600) , 600 # Sun 값 정의
         self.limit_y = random.randint(50 , 400 ) # y 값 리미트
         self.frame = random.randint(0,21)
         self.total_frame = random.randint(0 , 6)
@@ -22,4 +22,6 @@ class Sun_shine:
         self.total_frame = self.total_frame + 1
         if(self.limit_y < self.y):
             self.y = self.y - 1
+        pass
+    def go_Sun(self):
         pass
