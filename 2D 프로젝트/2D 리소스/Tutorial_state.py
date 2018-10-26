@@ -129,7 +129,8 @@ class Tutorial:
         global Zombies
         for Zombie in Zombies:
             Zombie.update() # 좀비 프레임 업데이트
-
+        for plant in Plants:
+            plant.update()
         if(self.idle_time >= 50 and self.order == 0): # 처음에 좀비 어떤 종류인지 알려줌
             self.order = 1
 
