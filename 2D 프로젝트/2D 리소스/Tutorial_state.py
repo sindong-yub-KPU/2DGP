@@ -42,6 +42,7 @@ class Tutorial:
         global mouse_x , mouse_y
         events = get_events()
         for event in events:
+
             if (event.type == SDL_QUIT or event.key == SDLK_ESCAPE):  # 게임 나가기
                 game_menu = True
             if(event.type == SDL_MOUSEMOTION): #마우스 좌표 받음
@@ -56,9 +57,12 @@ class Tutorial:
                 if (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_menu = False
 
-                if(event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 ):
+                if(event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and GAME_HEIGHT - event.y - 1 <  GAME_HEIGHT and GAME_HEIGHT - event.y - 1 >  GAME_HEIGHT - 80 ):
                     self.select_card = 1
-                    print(self.select_card)
+                elif(event.button == SDL_BUTTON_RIGHT):
+                    self.select_card = 0 # 오른쪽 버튼을 누르면 초기화
+
+
 
 
 
@@ -83,15 +87,17 @@ class Tutorial:
             self.Tutorial_Start_logo.draw(700, 300)
 
         # 식물을 위치시킬 곳을 그려줌
-        draw_rectangle(0 , 330 , 150 , 225) # 150
-        draw_rectangle(150, 330,280, 225)  # 130
-        draw_rectangle(280, 330,440, 225)  # 160
-        draw_rectangle(440, 330, 580, 225) # 140
-        draw_rectangle(580, 330, 710, 225) # 130
-        draw_rectangle(710, 330, 860, 225) # 150
-        draw_rectangle(860, 330, 990, 225)# 140
-        draw_rectangle(990, 330, 1140, 225) # 150
-        draw_rectangle(1140, 330,1300, 225) # 160
+        for i in range (9):
+            draw_rectangle(i * 140 , 330 , i* 140 + 140 , 225) # 상자 평균적인 위치 
+        #draw_rectangle(0 , 330 , 150 , 225) # 150
+        #draw_rectangle(150, 330,280, 225)  # 130
+        # draw_rectangle(280, 330,440, 225)  # 160
+        #draw_rectangle(440, 330, 580, 225) # 140
+        #draw_rectangle(580, 330, 710, 225) # 130
+        # draw_rectangle(710, 330, 860, 225) # 150
+        #draw_rectangle(860, 330, 990, 225)# 140
+        #draw_rectangle(990, 330, 1140, 225) # 150
+        # draw_rectangle(1140, 330,1300, 225) # 160
 
         Plants_Card.draw_card(self.select_card , mouse_x , mouse_y)
 
