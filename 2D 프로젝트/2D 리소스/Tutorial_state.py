@@ -6,7 +6,9 @@ from pico2d import*
 name = "Tutorial"
 tutorial = None
 game_menu = None
-Zombies = None
+Zombies = []
+current_time = 0
+Zombie_Count = 0
 class Tutorial:
     def __init__(self):
         self.Tutorial_Map = load_image('Tutorial/Tutorial_map.png')
@@ -47,7 +49,7 @@ class Tutorial:
                     game_menu = False
 
     def draw(self):
-        global Zombie
+
         clear_canvas()
         #처음 시작시는 0 으로 바꿔줌 # 700 까지 올려주고 다시 200으로 내려줌
         #글자 써줘야함
@@ -75,12 +77,15 @@ class Tutorial:
 
 
     def update(self):
-        global Zombie
+        global current_time
+        global Zombie_Count
+        global Zombies
         for Zombie in Zombies:
-            Zombie.update()
+            Zombie.update() # 좀비 프레임 업데이트
 
-        if(self.idle_time >= 50 and self.order == 0):
+        if(self.idle_time >= 50 and self.order == 0): # 처음에 좀비 어떤 종류인지 알려줌
             self.order = 1
+
         if(self.order == 0):
             self.idle_time = self.idle_time + 1
 
@@ -90,7 +95,9 @@ class Tutorial:
                 self.order = 2
 
         elif (self.order == 2):
+
             if(self.idle_time > 100):
+
                 self.order = 3
             self.idle_time = self.idle_time + 1
         elif(self.order == 3):
@@ -111,33 +118,63 @@ class Tutorial:
                 self.Tutorial_GAME_START.set_volume(64)
                 self.Tutorial_GAME_START.repeat_play()
                 self.order = 6
+        elif(self.order == 6):
+            for i in range(5):
+                Zombies[i].state = 1
+                Zombies[i].y = 300
+                self.order = 7
+        elif(self.order == 7):
+            for i in range(0 , Zombie_Count):
+                Zombies[i].x = Zombies[i].x - 1
+
+            current_time = (current_time + 1)
+            create()
 
 
 
 
 
-def creat_Zombie():
-    global Zombies
-
-    new_zombie = Zombie() # 새로운 좀비 객체에 할당
-    Zombies.append(new_zombie) # 리스트에 추가해줌
 
 def enter():
     global tutorial
     global Zombies
 
-    Zombies = [] # 객체 초기화
+    Zombies = []  # 객체 초기화
     tutorial = Tutorial()
-    for i in range(5): # 객체 생성
-        creat_Zombie() #리스트에 좀비들을 집어넣어줌
-    pass
+    for i in range(5):  # 객체 생성
+        creat_Zombie()  # 리스트에 좀비들을 집어넣어줌
+
+
+
+def creat_Zombie():
+    global Zombies
+    new_zombie = Zombie()
+
+    Zombies.append(new_zombie) # 리스트에 추가해줌
+
+def create():
+    global current_time
+    global Zombies , Zombie_Count
+    if(current_time % 200 == 199):
+        creat_Zombie()
+        Zombie_Count = Zombie_Count + 1
+        Zombies[5 + Zombie_Count].state = 1
+
+
+
+
+
 def update():
     global tutorial
     global Zombies
+
     tutorial.update()
-    if(tutorial.order >= 5):
-        for i in range(5):
-            Zombies[i].state = 1
+
+
+
+
+
+
 
 def draw():
     global tutorial
