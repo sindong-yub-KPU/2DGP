@@ -5,7 +5,7 @@ import game_world
 
 # Boy Event
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP ,SLEEP_TIMER , SPACE ,\
-L_SHIFT_DOWN , L_SHIFT_UP = range(8)
+L_SHIFT_DOWN , L_SHIFT_UP  , R_SHIFT_DOWN , R_SHIFT_UP = range(10)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -14,7 +14,9 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN , SDLK_SPACE) : SPACE,
     (SDL_KEYDOWN , SDLK_LSHIFT) : L_SHIFT_DOWN,
-    (SDL_KEYUP, SDLK_LSHIFT): L_SHIFT_UP
+    (SDL_KEYUP, SDLK_LSHIFT): L_SHIFT_UP,
+    (SDL_KEYDOWN, SDLK_RSHIFT): R_SHIFT_DOWN,
+    (SDL_KEYUP, SDLK_RSHIFT): R_SHIFT_UP
 }
 
 
@@ -144,15 +146,18 @@ class DashState:
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState,
                 RIGHT_DOWN: RunState,LEFT_DOWN: RunState,
-                SLEEP_TIMER : SleepState , SPACE : IdleState , L_SHIFT_DOWN : IdleState , L_SHIFT_UP : IdleState},
+                SLEEP_TIMER : SleepState , SPACE : IdleState , L_SHIFT_DOWN : IdleState , L_SHIFT_UP : IdleState,
+                R_SHIFT_DOWN: IdleState, R_SHIFT_UP: IdleState},
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState ,
                SPACE : RunState , L_SHIFT_DOWN : DashState ,
-               L_SHIFT_UP : RunState},
+               L_SHIFT_UP : RunState , R_SHIFT_DOWN : DashState ,R_SHIFT_UP : RunState },
     SleepState : {LEFT_DOWN : RunState , RIGHT_DOWN : RunState,
-                  LEFT_UP: RunState , RIGHT_UP : RunState , SPACE:IdleState , L_SHIFT_DOWN : IdleState},
+                  LEFT_UP: RunState , RIGHT_UP : RunState , SPACE:IdleState , L_SHIFT_DOWN : IdleState
+                  ,R_SHIFT_DOWN : IdleState},
     DashState : {LEFT_DOWN : IdleState , RIGHT_DOWN : IdleState , RIGHT_UP: IdleState, LEFT_UP : IdleState,
-                 SPACE :RunState , L_SHIFT_DOWN : DashState , L_SHIFT_UP: RunState}
+                 SPACE :RunState , L_SHIFT_DOWN : DashState , L_SHIFT_UP: RunState,
+                 R_SHIFT_DOWN: DashState, R_SHIFT_UP: RunState}
 }
 
 class Boy:
