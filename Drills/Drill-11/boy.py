@@ -123,9 +123,9 @@ class DashState:
 
     @staticmethod
     def exit(boy ,event):
-
-
         pass
+
+
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
@@ -140,7 +140,7 @@ class DashState:
             boy.image.clip_draw(boy.frame * 100, 100, 100, 100, boy.x, boy.y)
         else:
             boy.image.clip_draw(boy.frame * 100, 0, 100, 100, boy.x, boy.y)
-
+        pass
 
 
 next_state_table = {
