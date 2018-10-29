@@ -235,6 +235,7 @@ def create(): # 모든 걸 만드는 부분
         creat_Zombie()
         Zombie_Count = Zombie_Count + 1
         Zombies[4 + Zombie_Count].state = 1
+        Zombies[4 + Zombie_Count].y = 300
     if(current_time % 100 == 99 ):
         creat_Sun()
         Sun_Count = Sun_Count + 1

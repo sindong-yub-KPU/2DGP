@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec378d7-94fc-477e-9673-3d35b764c1d9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2D 리소스/Sun.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/Sun.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/Tutorial_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D 리소스/Zombies.py" beforeDir="false" afterPath="$PROJECT_DIR$/2D 리소스/Zombies.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,13 +15,13 @@
     <session id="-582776150">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.1" value="3" />
+          <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -58,7 +57,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
+            <state relative-caret-position="120">
               <caret line="8" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
@@ -70,7 +69,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-672">
+            <state relative-caret-position="360">
               <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -82,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1632">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="408">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <marker date="1540455040495" expanded="true" signature="3296:3335" ph="..." />
@@ -101,15 +100,9 @@
         <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="384">
-              <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
+              <caret line="133" column="28" lean-forward="true" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1540543689100" expanded="true" signature="181:186" ph="..." />
-                <marker date="1540543689100" expanded="true" signature="1186:2090" ph="..." />
-                <marker date="1540543689100" expanded="true" signature="3103:3112" ph="..." />
-                <marker date="1540543689100" expanded="true" signature="4516:4518" ph="..." />
-                <marker date="1540543689100" expanded="true" signature="5168:5178" ph="..." />
-                <marker date="1540543689100" expanded="true" signature="5191:5196" ph="..." />
               </folding>
             </state>
           </provider>
@@ -133,11 +126,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/Zombies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="456">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-                <marker date="1540543535804" expanded="true" signature="895:903" ph="..." />
               </folding>
             </state>
           </provider>
@@ -146,7 +138,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/2D 리소스/game_framework.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
+            <state relative-caret-position="2184">
               <caret line="91" selection-start-line="91" selection-end-line="91" />
             </state>
           </provider>
@@ -194,7 +186,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="960" />
-    <option name="height" value="1033" />
+    <option name="height" value="1034" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -202,7 +194,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,6 +220,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,25 +369,14 @@
     <entry file="file://$PROJECT_DIR$/2D 리소스/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Baisc_plants.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Baisc_plants.png" />
     <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/Tutorial_map.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/board.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Zombie.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="14" column="57" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Zombie.py" />
     <entry file="file://C:/Python 3.7/Lib/site-packages/pico2d/pico2d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -410,16 +391,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <marker date="1540484551162" expanded="true" signature="73:75" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/start_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-672">
+        <state relative-caret-position="360">
           <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -427,22 +414,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Sun.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/마우스.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/Tutorial_Zombie_walk.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/kpu_credit.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/title_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1632">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="408">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <marker date="1540455040495" expanded="true" signature="3296:3335" ph="..." />
@@ -450,10 +425,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/mygame.py">
+    <entry file="file://$PROJECT_DIR$/2D 리소스/마우스.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial/Tutorial_Zombie_walk.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Sun.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/kpu_credit.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2D 리소스/Zombies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="456">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
@@ -462,34 +449,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/game_framework.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
+        <state relative-caret-position="2184">
           <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2D 리소스/Zombies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <marker date="1540543535804" expanded="true" signature="895:903" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2D 리소스/Tutorial_state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
-          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
+          <caret line="133" column="28" lean-forward="true" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1540543689100" expanded="true" signature="181:186" ph="..." />
-            <marker date="1540543689100" expanded="true" signature="1186:2090" ph="..." />
-            <marker date="1540543689100" expanded="true" signature="3103:3112" ph="..." />
-            <marker date="1540543689100" expanded="true" signature="4516:4518" ph="..." />
-            <marker date="1540543689100" expanded="true" signature="5168:5178" ph="..." />
-            <marker date="1540543689100" expanded="true" signature="5191:5196" ph="..." />
           </folding>
         </state>
       </provider>
