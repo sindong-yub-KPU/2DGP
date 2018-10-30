@@ -110,6 +110,7 @@ class SleepState:
         boy.Sleeptimer = get_time()
     @staticmethod
     def exit(boy, event):
+        boy.image.opacify(1)
         pass
 
     @staticmethod
@@ -126,9 +127,10 @@ class SleepState:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2 -3.141592 / 6 * (boy.timer - boy.Sleeptimer), '',
                                           boy.x - 25, boy.y - 25,100, 100)
         else:
+            boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
-
-
+            boy.image.opacify(0.3)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2 + 3.141592 / 6 * (boy.timer - boy.Sleeptimer), '', boy.x + 25, boy.y - 25, 100, 100)
 
 
 
