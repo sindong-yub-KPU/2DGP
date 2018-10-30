@@ -68,7 +68,7 @@ class IdleState:
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
-        if boy.timer - boy.Idle_time > 3.0: #
+        if boy.timer - boy.Idle_time >= 10.0: #
 
             boy.add_event(SLEEP_TIMER)
 
@@ -133,7 +133,7 @@ class SleepState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        if(boy.timer - boy.sleep_time >= 4):
+        if(boy.timer - boy.sleep_time >= 3):
             boy.add_event(Ghost)
     @staticmethod
     def draw(boy):
@@ -141,13 +141,13 @@ class SleepState:
         boy.image.opacify(1)
         if boy.dir == 1:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
-            boy.image.opacify(0.3)
+            boy.image.opacify(random.randint(1, 100) * 0.01)
             boy.image.clip_composite_draw(int(boy.frame) * 100 , 300 , 100 , 100 ,
             3.141592 / 2 -3.141592 / 8 * (boy.timer - boy.sleep_time),'' ,
             boy.x-25 , boy.y -25 + (boy.timer - boy.sleep_time) * 20,100,100   )
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
-            boy.image.opacify(0.3)
+            boy.image.opacify(random.randint(1, 100) * 0.01)
             boy.image.clip_composite_draw(int(boy.frame) * 100 , 200 , 100 , 100 ,
             -3.141592 /2 + 3.141592/8 * (boy.timer - boy.sleep_time) , '' , boy.x+25,
             boy.y-25 + (boy.timer - boy.sleep_time) * 20 , 100 , 100)
@@ -172,7 +172,7 @@ class Ghost_State:
         if boy.dir == 1:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25,
                                           100, 100)
-            boy.image.opacify(0.3)
+            boy.image.opacify(random.randint(1, 100) * 0.01)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100,
                                           3.141592 / 2 - 3.141592 / 8 * 4, '',
                                           boy.x - 25 + PIXEL_PER_METER *3 * math.cos(boy.degree),
@@ -180,10 +180,10 @@ class Ghost_State:
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25,
                                           boy.y - 25, 100, 100)
-            boy.image.opacify(0.3)
+            boy.image.opacify(random.randint(1, 100) * 0.01)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100,
-                                          -3.141592 / 2 + 3.141592 / 8 * 4, '', boy.x + 25 + PIXEL_PER_METER *3 * math.cos(boy.degree),
-                                          boy.y - 25 + 80 + PIXEL_PER_METER *3 * math.sin(boy.degree), 100, 100)
+                                          -3.141592 / 2 + 3.141592 / 8 * 4, '', boy.x + 25 + PIXEL_PER_METER *3 * math.cos(-boy.degree),
+                                          boy.y - 25 + 80 + PIXEL_PER_METER *3 * math.sin(-boy.degree), 100, 100)
         pass
 
 
