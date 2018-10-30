@@ -124,21 +124,44 @@ class SleepState:
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2   , '', boy.x - 25, boy.y - 25, 100, 100)
             boy.image.opacify(0.3)
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2 -3.141592 / 6 * (boy.timer - boy.Sleeptimer), '',
-                                          boy.x - 25, boy.y - 25,100, 100)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100,
+                                          3.141592 / 2 -3.141592 / 6 * (boy.timer - boy.Sleeptimer), '',
+                                          boy.x - 25, boy.y - 25  + (boy.timer - boy.Sleeptimer) * 20,100, 100)
         else:
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
             boy.image.opacify(0.3)
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2 + 3.141592 / 6 * (boy.timer - boy.Sleeptimer), '', boy.x + 25, boy.y - 25, 100, 100)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100,
+            -3.141592 / 2 + 3.141592 / 6 * (boy.timer - boy.Sleeptimer), '', boy.x + 25,
+            boy.y - 25 + (boy.timer - boy.Sleeptimer) * 20, 100, 100)
 
+class GhostState:
+    @staticmethod
+    def enter(boy, event):
+        boy.frame = 0
+        boy.Sleeptimer = get_time()
 
+    @staticmethod
+    def exit(boy, event):
+        boy.image.opacify(1)
+        pass
+
+    @staticmethod
+    def do(boy):
+        boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        if (boy.timer - boy.Sleeptimer >= 3):
+            boy.add_event(SPACE)
+
+    @staticmethod
+    def draw(boy):
+        pass
 
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState, SPACE: IdleState},
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
-    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: IdleState , }
+    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: IdleState ,Ghost : GhostState },
+    GhostState: {RIGHT_UP : RunState , LEFT_UP: RunState , LEFT_DOWN : RunState , RIGHT_DOWN: RunState , Ghost: GhostState ,SPACE : IdleState}
 }
 
 class Boy:
