@@ -21,12 +21,13 @@ CHANGE_SPEED_PPS = (CHANGE_SPEED_MPS * PIXEL_PER_METER) # 픽셀 퍼 세크 미�
 SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START  = range(5)
 
 Zombies = []
-
+Zombie_count = 0
 def creat_Zombie():  # 좀비 생성
-    global Zombies
+    global Zombies , Zombie_count
     new_zombie = Zombie()
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
+    Zombie_count = Zombie_count +1
 
 #MAP States
 
@@ -50,7 +51,7 @@ class Start_state:
         tutorial.Tutorial_Map.clip_draw(0 + tutorial.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         tutorial.font.draw(600, 50, 'My house...')
 class Move_state: # 맵을 움직이는 스테이트
-    global Zombies
+    global Zombies ,Zombie_count
     @staticmethod
 
     def enter(tutorial ,event):
@@ -60,30 +61,68 @@ class Move_state: # 맵을 움직이는 스테이트
         tutorial.move_time = get_time()
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.map_x  = 0
-        tutorial.re = False
+        tutorial.re = 0
+        tutorial.Move_timer = 0 # 무브 타임
     @staticmethod
     def exit(tutorial , event):
-        pass
+        for i in range(5):
+            Zombies[i].state = 1;
     @staticmethod
     def do(tutorial):
+      if(tutorial.map_x < 500):# 좀비가 나타나야할 시간 300
+          if(tutorial.re == 0):
+              tutorial.map_x += tutorial.velocity * game_framework.frame_time  # 속도 * 시간
+              for i in range(5):
+                  Zombies[i].x -= (tutorial.velocity * game_framework.frame_time) * 1.7
+              if (tutorial.map_x > 500):
+                  tutorial.re = 1
 
-
-      if(tutorial.map_x < 500): # 좀비가 나타나야할 시간 300
-          tutorial.map_x += tutorial.velocity * game_framework.frame_time #속도 * 시간
-          for i in range(5):
-              Zombies[i].x -= (tutorial.velocity * game_framework.frame_time) * 1.7
-          if(tutorial.map_x > 500):
-              tutorial.re = True
-              print(tutorial.re)
+      if(tutorial.re == 1):
+          tutorial.Move_timer += 1
+          print(tutorial.Move_timer)
+          if (tutorial.Move_timer == 150):
+              tutorial.Move_timer = 0
+              tutorial.re = 2
+      if(tutorial.re == 2):
+          if (tutorial.map_x > 0):
+              tutorial.map_x -= tutorial.velocity * game_framework.frame_time  # 속도 * 시간
+              for i in range(5):
+                  Zombies[i].x += (tutorial.velocity * game_framework.frame_time) * 1.7  # 좀비야 멈춰라
+              if(tutorial.map_x < 0):
+                  tutorial.Move_timer += 1
+                  if (tutorial.Move_timer == 150):
+                      tutorial.add_event(START)
 
     @staticmethod
     def draw(tutorial):
         tutorial.Tutorial_Map.clip_draw(int(tutorial.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         tutorial.font.draw(600, 50, 'My house...')
     pass
+
+class Stage_state:
+    @staticmethod
+    def enter(tutorial, event):
+        tutorial.frame = 0
+        tutorial.start_time = get_time()
+
+    @staticmethod
+    def exit(tutorial, event):
+        pass
+
+    @staticmethod
+    def do(tutorial):
+        if (tutorial.timer - tutorial.start_time >= 2):
+            tutorial.add_event(SHOW_MAP)
+
+    @staticmethod
+    def draw(tutorial):
+        tutorial.Tutorial_Map.clip_draw(0 + tutorial.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+
+
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state},
-    Move_state : {SHOW_MAP: Move_state}
+    Move_state : {SHOW_MAP: Move_state , START : Stage_state},
+    Stage_state : {START : Stage_state }
 }
 
 class Tutorial:

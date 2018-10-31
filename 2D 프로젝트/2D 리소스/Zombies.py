@@ -2,7 +2,7 @@ from pico2d import *
 import game_framework
 import random
 
-TIME_PER_ACTION = 1.2
+TIME_PER_ACTION = 2
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION #1초에 할 액션수 2개
 FRAMES_PER_ACTION = 11 # 8개의 프레임
 
