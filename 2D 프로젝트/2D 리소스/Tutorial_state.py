@@ -32,7 +32,7 @@ def handle_events():
             game_framework.push_state(pause_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.push_state(pause_state)
-            print(1)
+
         else :
             tutorial.handle_event(event)
     pass
