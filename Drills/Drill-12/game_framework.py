@@ -106,7 +106,7 @@ def run(start_state):
         frame_rate = 1.0 / frame_time
         #프레임 속도 1초에 몇장을 그리는지
         current_time += frame_time
-        #현재시간을 계속 초기화 
+        #현재시간을 계속 초기화
 
     # repeatedly delete the top of the stack
     while (len(stack) > 0):
