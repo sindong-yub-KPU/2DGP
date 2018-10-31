@@ -75,7 +75,7 @@ class Tutorial:
                             Plant_Count = Plant_Count + 1
                             self.select_card = 0
                             break
-                elif(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 600 and event.y >= 0 and event.y <= 600):
+                elif(event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
 
                     for i in range(Sun_Count):
                         print(i)
@@ -217,7 +217,7 @@ def creat_Sun():
     global Sun
     new_Sun = Sun_shine()
     Sun.append(new_Sun)
-    print(12)
+
 def creat_Zombie():  # 좀비 생성
     global Zombies
     new_zombie = Zombie()
