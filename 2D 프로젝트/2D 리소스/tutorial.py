@@ -17,7 +17,9 @@ CHANGE_SPEED_PPS = (CHANGE_SPEED_MPS * PIXEL_PER_METER) # 픽셀 퍼 세크 미�
 
 
 # 튜토리얼 이벤트
-SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START = range(5)
+SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START  = range(5)
+
+
 
 
 #MAP States
@@ -67,7 +69,6 @@ class Tutorial:
     def __init__(self):
         self.Tutorial_Map = load_image('Tutorial/Tutorial_map.png')
         self.board = load_image('Tutorial/board.png')
-        self.Main_object_esc = load_image('Mainresource/areyousure.png')
         self.intro_music = load_music('Tutorial/intro_music.mp3')
         self.Tutorial_Start = load_music('Tutorial/Tutorial_start.mp3')  # 초반 도입 음악
         self.Tutorial_GAME_START = load_music('Tutorial/Tutorial_GAME_START.mp3')  # 게임 스타트 음악
