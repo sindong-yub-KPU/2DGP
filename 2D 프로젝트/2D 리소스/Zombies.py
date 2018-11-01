@@ -6,6 +6,30 @@ TIME_PER_ACTION = 2
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION #1초에 할 액션수 2개
 FRAMES_PER_ACTION = 11 # 8개의 프레임
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Zombie:
     WALK, ATTACK ,DIE ,END ,IDLE = 1, 2, 3 ,4 , 5
     start_frame = 0
@@ -27,9 +51,6 @@ class Zombie:
             # 좀비가 가만이 있는 상태일때
         if(self.state == self.WALK):
             self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 17
-
-
-
 
 
 

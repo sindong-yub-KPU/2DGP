@@ -233,5 +233,6 @@ class Boy:
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
-            key_event = key_event_table[(event.type, event.key)]
+            key_
+            event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)

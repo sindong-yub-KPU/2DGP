@@ -38,8 +38,7 @@ class Main_UI:
             if(event.type == SDL_MOUSEMOTION): #마우스 좌표 받음
                 mouse_x = event.x
                 mouse_y = event.y  # 게임 시작
-                print(event.x)
-                print(event.y)
+
 
 
                 if(mouse_x <= GAME_WIDTH//2 +146 and mouse_x >= GAME_WIDTH//2 - 146  and GAME_HEIGHT -mouse_y -1< GAME_HEIGHT//8 + 150 and GAME_HEIGHT - mouse_y -1 > GAME_HEIGHT//8):
