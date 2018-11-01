@@ -4,32 +4,8 @@ import random
 
 TIME_PER_ACTION = 2
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION #1초에 할 액션수 2개
-FRAMES_PER_ACTION = 11 # 8개의 프레임
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+FRAMES_PER_ACTION_IDLE = 11 # 8개의 프레임
+FRAMES_PER_ACTION_WALK = 17
 class Zombie:
     WALK, ATTACK ,DIE ,END ,IDLE = 1, 2, 3 ,4 , 5
     start_frame = 0
@@ -45,12 +21,12 @@ class Zombie:
 
     def update(self):
         if(self.state == self.IDLE):
-            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time ) % 11
+            self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time ) % 11
 
 
             # 좀비가 가만이 있는 상태일때
         if(self.state == self.WALK):
-            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 17
+            self.frame = (self.frame + FRAMES_PER_ACTION_WALK * ACTION_PER_TIME * game_framework.frame_time) % 17
 
 
 

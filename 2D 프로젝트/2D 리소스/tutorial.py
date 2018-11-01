@@ -212,7 +212,7 @@ class Tutorial:
                         global Plant_Count
                         creat_Plants()
                         Plants[Plant_Count].x = int(i * 140 + 70)
-                        Plants[Plant_Count].y = int(277)
+                        Plants[Plant_Count].y = int(282)
                         Plant_Count = Plant_Count + 1
                         self.select_card = 0
             if (event.button == SDL_BUTTON_RIGHT):
