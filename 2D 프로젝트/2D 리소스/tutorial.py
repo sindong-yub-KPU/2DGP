@@ -26,14 +26,16 @@ SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START  = range(5)
 Plants_Card = None
 Zombies = []
 Plants = []#객체 선언
-Zombie_count = 0
+Sun = []
+Zombie_Count = 0
 Plant_Count = 0 # 객체의의 개수
+Sun_Count =0
 def creat_Zombie():  # 좀비 생성
-    global Zombies , Zombie_count
+    global Zombies , Zombie_Count
     new_zombie = Zombie()
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
-    Zombie_count = Zombie_count +1
+    Zombie_Count = Zombie_Count +1
 def creat_Plant_card():
     global Plants_Card
     Plants_Card = plant()
@@ -42,6 +44,12 @@ def creat_Plants():
     new_plant = plant()
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
+def creat_Sun():
+    global Sun , Sun_Count
+    new_Sun = Sun_shine()
+    Sun.append(new_Sun)
+    Sun_Count += 1
+    game_world.add_object(new_Sun, 1)
 
 #MAP States
 
@@ -69,8 +77,9 @@ class Start_state:
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         tutorial.font.draw(600, 50, 'My house...')
+
 class Move_state: # 맵을 움직이는 스테이트
-    global Zombies ,Zombie_count
+    global Zombies ,Zombie_Count
     @staticmethod
 
     def enter(tutorial ,event):
@@ -107,10 +116,12 @@ class Move_state: # 맵을 움직이는 스테이트
               tutorial.map_x -= tutorial.velocity * game_framework.frame_time  # 속도 * 시간
               for i in range(5):
                   Zombies[i].x += (tutorial.velocity * game_framework.frame_time) * 1.7  # 좀비야 멈춰라
-              if(tutorial.map_x < 295): # 맵을 원위치로
+              if(tutorial.map_x < 310): # 맵을 원위치로
                   tutorial.Move_timer += 1
                   if (tutorial.Move_timer == 150):
                       tutorial.add_event(START)
+
+
 
     @staticmethod
     def draw(tutorial):
@@ -118,7 +129,7 @@ class Move_state: # 맵을 움직이는 스테이트
         tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
-        tutorial.font.draw(600, 50, 'My house...')
+        tutorial.font.draw(600, 50, 'Defence the Zombie!!' ,(255, 0 , 0) )
     pass
 
 class Stage_state:
@@ -130,6 +141,8 @@ class Stage_state:
         tutorial.order = 0
         tutorial.Tutorial_Start_music.set_volume(64)
         tutorial.Tutorial_Start_music.repeat_play()
+        tutorial.velocity += CHANGE_SPEED_PPS
+        tutorial.arrow_y = 560 - 100
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -140,15 +153,31 @@ class Stage_state:
             tutorial.Tutorial_GAME_START.set_volume(64)
             tutorial.Tutorial_GAME_START.repeat_play()
             tutorial.order = 1
-
+        if(tutorial.Click_order == 0 or tutorial.Click_order == 2): #첫번째 화살표 , 두번째 화살표 애니메이션을 위해
+            if (tutorial.timer % 0.8 < 0.4):
+                tutorial.arrow_y += tutorial.velocity * game_framework.frame_time
+            elif (tutorial.timer % 0.8 >= 0.4):
+                tutorial.arrow_y -= tutorial.velocity * game_framework.frame_time
+        if tutorial.Click_order == 1: # 화살표의 좌표를 바꿔주기 위해
+            tutorial.arrow_y = 340
+            tutorial.Click_order = 2
+        if tutorial.Click_order == 3: # 태양을 생산
+            if(tutorial.timer % 10 == 0):
+                creat_Sun()
 
         pass
 
     @staticmethod
     def draw(tutorial):
         tutorial.Tutorial_Map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
-        tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
+        tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80) # 보드판
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        if(tutorial.Click_order == 0): # 화살표
+            tutorial.arrow.clip_composite_draw(0, 0, 80, 80, 3.141592 / 2, '', 140, int(tutorial.arrow_y), 80, 80)
+            tutorial.font.draw(80, 460 - 100, 'Click here!' ,(255, 255, 0))
+        if (tutorial.Click_order == 2):# 화살표
+            tutorial.arrow.clip_composite_draw(0, 0, 80, 80, -3.141592 / 2, '', 210, int(tutorial.arrow_y), 80, 80)
+            tutorial.font.draw(150, 340 + 100, 'Click here!', (255, 255, 0)) # 튜토리얼 화살표와 누르라는 명령
         Plants_Card.draw_card(tutorial.select_card, tutorial.mouse_x, tutorial.mouse_y)
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
@@ -170,6 +199,7 @@ class Tutorial:
         self.font = load_font('Tutorial/ConsolaMalgun.ttf', 30)
         self.Tutorial_Start_logo = load_image('Tutorial/Turtorial_Start.png')
         self.cards = load_image('Tutorial/cards.png')
+        self.arrow = load_image('Tutorial/Tutorial_arrow.png')
         self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
@@ -184,7 +214,7 @@ class Tutorial:
         self.timer = 0
         self.mouse_x =0
         self.mouse_y =0
-
+        self.Click_order = 0
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
     def update(self):
@@ -204,12 +234,15 @@ class Tutorial:
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1
                 self.sun_value = self.sun_value - 100
+                if(self.Click_order == 0):
+                    self.Click_order = 1
                 pass
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 for i in range(9):
                     if (event.x >= i * 140 and event.x <= i * 140 + 140):
                         global Plant_Count
+                        self.Click_order = 3
                         creat_Plants()
                         Plants[Plant_Count].x = int(i * 140 + 70)
                         Plants[Plant_Count].y = int(282)
