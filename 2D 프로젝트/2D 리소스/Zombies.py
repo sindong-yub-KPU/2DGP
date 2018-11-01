@@ -26,11 +26,9 @@ class Zombie:
 
             # 좀비가 가만이 있는 상태일때
         if(self.state == self.WALK):
-            self.frame = (self.frame) % 17
-            if (self.total_frame >= 6):
-                self.frame = self.frame + 1
-                self.total_frame = 0
-            self.total_frame = self.total_frame + 1
+            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 17
+
+
 
 
 
@@ -43,7 +41,7 @@ class Zombie:
 
             self.Basic_Zombies.clip_draw(int(self.frame) * 166, 0, 81, 120, self.x , self.y)
         if(self.state == self.WALK):
-            self.Basic_Zombies_Walk.clip_draw(self.frame * 166  - 3, 0 , 90 , 128 , self.x  , self.y)
+            self.Basic_Zombies_Walk.clip_draw(int(self.frame) * 166  - 3, 0 , 90 , 128 , self.x  , self.y)
 
     def Walk(self):
         self.y = 300

@@ -49,6 +49,8 @@ class Start_state:
     @staticmethod
     def draw(tutorial):
         tutorial.Tutorial_Map.clip_draw(0 + tutorial.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+        tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
+        tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         tutorial.font.draw(600, 50, 'My house...')
 class Move_state: # 맵을 움직이는 스테이트
     global Zombies ,Zombie_count
@@ -88,7 +90,7 @@ class Move_state: # 맵을 움직이는 스테이트
               tutorial.map_x -= tutorial.velocity * game_framework.frame_time  # 속도 * 시간
               for i in range(5):
                   Zombies[i].x += (tutorial.velocity * game_framework.frame_time) * 1.7  # 좀비야 멈춰라
-              if(tutorial.map_x < 0):
+              if(tutorial.map_x < 295): # 맵을 원위치로
                   tutorial.Move_timer += 1
                   if (tutorial.Move_timer == 150):
                       tutorial.add_event(START)
@@ -96,6 +98,8 @@ class Move_state: # 맵을 움직이는 스테이트
     @staticmethod
     def draw(tutorial):
         tutorial.Tutorial_Map.clip_draw(int(tutorial.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+        tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
+        tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         tutorial.font.draw(600, 50, 'My house...')
     pass
 
@@ -103,7 +107,7 @@ class Stage_state:
     @staticmethod
     def enter(tutorial, event):
         tutorial.frame = 0
-        tutorial.start_time = get_time()
+        tutorial.stage_time = get_time()
 
     @staticmethod
     def exit(tutorial, event):
@@ -111,13 +115,13 @@ class Stage_state:
 
     @staticmethod
     def do(tutorial):
-        if (tutorial.timer - tutorial.start_time >= 2):
-            tutorial.add_event(SHOW_MAP)
+        pass
 
     @staticmethod
     def draw(tutorial):
-        tutorial.Tutorial_Map.clip_draw(0 + tutorial.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
-
+        tutorial.Tutorial_Map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+        tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
+        tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
 
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state},
@@ -159,7 +163,7 @@ class Tutorial:
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
     def draw(self):
-        self.cur_state.draw(self)
+        self.cur_state.draw(self) #현재 상태를 드로우
         pass
     def handle_event(self,event):
         pass
