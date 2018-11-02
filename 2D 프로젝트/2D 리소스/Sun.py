@@ -39,7 +39,7 @@ class Sun_shine:
 
 
     def update(self):
-        print(self.click)
+
         if(self.click == 0):
             self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 20
 
@@ -61,7 +61,7 @@ class Sun_shine:
         if (self.click == 2):
 
             game_world.remove_object(self)
-            del self
+
 
         pass
     def go_Sun(self):

@@ -29,7 +29,7 @@ Plants = []#객체 선언
 Sun = []
 Zombie_Count = 0
 Plant_Count = 0 # 객체의의 개수
-Sun_Count =0
+Sun_Count = 0
 def creat_Zombie():  # 좀비 생성
     global Zombies , Zombie_Count
     new_zombie = Zombie()
@@ -50,7 +50,9 @@ def creat_Sun():
 
     Sun.append(new_Sun)
     game_world.add_object(new_Sun, 1)
+
     Sun_Count += 1
+    print(Sun_Count)
 def delete_Sun():
 
     pass
@@ -99,6 +101,8 @@ class Move_state: # 맵을 움직이는 스테이트
     def exit(tutorial , event):
         for i in range(5):
             Zombies[i].state = 1;
+            Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
+
     @staticmethod
     def do(tutorial):
       if(tutorial.map_x < 500):# 좀비가 나타나야할 시간 300
@@ -148,6 +152,11 @@ class Stage_state:
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
+        for i in range(5):
+            creat_Zombie()
+            Zombies[i].state = 1;
+            Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
+            Zombies[i].x += 100
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -168,7 +177,7 @@ class Stage_state:
             tutorial.arrow_y = 340
             tutorial.Click_order = 2
 
-
+        # 화살표 때문에 만든것
         if tutorial.Click_order >= 3: # 태양을 생산
 
             if(tutorial.timer - tutorial.stage_time > 5 ):
@@ -280,11 +289,12 @@ class Tutorial:
 
                         self.Click_order = 5
                         Sun[i].click = 1
-                        Sun[i].plus_x = Sun[i].x
+                        Sun[i].plus_x = Sun[i].x# 좌표를 보내줌
                         Sun[i].plus_y = Sun[i].y
-                        del Sun[i]
-                        Sun_Count -= Sun_Count
+                        del Sun[i]  # 누르면 삭제
 
+                        Sun_Count -= 1 # 자원의 개수를 줄여줌
+                        print(Sun_Count)
                         self.sun_value = self.sun_value + 30  # 자원 증가
                         break
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
