@@ -10,10 +10,12 @@ def add_object(o,  layer):
 
 
 def remove_object(o):
-    for i in range(len(objects)):
+    for i in range(len(objects) -1,0,-1):
         if o in objects[i]:
-            objects.remove(o)
-            del o
+
+            objects[i].remove(o) #그룹에서 뻄
+
+            del o                   #메모리에서삭제
 # 정확한 리스트의 개수 리스트를 몇 개 추가해도 상관없게
 
 

@@ -4,7 +4,7 @@ from Zombies import Zombie
 from Plants import plant
 from Sun import Sun_shine
 import game_world
-
+import math
 
 PIXEL_PER_METER = (10.0 / 0.3)
 #이동거리가 10pixsel 에 30cm간다는 뜻 임의로 정함
@@ -47,9 +47,13 @@ def creat_Plants():
 def creat_Sun():
     global Sun , Sun_Count
     new_Sun = Sun_shine()
+
     Sun.append(new_Sun)
-    Sun_Count += 1
     game_world.add_object(new_Sun, 1)
+    Sun_Count += 1
+def delete_Sun():
+
+    pass
 
 #MAP States
 
@@ -129,7 +133,7 @@ class Move_state: # 맵을 움직이는 스테이트
         tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
-        tutorial.font.draw(600, 50, 'Defence the Zombie!!' ,(255, 0 , 0) )
+        tutorial.font.draw(600, 50, 'Defence the Zombies!!' ,(255, 0 , 0) )
     pass
 
 class Stage_state:
@@ -143,6 +147,7 @@ class Stage_state:
         tutorial.Tutorial_Start_music.repeat_play()
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
+        tutorial.arrow_x = 0
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -153,7 +158,8 @@ class Stage_state:
             tutorial.Tutorial_GAME_START.set_volume(64)
             tutorial.Tutorial_GAME_START.repeat_play()
             tutorial.order = 1
-        if(tutorial.Click_order == 0 or tutorial.Click_order == 2): #첫번째 화살표 , 두번째 화살표 애니메이션을 위해
+
+        if(tutorial.Click_order == 0 or tutorial.Click_order == 2 or tutorial.Click_order == 4): #첫번째 화살표 , 두번째 화살표 애니메이션을 위해
             if (tutorial.timer % 0.8 < 0.4):
                 tutorial.arrow_y += tutorial.velocity * game_framework.frame_time
             elif (tutorial.timer % 0.8 >= 0.4):
@@ -161,9 +167,20 @@ class Stage_state:
         if tutorial.Click_order == 1: # 화살표의 좌표를 바꿔주기 위해
             tutorial.arrow_y = 340
             tutorial.Click_order = 2
-        if tutorial.Click_order == 3: # 태양을 생산
-            if(tutorial.timer % 10 == 0):
+
+
+        if tutorial.Click_order >= 3: # 태양을 생산
+
+            if(tutorial.timer - tutorial.stage_time > 5 ):
+                tutorial.stage_time = get_time()
                 creat_Sun()
+                if(tutorial.Click_order < 4):
+                    tutorial.Click_order = 4
+                    if tutorial.Click_order == 4:
+                        tutorial.arrow_y = Sun[0].x  # y가 대신 받는다.
+
+
+
 
         pass
 
@@ -178,6 +195,10 @@ class Stage_state:
         if (tutorial.Click_order == 2):# 화살표
             tutorial.arrow.clip_composite_draw(0, 0, 80, 80, -3.141592 / 2, '', 210, int(tutorial.arrow_y), 80, 80)
             tutorial.font.draw(150, 340 + 100, 'Click here!', (255, 255, 0)) # 튜토리얼 화살표와 누르라는 명령
+        if (tutorial.Click_order == 4):
+            tutorial.arrow.clip_composite_draw(0, 0, 80, 80,   0, '',int(tutorial.arrow_y - 100) , int(Sun[0].y), 80, 80)
+            tutorial.font.draw(Sun[0].x -350, Sun[0].y , 'Click here!', (255, 255, 0))  # 튜토리얼 화살표와 누르라는 명령
+            tutorial.font.draw(600 , 50 , "you can get the money ^^",(255 ,0,0))  # 튜토리얼 화살표와 누르라는 명령
         Plants_Card.draw_card(tutorial.select_card, tutorial.mouse_x, tutorial.mouse_y)
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
@@ -205,7 +226,7 @@ class Tutorial:
         self.velocity = 0
         self.event_que = [] #이벤트 큐
         self.frame = 0  # 화면을 옮겨주는 프레임
-        self.cur_state = Start_state  # 화면을 옮겨주는 순서 정의
+        self.cur_state = Stage_state  # 화면을 옮겨주는 순서 정의
         self.cur_state.enter(self, None)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
@@ -242,13 +263,31 @@ class Tutorial:
                 for i in range(9):
                     if (event.x >= i * 140 and event.x <= i * 140 + 140):
                         global Plant_Count
-                        self.Click_order = 3
+                        if(self.Click_order < 3):
+                            self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
+
                         creat_Plants()
                         Plants[Plant_Count].x = int(i * 140 + 70)
                         Plants[Plant_Count].y = int(282)
                         Plant_Count = Plant_Count + 1
                         self.select_card = 0
-            if (event.button == SDL_BUTTON_RIGHT):
+            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
+                global Sun_Count , Sun
+                for i in range(Sun_Count):
+
+                    if (event.x > Sun[i].x - 50 and event.x < Sun[i].x + 50 and 600 - event.y - 1 > Sun[
+                        i].y - 50 and 600 - event.y - 1 < Sun[i].y + 50):
+
+                        self.Click_order = 5
+                        Sun[i].click = 1
+                        Sun[i].plus_x = Sun[i].x
+                        Sun[i].plus_y = Sun[i].y
+                        del Sun[i]
+                        Sun_Count -= Sun_Count
+
+                        self.sun_value = self.sun_value + 30  # 자원 증가
+                        break
+            if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
                 self.select_card = 0  # 오른쪽 버튼을 누르면 초기화
                 self.sun_value = self.sun_value + 100
 
