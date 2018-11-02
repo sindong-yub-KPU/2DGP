@@ -10,17 +10,18 @@ FRAMES_PER_ACTION_WALK = 17
 class plant:
     ATTACK,IDLE = 2 , 1
 
-    def __init__(self):
-        self.x , self.y = 0, 0
+    def __init__(self , x, y , line_):
+        self.x , self.y = x, y
 
         self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
 
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
         self.state = self.IDLE
+        self.Line = line_ ; # 맨위에부터 0 1 2 3 4  개의 라인
     def update(self):
-        if (self.state == self.IDLE):
-            self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 12
+
+        self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 12
 
     def draw_card(self , card_select , mouse_x , mouse_y): # 카드를 그려줌
         if(card_select == 1):

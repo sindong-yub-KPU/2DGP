@@ -4,6 +4,7 @@ from Zombies import Zombie
 from Plants import plant
 from Sun import Sun_shine
 import game_world
+import random
 import math
 
 PIXEL_PER_METER = (10.0 / 0.3)
@@ -38,10 +39,10 @@ def creat_Zombie():  # 좀비 생성
     Zombie_Count = Zombie_Count +1
 def creat_Plant_card():
     global Plants_Card
-    Plants_Card = plant()
-def creat_Plants():
+    Plants_Card = plant(0 , 0, 0)
+def creat_Plants( x, y , Line_ ):
     global Plants , Plant_Count
-    new_plant = plant()
+    new_plant = plant(x, y , Line_)
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
 def creat_Sun():
@@ -102,7 +103,10 @@ class Move_state: # 맵을 움직이는 스테이트
         for i in range(5):
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
+            Zombies[i].x = 1450
 
+        for i in range(5):
+            Zombies[i].x += 50
     @staticmethod
     def do(tutorial):
       if(tutorial.map_x < 500):# 좀비가 나타나야할 시간 300
@@ -156,7 +160,9 @@ class Stage_state:
             creat_Zombie()
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x += 100
+            Zombies[i].x = 1500
+        for i in range(5):
+            Zombies[i].x += i * random.randint(300 , 500)
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -187,8 +193,15 @@ class Stage_state:
                     tutorial.Click_order = 4
                     if tutorial.Click_order == 4:
                         tutorial.arrow_y = Sun[0].x  # y가 대신 받는다.
-
-
+        #식물 라인에 좀비가 등장할 경우 식물은 탄을 쏘게 해야한다 라인마다 번호를 부여해서 좀비가 그 라인에
+        #등장하면 쏘게한다.
+        for i in range(Plant_Count):
+            for j in range(Zombie_Count):
+                if ((Plants[i].Line == Zombies[j].Line) and Zombies[j].x < 1400):
+                    Plants[i].state = 2
+                    print(1)
+                else:
+                    Plants[i].state = 1
 
 
         pass
@@ -270,15 +283,15 @@ class Tutorial:
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 for i in range(9):
-                    if (event.x >= i * 140 and event.x <= i * 140 + 140):
+                    if (event.x >= i * 140 and event.x <= i * 140 + 140): #가운데 라인 생성
                         global Plant_Count
                         if(self.Click_order < 3):
                             self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
 
-                        creat_Plants()
-                        Plants[Plant_Count].x = int(i * 140 + 70)
-                        Plants[Plant_Count].y = int(282)
+                        creat_Plants(int(i * 140 + 70) ,int(282) , 2 )
+
                         Plant_Count = Plant_Count + 1
+
                         self.select_card = 0
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
                 global Sun_Count , Sun

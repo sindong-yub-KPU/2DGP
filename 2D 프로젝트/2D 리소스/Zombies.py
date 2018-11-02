@@ -31,7 +31,7 @@ class Zombie:
     def __init__(self):
         self.x, self.y = random.randint(1900 , 2000) , random.randint(100 , 450)
         self.frame = random.randint(0, 11)
-
+        self.Line = 2
         self.state = self.IDLE
         self.velocity = Zombie_SPEED_PPS
         self.Basic_Zombies = load_image('Tutorial/basic_zombie_idle.png')
