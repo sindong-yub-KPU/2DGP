@@ -11,7 +11,7 @@ FRAMES_PER_ACTION_IDLE = 11 # 8개의 프레임
 FRAMES_PER_ACTION_WALK = 17
 
 class plant:
-    DIE , HIT, ATTACK,IDLE  =4 , 3,2 , 1
+    DIE , HIT, ATTACK,IDLE  =4, 3,2 , 1
 
     def __init__(self , x, y , line_):
         self.x , self.y = x, y
@@ -33,9 +33,10 @@ class plant:
             if(self.world_time - self.state_time  > 2):
                 self.state_time = get_time()
                 self.hp -= 1 #식물의 피 달음
-                print(self.hp)
-        if(self.hp <= 0):
-            self.state = self.DIE
+                if (self.hp <= 0):
+                    self.state = self.DIE
+
+        if(self.state == 4):
             game_world.remove_object(self)
 
 

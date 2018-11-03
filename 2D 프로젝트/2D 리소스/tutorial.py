@@ -55,6 +55,8 @@ def creat_Plants( x, y , Line_ ):
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
     Plant_Count = Plant_Count + 1
+    print(Plant_Count)
+
 def creat_Sun():
     global Sun , Sun_Count
     new_Sun = Sun_shine()
@@ -78,7 +80,9 @@ def collide(a, b): #사각형 충돌제크
         return False
     return True
 def Collide_check(): # 충돌체크 편하기 위해 만듬
-    global Zombies , Plants , Bullets #
+    global Zombies , Plants , Bullets
+    global Plant_Count
+
     for Zombie in Zombies:
         for Bullet in Bullets:
             if collide(Bullet, Zombie) and Bullet.state != 1 and Zombie.hp > 0:
@@ -91,17 +95,24 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
         for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
             if collide(plant, Zombie):
                 Zombie.state = 2
+
                 plant.state = 3
                 plant_hited = True
-            elif(plant_hited != True and Zombie.state != 3 , 4 , 5):
+            elif(Zombie.state != 3 , 4 , 5):
                 Zombie.state = 1
          #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
              #   plant.state = 1
+    for Zombie in Zombies: # 모든 좀비에 대하여
+
+        if(Plant_Count == 0 and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
+            Zombie.state = 1 #좀비의 상태는 워킹
+
 
     pass
 def Delete_all():
     global Zombies, Plants, Bullets
     global Zombie_Count
+    global Plant_Count
     for Zombie in Zombies:
         if(Zombie.state == 5):
 
@@ -114,9 +125,13 @@ def Delete_all():
             Bullets.remove(Bullet)
             del Bullet
     for plant in Plants:
-        if (plant.state == 4):
+
+        if (plant.state == 3 and plant.hp <= 0):
             Plants.remove(plant)
             del plant
+            Plant_Count = Plant_Count - 1
+            print(123213)
+
 
 #MAP States
 
