@@ -34,8 +34,10 @@ class plant:
                 self.state_time = get_time()
                 self.hp -= 1 #식물의 피 달음
                 print(self.hp)
+        if(self.hp <= 0):
+            self.state = self.DIE
+            game_world.remove_object(self)
 
-        
 
 
     def draw_card(self , card_select , mouse_x , mouse_y): # 카드를 그려줌

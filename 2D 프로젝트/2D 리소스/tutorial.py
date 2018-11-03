@@ -113,8 +113,10 @@ def Delete_all():
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
             del Bullet
-
-
+    for plant in Plants:
+        if (plant.state == 4):
+            Plants.remove(plant)
+            del plant
 
 #MAP States
 
