@@ -78,13 +78,31 @@ def collide(a, b): #사각형 충돌제크
         return False
     return True
 def Collide_check(): # 충돌체크 편하기 위해 만듬
-    global Zombies , Plants , Bullets
+    global Zombies , Plants , Bullets #
     for Zombie in Zombies:
         for Bullet in Bullets:
-            if collide(Zombie, Bullet):
+            if collide(Bullet, Zombie) and Bullet.state != 1 and Zombie.hp > 0:
+
                 Zombie.hp -=  1
                 Bullet.state = 1
+                print(Zombie.hp)
+                break;
     pass
+def Delete_all():
+    global Zombies, Plants, Bullets
+    global Zombie_Count
+    for Zombie in Zombies:
+        if(Zombie.state == 5):
+            print(1112)
+            Zombies.remove(Zombie)
+            del Zombie
+            Zombie_Count = Zombie_Count - 1
+    for Bullet in Bullets:
+        if(Bullet.state == 2):
+            Bullets.remove(Bullet)
+            del Bullet
+
+
 
 #MAP States
 
@@ -190,6 +208,7 @@ class Stage_state:
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
             Zombies[i].x = 1500
+            Zombies[i].frame = random.randint(0, 17)
         for i in range(5):
             Zombies[i].x += i * random.randint(300 , 500)
     @staticmethod
@@ -237,6 +256,7 @@ class Stage_state:
                     plant.state_time = get_time()
 
         Collide_check()
+        Delete_all()
         pass
 
     @staticmethod

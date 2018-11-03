@@ -41,16 +41,18 @@ class Bullet:
         if self.state == 0:
             self.x += self.velocity * game_framework.frame_time  # 총알 속도
             self.seta += 0.2  # 총알의 회전
-        if  self.x > 1600 - 25:
-            game_world.remove_object(self)
-            del self
-        if (self.state == 1): # 총알 상태
+        if self.state == 1: # 총알 상태
             self.action += self.velocity * game_framework.frame_time
             if(self.action > 20):
+
                 self.state = 2
         if self.state == 2:
             game_world.remove_object(self)
-            del self
+
+        if self.x > 1600 - 25:
+            self.state = 2
+            game_world.remove_object(self)
+
         pass
     def draw_bb(self):
         draw_rectangle(*self.get_bb())

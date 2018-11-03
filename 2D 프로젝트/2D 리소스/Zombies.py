@@ -1,7 +1,7 @@
 from pico2d import *
 import game_framework
 import random
-
+import game_world
 PIXEL_PER_METER = (10.0 / 0.3)
 #이동거리가 10pixsel 에 30cm간다는 뜻 임의로 정함
 Zombie_SPEED_KMPH = 2.0
@@ -24,20 +24,43 @@ FRAMES_PER_ACTION_IDLE = 11 # 8개의 프레임
 TIME_PER_ACTION_WALK = 3
 ACTION_PER_TIME_WALK = 1.0 / TIME_PER_ACTION_WALK #1초에 할 액션수 2개
 FRAMES_PER_ACTION_WALK = 17
+
+# 죽음
+TIME_PER_ACTION_Dead = 3.5
+ACTION_PER_TIME_Dead = 1.0 / TIME_PER_ACTION_Dead #1초에 할 액션수 2개
+FRAMES_PER_ACTION_Dead = 9
 class Zombie:
-    WALK, ATTACK ,DIE ,END ,IDLE = 1, 2, 3 ,4 , 5
+    IDLE, WALK, ATTACK ,HEAD_DOWN , DIE , Remove = 0, 1, 2 ,3 , 4 , 5
     start_frame = 0
     order = 0
+    Basic_Zombies = None
+    Basic_Zombies_Walk = None
+    Basic_Zombies_Head = None
+    Basic_Zombies_NO_Head = None
+    Basic_Zombies_Die = None
     def __init__(self):
         self.x, self.y = random.randint(1900 , 2000) , random.randint(100 , 450)
         self.frame = random.randint(0, 11)
         self.Line = 2
         self.state = self.IDLE
+        self.head = 0
         self.velocity = Zombie_SPEED_PPS
-        self.Basic_Zombies = load_image('Tutorial/basic_zombie_idle.png')
-        self.Basic_Zombies_Walk = load_image('Tutorial/Tutorial_Zombie_walk.png')
-        self.hp = 10
+        self.Zombie_time = 0
+        if(self.Basic_Zombies == None):
+            self.Basic_Zombies = load_image('Tutorial/basic_zombie_idle.png')
+        if (self.Basic_Zombies_Walk == None):
+            self.Basic_Zombies_Walk = load_image('Tutorial/Tutorial_Zombie_walk.png')
+        if (self.Basic_Zombies_Head == None):
+            self.Basic_Zombies_Head = load_image('Tutorial/Tutorial_Zombie_head.png')
+        if(self.Basic_Zombies_NO_Head == None):
+            self.Basic_Zombies_NO_Head = load_image('Tutorial/Tutorial_Zombie_nohead_walk.png')
+        if(self.Basic_Zombies_Die == None):
+            self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
+        self.hp = 30
+        self.world_time = get_time()
     def update(self):
+        self.world_time = get_time()
+
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 11
 
@@ -48,6 +71,28 @@ class Zombie:
             self.x -= self.velocity * game_framework.frame_time
             self.get_bb()
 
+            if(self.hp <= 0):
+                self.state = self.HEAD_DOWN # 머리가 떨어져서 걷다가 죽어야함
+                self.head = 1 # 머리가 떨어짐
+                self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
+
+        if(self.state == self.HEAD_DOWN): #머리가 떨어져서 걷고 있을때
+            self.frame = (self.frame + FRAMES_PER_ACTION_WALK * ACTION_PER_TIME_WALK * game_framework.frame_time) % 17
+            self.x -= self.velocity * game_framework.frame_time
+            if(self.world_time - self.Zombie_time > 4):
+                self.state = self.DIE
+                self.Zombie_time = get_time() # 상태변화 시간을 잰다 .
+                self.frame = 0
+        if (self.state == self.DIE):
+            if(self.frame > 8):
+                if(self.world_time - self.Zombie_time > 5):
+                    self.state = self.Remove
+                    game_world.remove_object(self)
+            elif(self.frame < 8):
+                self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 9
+
+
+
 
 
     def draw(self):
@@ -56,12 +101,13 @@ class Zombie:
 
             self.Basic_Zombies.clip_draw(int(self.frame) * 166, 0, 81, 120, self.x , self.y)
         if(self.state == self.WALK):
-            self.Basic_Zombies_Walk.clip_draw(int(self.frame) * 166  - 3, 0 , 90 , 128 , self.x  , self.y)
+            self.Basic_Zombies_Walk.clip_draw(int(self.frame) * 166 - 3, 0, 90, 128, self.x, self.y)
             self.draw_bb()
+        if (self.state == self.HEAD_DOWN):
+            self.Basic_Zombies_NO_Head.clip_draw(int(self.frame) * 181 - 3, 0, 90, 95, self.x, self.y , 90 , 100)
+        if (self.state == self.DIE):
+            self.Basic_Zombies_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
 
-    def Walk(self):
-        self.y = 300
-        self.state = self.WALK
     def Attack(self):
         pass
     def get_bb(self):
