@@ -91,15 +91,14 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
                 Bullet.state = 1 # 총알을 없에준다
                 break;
     for plant in Plants:
-        plant_hited = False #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
+         #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
         for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
             if collide(plant, Zombie) and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5:
                 Zombie.state = 2
                 Zombie.collide = True
                 plant.state = 3
-                plant_hited = True
-            elif (Zombie != True  and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
 
+            elif (Zombie.collide != True  and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
          #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
              #   plant.state = 1
