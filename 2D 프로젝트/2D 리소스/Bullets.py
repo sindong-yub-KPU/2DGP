@@ -1,10 +1,11 @@
 from pico2d import *
 import time
 import game_framework
+import game_world
 import Plants
-PIXEL_PER_METER = (10.0 / 0.3)
+PIXEL_PER_METER = (20.0 / 0.3)
 #이동거리가 10pixsel 에 30cm간다는 뜻 임의로 정함
-Bullet_SPEED_KMPH = 5.0
+Bullet_SPEED_KMPH = 10.0
 # 10.0 속도
 #  10.0 속도 =  km / hour 킬로미터 거리 / 시간
 Bullet_SPEED_MPM = (Bullet_SPEED_KMPH * 1000.0 / 60 )
@@ -19,9 +20,14 @@ class Bullet:
             self.basic_plants_bullet = load_image('Tutorial/Tutorial_bullet.png')
         self.x = x
         self.y = y
+        self.seta = 0
         self.velocity = Bullet_SPEED_PPS
     def draw(self):
-        pass
+        self.basic_plants_bullet.clip_composite_draw(0 , 0 , 29 , 30 , 0 + self.seta,'' ,self.x , self.y , 29 , 30  )
     def update(self):
         self.x += self.velocity * game_framework.frame_time
+        self.seta += 0.2
+        if  self.x > 1600 - 25:
+            game_world.remove_object(self)
+            del self
         pass

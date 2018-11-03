@@ -3,6 +3,7 @@ from pico2d import *
 from Zombies import Zombie
 from Plants import plant
 from Sun import Sun_shine
+from Bullets import Bullet
 import game_world
 import random
 import math
@@ -26,11 +27,19 @@ SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START  = range(5)
 
 Plants_Card = None
 Zombies = []
-Plants = []#객체 선언
+Plants = []
 Sun = []
+Bullets = [] # 객체 리스트
 Zombie_Count = 0
-Plant_Count = 0 # 객체의의 개수
+Plant_Count = 0
 Sun_Count = 0
+Bullet_Count = 0 #객체 개수
+def creat_Bullet( x , y ):
+    global Bullets , Bullet_Count
+    New_Bullet = Bullet(x + 30, y )
+    Bullets.append(New_Bullet)
+    game_world.add_object(New_Bullet, 1)
+    Bullet_Count += 1
 def creat_Zombie():  # 좀비 생성
     global Zombies , Zombie_Count
     new_zombie = Zombie()
@@ -45,6 +54,7 @@ def creat_Plants( x, y , Line_ ):
     new_plant = plant(x, y , Line_)
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
+    Plant_Count = Plant_Count + 1
 def creat_Sun():
     global Sun , Sun_Count
     new_Sun = Sun_shine()
@@ -53,8 +63,8 @@ def creat_Sun():
     game_world.add_object(new_Sun, 1)
 
     Sun_Count += 1
-    print(Sun_Count)
-def delete_Sun():
+
+def Collide_check():
 
     pass
 
@@ -119,7 +129,7 @@ class Move_state: # 맵을 움직이는 스테이트
 
       if(tutorial.re == 1):
           tutorial.Move_timer += 1
-          print(tutorial.Move_timer)
+
           if (tutorial.Move_timer == 150):
               tutorial.Move_timer = 0
               tutorial.re = 2
@@ -145,6 +155,7 @@ class Move_state: # 맵을 움직이는 스테이트
     pass
 
 class Stage_state:
+    global Plants, Plant_Count
     @staticmethod
     def enter(tutorial, event):
         creat_Plant_card()
@@ -187,7 +198,7 @@ class Stage_state:
         if tutorial.Click_order >= 3: # 태양을 생산
 
             if(tutorial.timer - tutorial.stage_time > 5 ):
-                tutorial.stage_time = get_time()
+                tutorial.stage_time = get_time() # 5초 마다 Sun이 나오게함
                 creat_Sun()
                 if(tutorial.Click_order < 4):
                     tutorial.Click_order = 4
@@ -195,13 +206,17 @@ class Stage_state:
                         tutorial.arrow_y = Sun[0].x  # y가 대신 받는다.
         #식물 라인에 좀비가 등장할 경우 식물은 탄을 쏘게 해야한다 라인마다 번호를 부여해서 좀비가 그 라인에
         #등장하면 쏘게한다.
-        for i in range(Plant_Count):
-            for j in range(Zombie_Count):
-                if ((Plants[i].Line == Zombies[j].Line) and Zombies[j].x < 1400):
-                    Plants[i].state = 2
-                    print(1)
-                else:
-                    Plants[i].state = 1
+        for plant in Plants:
+            for Zombie in Zombies:
+                if ((plant.Line == Zombie.Line) and Zombie.x < 1400):
+                    plant.state = 2
+                elif((plant.Line != Zombie.Line) and Zombie.x > 1400):
+                    plant.state = 1
+        for plant in Plants:
+            if(plant.state == 2):
+                if tutorial.timer - plant.state_time > 5:
+                    creat_Bullet(plant.x , plant.y + 30)
+                    plant.state_time = get_time()
 
 
         pass
@@ -255,8 +270,8 @@ class Tutorial:
         self.sun_value = 200  # 자원량
         self.select_card = 0  # 무슨 카드를 선택했는지 아는 변수
         self.timer = 0
-        self.mouse_x =0
-        self.mouse_y =0
+        self.mouse_x = 0
+        self.mouse_y = 0
         self.Click_order = 0
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
@@ -290,7 +305,7 @@ class Tutorial:
 
                         creat_Plants(int(i * 140 + 70) ,int(282) , 2 )
 
-                        Plant_Count = Plant_Count + 1
+
 
                         self.select_card = 0
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
@@ -307,7 +322,7 @@ class Tutorial:
                         del Sun[i]  # 누르면 삭제
 
                         Sun_Count -= 1 # 자원의 개수를 줄여줌
-                        print(Sun_Count)
+
                         self.sun_value = self.sun_value + 30  # 자원 증가
                         break
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):

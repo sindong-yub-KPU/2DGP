@@ -46,7 +46,7 @@ class Zombie:
         if(self.state == self.WALK):
             self.frame = (self.frame + FRAMES_PER_ACTION_WALK * ACTION_PER_TIME_WALK * game_framework.frame_time) % 17
             self.x -= self.velocity * game_framework.frame_time
-
+            self.get_bb()
 
 
 
@@ -57,11 +57,14 @@ class Zombie:
             self.Basic_Zombies.clip_draw(int(self.frame) * 166, 0, 81, 120, self.x , self.y)
         if(self.state == self.WALK):
             self.Basic_Zombies_Walk.clip_draw(int(self.frame) * 166  - 3, 0 , 90 , 128 , self.x  , self.y)
+            self.draw_bb()
 
     def Walk(self):
         self.y = 300
         self.state = self.WALK
     def Attack(self):
         pass
-
-
+    def get_bb(self):
+        return self.x - 25, self.y - 30, self.x + 25, self.y + 30
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())
