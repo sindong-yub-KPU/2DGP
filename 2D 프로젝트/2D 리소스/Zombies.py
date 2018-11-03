@@ -38,6 +38,7 @@ class Zombie:
     Basic_Zombies_Head = None
     Basic_Zombies_NO_Head = None
     Basic_Zombies_Die = None
+    Basic_Zombies_Attack = None
     def __init__(self):
         self.x, self.y = random.randint(1900 , 2000) , random.randint(100 , 450)
         self.frame = random.randint(0, 11)
@@ -56,6 +57,8 @@ class Zombie:
             self.Basic_Zombies_NO_Head = load_image('Tutorial/Tutorial_Zombie_nohead_walk.png')
         if(self.Basic_Zombies_Die == None):
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
+        if(self.Basic_Zombies_Attack == None):
+            self.Basic_Zombies_Attack = load_image('Tutorial/Tutorial_Zombie_Attack.png')
         self.hp = 30
         self.world_time = get_time()
     def update(self):
