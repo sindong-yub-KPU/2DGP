@@ -84,9 +84,13 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
             if collide(Bullet, Zombie) and Bullet.state != 1 and Zombie.hp > 0:
 
                 Zombie.hp -=  1
-                Bullet.state = 1
-
+                Bullet.state = 1 # 총알을 없에준다
                 break;
+    for plant in Plants:
+        for Zombie in Zombies:
+            if collide(plant, Zombie):
+                Zombie.state = 2
+
     pass
 def Delete_all():
     global Zombies, Plants, Bullets
@@ -208,7 +212,7 @@ class Stage_state:
             creat_Zombie()
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1500
+            Zombies[i].x = 1200
             Zombies[i].frame = random.randint(0, 17)
         for i in range(2):
             Zombies[i].x += i * 1000
