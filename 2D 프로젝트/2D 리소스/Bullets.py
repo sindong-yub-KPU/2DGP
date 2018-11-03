@@ -49,7 +49,7 @@ class Bullet:
         if self.state == 2:
             game_world.remove_object(self)
 
-        if self.x > 1600 - 25:
+        if self.x > 1450 - 25: # 화면 밖에 나가면 사라짐 
             self.state = 2
             game_world.remove_object(self)
 

@@ -246,9 +246,12 @@ class Stage_state:
         for plant in Plants:
             for Zombie in Zombies:
                 if ((plant.Line == Zombie.Line) and Zombie.x < 1400):
+                    print(Zombie.x)
                     plant.state = 2
-                elif((plant.Line != Zombie.Line) and Zombie.x > 1400):
+                    break
+                else:
                     plant.state = 1
+
         for plant in Plants:
             if(plant.state == 2):
                 if tutorial.timer - plant.state_time > 5:
