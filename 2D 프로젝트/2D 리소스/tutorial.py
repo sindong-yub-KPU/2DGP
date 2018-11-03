@@ -330,6 +330,7 @@ class Tutorial:
         self.Tutorial_Start_logo = load_image('Tutorial/Turtorial_Start.png')
         self.cards = load_image('Tutorial/cards.png')
         self.arrow = load_image('Tutorial/Tutorial_arrow.png')
+        self.time_bar_image = load_image('Tutorial/progress_bar.png')
         self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
