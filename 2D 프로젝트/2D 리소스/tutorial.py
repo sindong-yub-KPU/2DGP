@@ -85,7 +85,7 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
 
                 Zombie.hp -=  1
                 Bullet.state = 1
-                print(Zombie.hp)
+
                 break;
     pass
 def Delete_all():
@@ -93,10 +93,11 @@ def Delete_all():
     global Zombie_Count
     for Zombie in Zombies:
         if(Zombie.state == 5):
-            print(1112)
+
             Zombies.remove(Zombie)
             del Zombie
             Zombie_Count = Zombie_Count - 1
+            print(Zombie_Count)
     for Bullet in Bullets:
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
@@ -203,14 +204,14 @@ class Stage_state:
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
-        for i in range(5):
+        for i in range(2):
             creat_Zombie()
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
             Zombies[i].x = 1500
             Zombies[i].frame = random.randint(0, 17)
-        for i in range(5):
-            Zombies[i].x += i * random.randint(300 , 500)
+        for i in range(2):
+            Zombies[i].x += i * 1000
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -244,14 +245,16 @@ class Stage_state:
         #식물 라인에 좀비가 등장할 경우 식물은 탄을 쏘게 해야한다 라인마다 번호를 부여해서 좀비가 그 라인에
         #등장하면 쏘게한다.
         for plant in Plants:
+            Zombie_line = False
             for Zombie in Zombies:
-                if ((plant.Line == Zombie.Line) and Zombie.x < 1400):
-                    print(Zombie.x)
+                if ((plant.Line == Zombie.Line) and Zombie.x < 1400 and Zombie.state != 4):
+                    print(Zombie.x) #라인이 같고 1400 이하일때 쏜다 . 라인이 같은 좀비가 없다면
                     plant.state = 2
-                    break
-                else:
+                    Zombie_line = True
+                if(((plant.Line != Zombie.Line) or Zombie.x > 1400) and Zombie_line != True):
                     plant.state = 1
-
+            if(Zombie_Count == 0):
+                plant.state = 1
         for plant in Plants:
             if(plant.state == 2):
                 if tutorial.timer - plant.state_time > 5:
