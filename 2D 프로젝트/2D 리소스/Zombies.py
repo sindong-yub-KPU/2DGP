@@ -84,6 +84,11 @@ class Zombie:
                 self.state = self.HEAD_DOWN # 머리가 떨어져서 걷다가 죽어야함
                 self.head = 1 # 머리가 떨어짐
                 self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
+        if (self.state == self.ATTACK):
+            if (self.hp <= 0):
+                self.state = self.HEAD_DOWN  # 머리가 떨어져서 걷다가 죽어야함
+                self.head = 1  # 머리가 떨어짐
+                self.Zombie_time = get_time()  # 머리가 떨어진 시간을 잰다 .
         #좀비 머리 떨어짐
         if(self.state == self.HEAD_DOWN): #머리가 떨어져서 걷고 있을때
             self.frame = (self.frame + FRAMES_PER_ACTION_WALK * ACTION_PER_TIME_WALK * game_framework.frame_time) % 17

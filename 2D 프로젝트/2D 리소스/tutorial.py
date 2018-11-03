@@ -93,7 +93,7 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
     for plant in Plants:
         plant_hited = False #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
         for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
-            if collide(plant, Zombie):
+            if collide(plant, Zombie) and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5:
                 Zombie.state = 2
                 Zombie.collide = True
                 plant.state = 3
