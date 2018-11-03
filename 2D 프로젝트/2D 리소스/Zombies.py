@@ -25,6 +25,11 @@ TIME_PER_ACTION_WALK = 3
 ACTION_PER_TIME_WALK = 1.0 / TIME_PER_ACTION_WALK #1초에 할 액션수 2개
 FRAMES_PER_ACTION_WALK = 17
 
+#공격
+TIME_PER_ACTION_ATTACK = 2
+ACTION_PER_TIME_ATTACK = 1.0 / TIME_PER_ACTION_WALK #1초에 할 액션수 2개
+FRAMES_PER_ACTION_ATTACK = 20 # 21 개
+
 # 죽음
 TIME_PER_ACTION_Dead = 3.5
 ACTION_PER_TIME_Dead = 1.0 / TIME_PER_ACTION_Dead #1초에 할 액션수 2개
@@ -78,7 +83,7 @@ class Zombie:
                 self.state = self.HEAD_DOWN # 머리가 떨어져서 걷다가 죽어야함
                 self.head = 1 # 머리가 떨어짐
                 self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
-
+        #좀비 머리 떨어짐
         if(self.state == self.HEAD_DOWN): #머리가 떨어져서 걷고 있을때
             self.frame = (self.frame + FRAMES_PER_ACTION_WALK * ACTION_PER_TIME_WALK * game_framework.frame_time) % 17
             self.x -= self.velocity * game_framework.frame_time
@@ -86,6 +91,7 @@ class Zombie:
                 self.state = self.DIE
                 self.Zombie_time = get_time() # 상태변화 시간을 잰다 .
                 self.frame = 0
+        #좀비 사망
         if (self.state == self.DIE):
             if(self.frame > 8):
                 if(self.world_time - self.Zombie_time > 5):
@@ -93,7 +99,9 @@ class Zombie:
                     game_world.remove_object(self)
             elif(self.frame < 8):
                 self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 9
-
+        #좀비 공격
+        if (self.state == self.ATTACK):
+            self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 20
 
 
 
