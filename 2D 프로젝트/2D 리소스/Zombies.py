@@ -118,6 +118,8 @@ class Zombie:
             self.Basic_Zombies_NO_Head.clip_draw(int(self.frame) * 181 - 3, 0, 90, 95, self.x, self.y , 90 , 100)
         if (self.state == self.DIE):
             self.Basic_Zombies_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
+        if (self.state == self.ATTACK):
+            self.Basic_Zombies_Attack.clip_draw(int(self.frame) * 176, 0, 180, 95, self.x, self.y)
 
     def Attack(self):
         pass
