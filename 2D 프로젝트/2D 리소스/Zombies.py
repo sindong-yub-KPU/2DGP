@@ -36,7 +36,7 @@ class Zombie:
         self.velocity = Zombie_SPEED_PPS
         self.Basic_Zombies = load_image('Tutorial/basic_zombie_idle.png')
         self.Basic_Zombies_Walk = load_image('Tutorial/Tutorial_Zombie_walk.png')
-
+        self.hp = 10
     def update(self):
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 11
