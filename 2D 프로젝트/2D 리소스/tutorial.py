@@ -87,9 +87,16 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
                 Bullet.state = 1 # 총알을 없에준다
                 break;
     for plant in Plants:
-        for Zombie in Zombies:
+        plant_hited = False #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
+        for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
             if collide(plant, Zombie):
                 Zombie.state = 2
+                plant.state = 3
+                plant_hited = True
+            elif(plant_hited != True and Zombie.state != 3 , 4 , 5):
+                Zombie.state = 1
+         #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
+             #   plant.state = 1
 
     pass
 def Delete_all():
@@ -101,7 +108,7 @@ def Delete_all():
             Zombies.remove(Zombie)
             del Zombie
             Zombie_Count = Zombie_Count - 1
-            print(Zombie_Count)
+
     for Bullet in Bullets:
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
@@ -252,7 +259,7 @@ class Stage_state:
             Zombie_line = False
             for Zombie in Zombies:
                 if ((plant.Line == Zombie.Line) and Zombie.x < 1400 and Zombie.state != 4):
-                    print(Zombie.x) #라인이 같고 1400 이하일때 쏜다 . 라인이 같은 좀비가 없다면
+                     #라인이 같고 1400 이하일때 쏜다 . 라인이 같은 좀비가 없다면
                     plant.state = 2
                     Zombie_line = True
                 if(((plant.Line != Zombie.Line) or Zombie.x > 1400) and Zombie_line != True):

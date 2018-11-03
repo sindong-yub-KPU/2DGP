@@ -11,7 +11,7 @@ FRAMES_PER_ACTION_IDLE = 11 # 8개의 프레임
 FRAMES_PER_ACTION_WALK = 17
 
 class plant:
-    ATTACK,IDLE = 2 , 1
+    DIE , HIT, ATTACK,IDLE  =4 , 3,2 , 1
 
     def __init__(self , x, y , line_):
         self.x , self.y = x, y
@@ -23,12 +23,19 @@ class plant:
         self.total_frame = random.randint(0, 4)
         self.state = self.IDLE
         self.Line = line_ ; # 맨위에부터 0 1 2 3 4  개의 라인
-        self.state_time = get_time()
-
-
+        self.state_time = 0
+        self.world_time =0
+        self.hp = 3
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 12
+        if(self.state == 3): #식물이 지금 맞고 있다.
+            self.world_time = get_time()
+            if(self.world_time - self.state_time  > 2):
+                self.state_time = get_time()
+                self.hp -= 1 #식물의 피 달음
+                print(self.hp)
 
+        
 
 
     def draw_card(self , card_select , mouse_x , mouse_y): # 카드를 그려줌
