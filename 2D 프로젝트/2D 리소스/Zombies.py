@@ -49,6 +49,7 @@ class Zombie:
         self.frame = random.randint(0, 11)
         self.Line = 2
         self.state = self.IDLE
+        self.collide = False
         self.head = 0
         self.velocity = Zombie_SPEED_PPS
         self.Zombie_time = 0

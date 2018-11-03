@@ -95,16 +95,17 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
         for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
             if collide(plant, Zombie):
                 Zombie.state = 2
-
+                Zombie.collide = True
                 plant.state = 3
                 plant_hited = True
-            elif(Zombie.state != 3 , 4 , 5):
+            elif (Zombie != True  and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
+
                 Zombie.state = 1
          #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
              #   plant.state = 1
     for Zombie in Zombies: # 모든 좀비에 대하여
-
-        if(Plant_Count == 0 and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
+        Zombie.collide = False
+        if(Plant_Count == 0  and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
             Zombie.state = 1 #좀비의 상태는 워킹
 
 
@@ -178,10 +179,10 @@ class Move_state: # 맵을 움직이는 스테이트
         for i in range(5):
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1450
+            Zombies[i].x = 1500
 
         for i in range(5):
-            Zombies[i].x += 50
+            Zombies[i].x += random.randint(100, 300)
     @staticmethod
     def do(tutorial):
       if(tutorial.map_x < 500):# 좀비가 나타나야할 시간 300
@@ -226,20 +227,21 @@ class Stage_state:
         creat_Plant_card()
         tutorial.frame = 0
         tutorial.stage_time = get_time()
+        tutorial.time_bar_time = get_time()
         tutorial.order = 0
         tutorial.Tutorial_Start_music.set_volume(64)
         tutorial.Tutorial_Start_music.repeat_play()
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
-        for i in range(2):
+        for i in range(5):
             creat_Zombie()
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1200
+            Zombies[i].x = 1470
             Zombies[i].frame = random.randint(0, 17)
-        for i in range(2):
-            Zombies[i].x += i * 1000
+        for i in range(5):
+            Zombies[i].x += i * random.randint(200 , 400)
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -289,6 +291,12 @@ class Stage_state:
                     creat_Bullet(plant.x , plant.y + 30)
                     plant.state_time = get_time()
 
+
+        if(tutorial.timer - tutorial.time_bar_time >= 1):
+            if(tutorial.time_bar <= 300):
+                tutorial.time_bar += 2
+            print(tutorial.time_bar)
+            tutorial.time_bar_time = get_time()
         Collide_check()
         Delete_all()
         pass
@@ -298,6 +306,8 @@ class Stage_state:
         tutorial.Tutorial_Map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80) # 보드판
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        tutorial.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30) #스테이지 타임바
+        tutorial.time_bar_image.clip_draw_to_origin(0, 60, 300 - tutorial.time_bar, 60, 1080,1)
         if(tutorial.Click_order == 0): # 화살표
             tutorial.arrow.clip_composite_draw(0, 0, 80, 80, 3.141592 / 2, '', 140, int(tutorial.arrow_y), 80, 80)
             tutorial.font.draw(80, 460 - 100, 'Click here!' ,(255, 255, 0))
@@ -312,8 +322,8 @@ class Stage_state:
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
-        tutorial.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30)
-        tutorial.time_bar_image.clip_draw_to_origin(0, 60, 280, 60, 1080,1)
+
+        print(tutorial.time_bar)
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
