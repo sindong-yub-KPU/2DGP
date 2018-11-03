@@ -312,7 +312,8 @@ class Stage_state:
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
-
+        tutorial.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30)
+        tutorial.time_bar_image.clip_draw_to_origin(0, 60, 280, 60, 1080,1)
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
@@ -331,6 +332,7 @@ class Tutorial:
         self.cards = load_image('Tutorial/cards.png')
         self.arrow = load_image('Tutorial/Tutorial_arrow.png')
         self.time_bar_image = load_image('Tutorial/progress_bar.png')
+        self.time_bar = 0
         self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
