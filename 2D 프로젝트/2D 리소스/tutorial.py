@@ -246,6 +246,7 @@ class Stage_state:
             Zombies[i].frame = random.randint(0, 17)
         for i in range(5):
             Zombies[i].x += i * random.randint(200 , 400)
+        pass
     @staticmethod
     def exit(tutorial, event):
             pass
