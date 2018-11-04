@@ -24,6 +24,12 @@ CHANGE_SPEED_PPS = (CHANGE_SPEED_MPS * PIXEL_PER_METER) # 픽셀 퍼 세크 미�
 # 튜토리얼 이벤트
 SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START  = range(5)
 
+next_state_table = {
+(SDL_KEYDOWN, SDLK_1): SHOW_MAP,
+(SDL_KEYDOWN,SDLK_2) : START
+
+
+}
 
 Plants_Card = None
 Zombies = []
@@ -203,7 +209,7 @@ class Move_state: # 맵을 움직이는 스테이트
               tutorial.map_x -= tutorial.velocity * game_framework.frame_time  # 속도 * 시간
               for i in range(5):
                   Zombies[i].x += (tutorial.velocity * game_framework.frame_time) * 1.7  # 좀비야 멈춰라
-              if(tutorial.map_x < 310): # 맵을 원위치로
+              if(tutorial.map_x < 330): # 맵을 원위치로
                   tutorial.Move_timer += 1
                   if (tutorial.Move_timer == 150):
                       tutorial.add_event(START)
@@ -229,12 +235,11 @@ class Stage_state:
         tutorial.time_bar_time = get_time()
         tutorial.order = 0
         tutorial.Tutorial_Start_music.set_volume(64)
-        tutorial.Tutorial_Start_music.repeat_play()
+        tutorial.Tutorial_Start_music.play()
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
         for i in range(5):
-            creat_Zombie()
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
             Zombies[i].x = 1470
@@ -324,7 +329,7 @@ class Stage_state:
 
         print(tutorial.time_bar)
 next_state_table = {
-    Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state },
+    Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state , },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
     Stage_state : {START : Stage_state  }
 }
@@ -347,7 +352,7 @@ class Tutorial:
         self.velocity = 0
         self.event_que = [] #이벤트 큐
         self.frame = 0  # 화면을 옮겨주는 프레임
-        self.cur_state = Stage_state  # 화면을 옮겨주는 순서 정의
+        self.cur_state = Start_state  # 화면을 옮겨주는 순서 정의
         self.cur_state.enter(self, None)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
@@ -418,6 +423,12 @@ class Tutorial:
                 and event.type == SDL_MOUSEMOTION):
             self.mouse_x =  event.x
             self.mouse_y = event.y
+
+        if(event.type == SDL_KEYDOWN):
+            if(event.key == SDLK_1):
+                self.add_event(SHOW_MAP)
+            if(event.key == SDLK_2):
+                self.add_event(START)
 
 
 
