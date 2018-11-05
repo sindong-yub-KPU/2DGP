@@ -239,13 +239,14 @@ class Stage_state:
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
+        tutorial.game_over = 0 # 게임 오버
         for i in range(5):
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1470
+            Zombies[i].x = 1450
             Zombies[i].frame = random.randint(0, 17)
         for i in range(5):
-            Zombies[i].x += i * random.randint(200 , 400)
+            Zombies[i].x += i * random.randint(100 , 300)
         pass
     @staticmethod
     def exit(tutorial, event):
@@ -297,11 +298,18 @@ class Stage_state:
                     plant.state_time = get_time()
 
 
-        if(tutorial.timer - tutorial.time_bar_time >= 1):
+        if(tutorial.timer - tutorial.time_bar_time >= 0.5):
             if(tutorial.time_bar <= 300):
                 tutorial.time_bar += 2
-            print(tutorial.time_bar)
+            elif(tutorial.time_bar >300 and Zombie_Count == 0):
+                game_framework.change_state(Stage_state)
+
             tutorial.time_bar_time = get_time()
+        for Zombie in Zombies: #좀비의 좌표가 0 보다 작아진다면 게임 오버
+            if(Zombie.x < 0 ):
+                tutorial.game_over += 1 # 게임 오버
+                
+
         Collide_check()
         Delete_all()
         pass
@@ -327,6 +335,8 @@ class Stage_state:
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
+        if(tutorial.game_over > 0 ):
+            tutorial.font.draw(600, 50, 'Game Over' , (0, 122 , 0 )) # 게임 오버 메세지 출력
 
         print(tutorial.time_bar)
 next_state_table = {
