@@ -1,6 +1,6 @@
 from pico2d import *
 import game_framework
-
+import game_world
 import Tutorial_state
 GAME_WIDTH = 1400
 GAME_HEIGHT = 600
@@ -9,7 +9,8 @@ game_start = False
 game_menu = False
 game_running = True
 change_screen = 0
-soundtime = 0
+
+MAIN = None
 class Main_UI:
     def __init__(self) :
         self.Main_Screen = load_image('Mainresource/main_image.png')
@@ -17,7 +18,7 @@ class Main_UI:
         self.Main_object = load_image('Mainresource/icono.png');
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
         self.Main_UI = load_image('Mainresource/Main_UI.png')
-
+        self.soundtime = 0
 
         self.start_music = load_music('start_sound.mp3')
         self.bgm = load_music('Mainresource/Plants vs Zombies Soundtrack. [Main Menu].mp3')
@@ -78,30 +79,37 @@ class Main_UI:
             self.Main_object_esc.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2, 510, 380 )
 
         update_canvas()
+
 def update():
-    global soundtime
+    global MAIN
+
+
     if(change_screen == 1):
-        soundtime = soundtime + 1
+        MAIN.soundtime = MAIN.soundtime + 1
         delay(0.02)
-        if(soundtime > 140):
+        if(MAIN.soundtime > 140):
             game_framework.change_state(Tutorial_state)
+
+
     pass
 def enter():
-    global Main_UI
+    global MAIN
 
-    Main_UI = Main_UI()
+    game_world.objects = [[],[]]
+    MAIN = Main_UI()
     pass
 def draw():
-    global Main_UI
-    Main_UI.draw()
+    global MAIN
+    MAIN.draw()
 def exit():
-    global Main_UI
-    del (Main_UI)
+    global MAIN , change_screen
+    change_screen =0
+    del MAIN
 
 def handle_events():
-    global Main_UI
+    global MAIN
     global game_running
-    Main_UI.handle_events()
+    MAIN.handle_events()
     if(game_running == False):
         game_framework.quit()
 

@@ -6,6 +6,7 @@ from Sun import Sun_shine
 from Bullets import Bullet
 import game_world
 import random
+import title_state
 import math
 
 PIXEL_PER_METER = (10.0 / 0.3)
@@ -138,6 +139,30 @@ def Delete_all():
             Plant_Count = Plant_Count - 1
             print(123213)
 
+def clear(): #객체 리스트 다 삭제
+    global Zombies, Plants, Bullets , Sun
+    global Zombie_Count
+    global Plant_Count
+    del Zombies
+    del Plants
+    del Bullets
+    del Sun
+
+    Zombies = []
+    Plants = []
+    Sun = []
+    Bullets = []  # 객체 리스트
+
+    Plant_Count =0
+    Zombie_Count =0
+    Bullet_Count=0
+
+def game_over():
+    global Zombies
+    for Zombie in Zombies:
+        if(Zombie.x < 0):
+            clear()
+            game_framework.change_state(title_state)
 
 #MAP States
 
@@ -239,15 +264,14 @@ class Stage_state:
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
-        tutorial.game_over = 0 # 게임 오버
+        tutorial.game_over = 0
         for i in range(5):
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1450
+            Zombies[i].x = 1470
             Zombies[i].frame = random.randint(0, 17)
         for i in range(5):
-            Zombies[i].x += i * random.randint(100 , 300)
-        pass
+            Zombies[i].x += i * random.randint(200 , 400)
     @staticmethod
     def exit(tutorial, event):
             pass
@@ -298,20 +322,16 @@ class Stage_state:
                     plant.state_time = get_time()
 
 
-        if(tutorial.timer - tutorial.time_bar_time >= 0.5):
+        if(tutorial.timer - tutorial.time_bar_time >= 1):
             if(tutorial.time_bar <= 300):
                 tutorial.time_bar += 2
-            elif(tutorial.time_bar >300 and Zombie_Count == 0):
-                game_framework.change_state(Stage_state)
-
+            print(tutorial.time_bar)
             tutorial.time_bar_time = get_time()
-        for Zombie in Zombies: #좀비의 좌표가 0 보다 작아진다면 게임 오버
-            if(Zombie.x < 0 ):
-                tutorial.game_over += 1 # 게임 오버
-                
-
         Collide_check()
         Delete_all()
+        game_over()
+
+
         pass
 
     @staticmethod
@@ -335,8 +355,6 @@ class Stage_state:
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
-        if(tutorial.game_over > 0 ):
-            tutorial.font.draw(600, 50, 'Game Over' , (0, 122 , 0 )) # 게임 오버 메세지 출력
 
         print(tutorial.time_bar)
 next_state_table = {
@@ -440,7 +458,5 @@ class Tutorial:
                 self.add_event(SHOW_MAP)
             if(event.key == SDLK_2):
                 self.add_event(START)
-
-
 
 

@@ -19,7 +19,9 @@ def enter():
     tutorial = Tutorial()
     game_world.add_object(tutorial, 0)
 def exit():
+    global tutorial
     game_world.clear()
+    del tutorial
 
 def pause():
     pass
