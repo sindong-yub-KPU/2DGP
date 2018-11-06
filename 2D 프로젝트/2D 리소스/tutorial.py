@@ -7,6 +7,7 @@ from Bullets import Bullet
 import game_world
 import random
 import title_state
+import Stage1_state
 import math
 
 PIXEL_PER_METER = (10.0 / 0.3)
@@ -321,12 +322,17 @@ class Stage_state:
 
         if(tutorial.timer - tutorial.time_bar_time >= 1):
             if(tutorial.time_bar <= 300):
-                tutorial.time_bar += 2
+                tutorial.time_bar += 2 #시간바의 이동속도
 
-            tutorial.time_bar_time = get_time()
-        Collide_check()
-        Delete_all()
+            tutorial.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
+        Collide_check() #객체들의 충돌 체크
+        Delete_all() # 객체들의 삭제
+        # 다음 스테이지로 넘어감 스테이지 클리어
+        if(tutorial.time_bar > 300 and Zombie_Count == 0):
+            game_framework.change_state(Stage1_state)
+
+        # 게임 오버
         if(tutorial.game_over == 0):
             for Zombie in Zombies:
                 if (Zombie.x < 0):

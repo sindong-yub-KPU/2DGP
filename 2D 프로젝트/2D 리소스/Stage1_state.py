@@ -3,21 +3,21 @@ import game_framework
 import game_world
 import pause_state
 
-from tutorial import Tutorial
+from Stage1 import Stage_level_1
 
 
 
 
-name = "Tutorial_state"
+name = "Stage1"
 
 
-tutorial = None
+Stage1 = None
 
 
 def enter():
-    global tutorial
-    tutorial = Tutorial()
-    game_world.add_object(tutorial, 0)
+    global Stage1
+    Stage1 = Stage_level_1()
+    game_world.add_object(Stage1, 0)
 def exit():
     game_world.clear()
 
@@ -33,7 +33,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.push_state(pause_state)
         else :
-            tutorial.handle_event(event)
+            Stage1.handle_event(event)
     pass
 
 def update():
