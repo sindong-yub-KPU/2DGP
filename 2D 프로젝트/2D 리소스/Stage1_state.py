@@ -15,6 +15,7 @@ Stage1 = None
 
 
 def enter():
+    game_world.objects = [[], []]
     global Stage1
     Stage1 = Stage_level_1()
     game_world.add_object(Stage1, 0)
