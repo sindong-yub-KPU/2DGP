@@ -62,7 +62,7 @@ def creat_Plants( x, y , Line_ ):
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
     Plant_Count = Plant_Count + 1
-    print(Plant_Count)
+
 
 def creat_Sun():
     global Sun , Sun_Count
@@ -137,12 +137,13 @@ def Delete_all():
             Plants.remove(plant)
             del plant
             Plant_Count = Plant_Count - 1
-            print(123213)
+
 
 def clear(): #객체 리스트 다 삭제
     global Zombies, Plants, Bullets , Sun
     global Zombie_Count
     global Plant_Count
+    global Bullet_Count
     del Zombies
     del Plants
     del Bullets
@@ -157,12 +158,8 @@ def clear(): #객체 리스트 다 삭제
     Zombie_Count =0
     Bullet_Count=0
 
-def game_over():
-    global Zombies
-    for Zombie in Zombies:
-        if(Zombie.x < 0):
-            clear()
-            game_framework.change_state(title_state)
+
+
 
 #MAP States
 
@@ -264,11 +261,11 @@ class Stage_state:
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
-        tutorial.game_over = 0
+        tutorial.game_over_time = 0
         for i in range(5):
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1470
+            Zombies[i].x = 200
             Zombies[i].frame = random.randint(0, 17)
         for i in range(5):
             Zombies[i].x += i * random.randint(200 , 400)
@@ -325,13 +322,22 @@ class Stage_state:
         if(tutorial.timer - tutorial.time_bar_time >= 1):
             if(tutorial.time_bar <= 300):
                 tutorial.time_bar += 2
-            print(tutorial.time_bar)
+
             tutorial.time_bar_time = get_time()
         Collide_check()
         Delete_all()
-        game_over()
 
+        if(tutorial.game_over == 0):
+            for Zombie in Zombies:
+                if (Zombie.x < 0):
+                    tutorial.game_over = 1
 
+        if(tutorial.game_over == 1):
+            tutorial.game_over_time = get_time()
+            tutorial.game_over = 2
+        if(tutorial.game_over == 2 and tutorial.timer - tutorial.game_over_time > 8 ):
+            clear()
+            game_framework.change_state(title_state)
         pass
 
     @staticmethod
@@ -356,7 +362,11 @@ class Stage_state:
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
 
-        print(tutorial.time_bar)
+        #게임 오버
+        if(tutorial.game_over > 0):
+            tutorial.font.draw(600 , 550 , 'GAME OVER.....', (0 , 150, 0))
+
+
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state , },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
@@ -391,6 +401,7 @@ class Tutorial:
         self.mouse_x = 0
         self.mouse_y = 0
         self.Click_order = 0
+        self.game_over =0
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
     def update(self):
@@ -428,16 +439,15 @@ class Tutorial:
                         self.select_card = 0
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
                 global Sun_Count , Sun
-                for i in range(Sun_Count):
+                for Sun_shine in Sun:
 
-                    if (event.x > Sun[i].x - 50 and event.x < Sun[i].x + 50 and 600 - event.y - 1 > Sun[
-                        i].y - 50 and 600 - event.y - 1 < Sun[i].y + 50):
+                    if (event.x > Sun_shine.x - 50 and event.x < Sun_shine.x + 50 and 600 - event.y - 1 > Sun_shine.y - 50 and 600 - event.y - 1 < Sun_shine.y + 50):
 
                         self.Click_order = 5
-                        Sun[i].click = 1
-                        Sun[i].plus_x = Sun[i].x# 좌표를 보내줌
-                        Sun[i].plus_y = Sun[i].y
-                        del Sun[i]  # 누르면 삭제
+                        Sun_shine.click = 1
+                        Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
+                        Sun_shine.plus_y = Sun_shine.y
+                        del Sun_shine  # 누르면 삭제
 
                         Sun_Count -= 1 # 자원의 개수를 줄여줌
 
