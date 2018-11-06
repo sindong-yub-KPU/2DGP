@@ -181,27 +181,30 @@ class Start_state:
             Stage_level_1.add_event(SHOW_MAP)
 
     @staticmethod
-    def draw(tutorial):
-        Stage_level_1.Tutorial_Map.clip_draw(0 + tutorial.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+    def draw(Stage_level_1):
+        Stage_level_1.Stage_level_1_map.clip_draw(0 + Stage_level_1.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
-        Stage_level_1.font.draw(20, 530, '%d' % tutorial.sun_value)
+        Stage_level_1.font.draw(20, 530, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Stage 1')
 
 
 
+
+class Stage_state:
+    pass
 class Stage_level_1:
     def __init__(self):
-        self.Stage_level_1 = load_image('Tutorial/Tutorial_map.png')
-        self.board = load_image('Tutorial/board.png')
-        self.intro_music = load_music('Tutorial/intro_music.mp3')
-        self.Stage_level_1_Start_music = load_music('Tutorial/Tutorial_start.mp3')  # 초반 도입 음악
-        self.Stage_level_1_GAME_START = load_music('Tutorial/Tutorial_GAME_START.mp3')  # 게임 스타트 음악
-        self.font = load_font('Tutorial/ConsolaMalgun.ttf', 30)
-        self.Stage_level_1_Start_logo = load_image('Tutorial/Turtorial_Start.png')
-        self.cards = load_image('Tutorial/cards.png')
-        self.arrow = load_image('Tutorial/Tutorial_arrow.png')
-        self.time_bar_image = load_image('Tutorial/progress_bar.png')
+        self.Stage_level_1_map = load_image('Stage1/Tutorial_map.png')
+        self.board = load_image('Stage1/board.png')
+        self.intro_music = load_music('Stage1/intro_music.mp3')
+        self.Stage_level_1_Start_music = load_music('Stage1/Tutorial_start.mp3')  # 초반 도입 음악
+        self.Stage_level_1_GAME_START = load_music('Stage1/Tutorial_GAME_START.mp3')  # 게임 스타트 음악
+        self.font = load_font('Stage1/ConsolaMalgun.ttf', 30)
+        self.Stage_level_1_Start_logo = load_image('Stage1/Turtorial_Start.png')
+        self.cards = load_image('Stage1/cards.png')
+        self.arrow = load_image('Stage1/Tutorial_arrow.png')
+        self.time_bar_image = load_image('Stage1/progress_bar.png')
         self.time_bar = 0
         self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
@@ -218,3 +221,76 @@ class Stage_level_1:
         self.mouse_x = 0
         self.mouse_y = 0
         self.game_over =0 # 게엠 오버 확인
+
+    def add_event(self , event):
+        self.event_que.insert(0,event) # 이벤트를 추가
+    def update(self):
+        self.timer = get_time() # 계속 시간을 잰다.
+        self.cur_state.do(self) #현재 스테이트의 do를 해준다.
+        if len(self.event_que) > 0: #이벤트 큐에서 이벤트를 하나씩 꺼냄
+            event = self.event_que.pop()
+            self.cur_state.exit(self, event)
+            self.cur_state = next_state_table[self.cur_state][event]
+            self.cur_state.enter(self, event)
+    def draw(self):
+        self.cur_state.draw(self) #현재 상태를 드로우
+        pass
+    def handle_event(self,event):
+        if(self.cur_state == Stage_state
+        and event.type == SDL_MOUSEBUTTONDOWN): #마우스 버튼 다운시
+            #카드 고르기
+            if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
+                self.select_card = 1
+                self.sun_value = self.sun_value - 100
+                if(self.Click_order == 0):
+                    self.Click_order = 1
+                pass
+            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
+                # 여기서부턴 튜토리얼 대지 영역
+                for i in range(9):
+                    if (event.x >= i * 140 and event.x <= i * 140 + 140): #가운데 라인 생성
+                        global Plant_Count
+                        if(self.Click_order < 3):
+                            self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
+
+                        creat_Plants(int(i * 140 + 70) ,int(282) , 2 )
+
+
+
+                        self.select_card = 0
+
+            # 자원을 얻는것
+            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
+                global Sun_Count , Sun
+                for Sun_shine in Sun:
+
+                    if (event.x > Sun_shine.x - 50 and event.x < Sun_shine.x + 50 and 600 - event.y - 1 > Sun_shine.y - 50 and 600 - event.y - 1 < Sun_shine.y + 50):
+
+                        self.Click_order = 5
+                        Sun_shine.click = 1
+                        Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
+                        Sun_shine.plus_y = Sun_shine.y
+                        del Sun_shine  # 누르면 삭제
+
+                        Sun_Count -= 1 # 자원의 개수를 줄여줌
+
+                        self.sun_value = self.sun_value + 30  # 자원 증가
+                        break
+            #카드 선택 해제
+            if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
+                self.select_card = 0  # 오른쪽 버튼을 누르면 초기화
+                self.sun_value = self.sun_value + 100
+
+        # 마우스 모션
+        if (self.cur_state == Stage_state
+                and event.type == SDL_MOUSEMOTION):
+            self.mouse_x = event.x
+            self.mouse_y = event.y
+        # 장면 넘어가기
+        if(event.type == SDL_KEYDOWN):
+            if(event.key == SDLK_1):
+                self.add_event(SHOW_MAP)
+            if(event.key == SDLK_2):
+                self.add_event(START)
+
+

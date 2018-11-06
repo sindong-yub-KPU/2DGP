@@ -263,12 +263,13 @@ class Stage_state:
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
         tutorial.game_over_time = 0
-        for i in range(5):
+        for i in range(1):
+            creat_Zombie()
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
             Zombies[i].x = 1400
             Zombies[i].frame = random.randint(0, 17)
-        for i in range(5):
+        for i in range(1):
             Zombies[i].x += i * random.randint(200 , 400)
     @staticmethod
     def exit(tutorial, event):
@@ -322,7 +323,7 @@ class Stage_state:
 
         if(tutorial.timer - tutorial.time_bar_time >= 1):
             if(tutorial.time_bar <= 300):
-                tutorial.time_bar += 2 #시간바의 이동속도
+                tutorial.time_bar += 4 #시간바의 이동속도
 
             tutorial.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
@@ -375,7 +376,7 @@ class Stage_state:
 
 
 next_state_table = {
-    Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state , },
+    Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state ,START : Stage_state },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
     Stage_state : {START : Stage_state  }
 }
@@ -472,7 +473,8 @@ class Tutorial:
 
         if(event.type == SDL_KEYDOWN):
             if(event.key == SDLK_1):
-                self.add_event(SHOW_MAP)
+                clear()
+                game_framework.change_state(Stage1_state)
             if(event.key == SDLK_2):
                 self.add_event(START)
 
