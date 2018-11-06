@@ -266,7 +266,7 @@ class Stage_state:
         for i in range(5):
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 200
+            Zombies[i].x = 1400
             Zombies[i].frame = random.randint(0, 17)
         for i in range(5):
             Zombies[i].x += i * random.randint(200 , 400)
@@ -329,7 +329,8 @@ class Stage_state:
         Collide_check() #객체들의 충돌 체크
         Delete_all() # 객체들의 삭제
         # 다음 스테이지로 넘어감 스테이지 클리어
-        if(tutorial.time_bar > 300 and Zombie_Count == 0):
+        if(Zombie_Count == 0): # 스테이지 넘어가는 조건
+            clear()
             game_framework.change_state(Stage1_state)
 
         # 게임 오버
