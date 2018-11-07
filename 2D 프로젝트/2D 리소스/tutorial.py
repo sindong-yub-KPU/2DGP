@@ -264,7 +264,7 @@ class Stage_state:
         tutorial.arrow_x = 0
         tutorial.game_over_time = 0
         for i in range(1):
-            creat_Zombie()
+
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
             Zombies[i].x = 1400
@@ -323,8 +323,8 @@ class Stage_state:
 
         if(tutorial.timer - tutorial.time_bar_time >= 1):
             if(tutorial.time_bar <= 300):
-                tutorial.time_bar += 4 #시간바의 이동속도
-
+                tutorial.time_bar = (5 - Zombie_Count) * 60  #시간바의 이동속도
+                print((5 - Zombie_Count) * 30)
             tutorial.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
