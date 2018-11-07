@@ -139,10 +139,12 @@ class Zombie:
 class Buket_Zombie(Zombie): # 상속
 
     Buket_IDLE = None
-
+    Buket_Walk = None
     def __init__(self):
         if(self.Buket_IDLE == None):
             self.Buket_IDLE = load_image('Stage1/Buket_Zombie_Idle.png')
+        if (self.Buket_Walk == None):
+            self.Buket_Walk = load_image('Stage1/Buket_Zombie_Walk.png')
             self.x, self.y = random.randint(1900, 2000), random.randint(100, 450)
             self.frame = random.randint(0, 11)
             self.Line = 2
