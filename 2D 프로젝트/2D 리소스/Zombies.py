@@ -133,3 +133,15 @@ class Zombie:
         return self.x - 25, self.y - 30, self.x + 25, self.y + 30
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
+
+
+
+class Buket_Zombie(Zombie): # 상속
+
+
+    def __init__(self):
+        if(self.Basic_Zombies == None):
+            self.Basic_Zombies = load_image('Stage1/Buket_Zombie_Idle.png')
+            print(10102)
+
+        pass
