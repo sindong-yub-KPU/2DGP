@@ -187,12 +187,69 @@ class Start_state:
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         Stage_level_1.font.draw(20, 530, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Stage 1')
+class Move_state:
+    global Zombies , Zombie_Count
+    @staticmethod
 
+    def enter(Stage_level_1 , event):
+        Stage_level_1.frame = 0
+        Stage_level_1.move_time = get_time()
+        Stage_level_1.velocity += CHANGE_SPEED_PPS
+        Stage_level_1.map_x = 0
+        Stage_level_1.re = 0
+        Stage_level_1.Move_timer = 0  # 무브 타임
 
+        for i in range(1):
+            creat_Zombie()
+            Zombies[i].x += random.randint(100, 300)
+    @staticmethod
+    def exit(Stage_level_1,event):
+        for Zombie in Zombies:
+            Zombie.state = 1;
+            Zombie.y = 300
+            Zombie.x = 1500
+    @staticmethod
+    def do(Stage_level_1):
+        if (Stage_level_1.map_x < 500):  # 좀비가 나타나야할 시간 300
+            if (Stage_level_1.re == 0):
+                Stage_level_1.map_x += Stage_level_1.velocity * game_framework.frame_time  # 속도 * 시간
+                for Zombie in Zombies:
+                    Zombie.x -= (Stage_level_1.velocity * game_framework.frame_time) * 1.7
+                if (Stage_level_1.map_x > 500):
+                    Stage_level_1.re = 1
 
+        if(Stage_level_1.re == 1):
+            Stage_level_1.Move_timer += 1
+
+            if (Stage_level_1.Move_timer == 150):
+                Stage_level_1.Move_timer = 0
+                Stage_level_1.re = 2
+        if (Stage_level_1.re == 2):
+            if (Stage_level_1.map_x > 0):
+                Stage_level_1.map_x -= Stage_level_1.velocity * game_framework.frame_time  # 속도 * 시간
+                for Zombie in Zombies:
+                    Zombie.x += (Stage_level_1.velocity * game_framework.frame_time) * 1.7  # 좀비야 멈춰라
+                if (Stage_level_1.map_x < 330):  # 맵을 원위치로
+                    Stage_level_1.Move_timer += 1
+                    if (Stage_level_1.Move_timer == 150):
+                        Stage_level_1.add_event(START)
+    @staticmethod
+    def draw(Stage_level_1):
+        Stage_level_1.Stage_level_1_map.clip_draw(int(Stage_level_1.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+        Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
+        Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        Stage_level_1.font.draw(20, 530, '%d' % Stage_level_1.sun_value)
+        Stage_level_1.font.draw(600, 50, 'Defence the Zombies!!', (255, 0, 0))
 
 class Stage_state:
     pass
+
+
+next_state_table = {
+    Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state ,START : Stage_state },
+    Move_state : {SHOW_MAP: Move_state , START : Stage_state},
+    Stage_state : {START : Stage_state  }
+}
 class Stage_level_1:
     def __init__(self):
         self.Stage_level_1_map = load_image('Stage1/Tutorial_map.png')
