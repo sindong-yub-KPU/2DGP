@@ -138,10 +138,23 @@ class Zombie:
 
 class Buket_Zombie(Zombie): # 상속
 
+    Buket_IDLE = None
 
     def __init__(self):
-        if(self.Basic_Zombies == None):
-            self.Basic_Zombies = load_image('Stage1/Buket_Zombie_Idle.png')
+        if(self.Buket_IDLE == None):
+            self.Buket_IDLE = load_image('Stage1/Buket_Zombie_Idle.png')
+            self.x, self.y = random.randint(1900, 2000), random.randint(100, 450)
+            self.frame = random.randint(0, 11)
+            self.Line = 2
+            self.state = self.IDLE
+            self.collide = False
+            self.head = 0
+            self.velocity = Zombie_SPEED_PPS
+            self.Zombie_time = 0
             print(10102)
-
+    def draw(self):
+        if (self.state == self.IDLE):
+            self.Buket_IDLE.clip_draw(int(self.frame) * 166, 0, 81, 120, self.x, self.y)
         pass
+
+

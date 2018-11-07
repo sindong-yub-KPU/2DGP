@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 from Zombies import Zombie
+from Zombies import Buket_Zombie
 from Plants import plant
 from Sun import Sun_shine
 from Bullets import Bullet
@@ -53,6 +54,12 @@ def creat_Zombie():  # 좀비 생성
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
     Zombie_Count = Zombie_Count +1
+def creat_Buket_Zombie():
+    global Zombies, Zombie_Count
+    new_zombie = Buket_Zombie()
+    game_world.add_object(new_zombie, 1)
+    Zombies.append(new_zombie)
+    Zombie_Count = Zombie_Count + 1
 #좀비 생산
 def creat_Plant_card():
     global Plants_Card
@@ -199,9 +206,16 @@ class Move_state:
         Stage_level_1.re = 0
         Stage_level_1.Move_timer = 0  # 무브 타임
 
-        for i in range(1):
+        for i in range(2):
             creat_Zombie()
-            Zombies[i].x += random.randint(100, 300)
+            creat_Buket_Zombie()
+
+
+        for Zombie  in Zombies:
+
+            Zombie.x += random.randint(100, 200)
+        for Buket_Zombie in Zombies:
+            Buket_Zombie.x += random.randint(100, 200)
     @staticmethod
     def exit(Stage_level_1,event):
         for Zombie in Zombies:
