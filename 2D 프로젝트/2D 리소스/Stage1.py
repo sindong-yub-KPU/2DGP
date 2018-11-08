@@ -315,7 +315,7 @@ class Stage_state:
 
         if Stage_level_1.order >= 0:
             if (Stage_level_1.timer - Stage_level_1.stage_time > 5):
-                Stage_level_1.stage_time = get_time()  # 5초 마다 Sun이 나오게함
+                Stage_level_1.stage_time = get_time()  # 20초 마다 자원이 나오게함
                 creat_Sun()
         # 식물과 좀비 상호작용
     @staticmethod
@@ -355,7 +355,7 @@ class Stage_level_1:
         self.cur_state.enter(self, None)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
-        self.sun_value = 200  # 자원량
+        self.sun_value = 100  # 자원량
         self.select_card = 0  # 무슨 카드를 선택했는지 아는 변수
         self.timer = 0
         self.mouse_x = 0
@@ -383,9 +383,9 @@ class Stage_level_1:
                 self.select_card = 1
                 self.sun_value = self.sun_value - 100
                 pass
-            elif (event.button == SDL_BUTTON_LEFT and event.x > 150 and event.x < 230 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
+            elif (event.button == SDL_BUTTON_LEFT and event.x > 150 and event.x < 230 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 50 and self.select_card == 0):
                 self.select_card = 2
-                self.sun_value = self.sun_value - 100
+                self.sun_value = self.sun_value - 50
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 for i in range(9):
