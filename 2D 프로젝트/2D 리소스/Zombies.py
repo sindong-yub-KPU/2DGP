@@ -161,8 +161,8 @@ class Buket_Zombie(): # 상속
             self.head = 0
             self.velocity = Zombie_SPEED_PPS
             self.Zombie_time = 0
-            print(10102)
-            self.hp = 2
+
+            self.hp = 20
     def draw(self):
         if (self.state == self.IDLE):
             self.Buket_IDLE.clip_draw(int(self.frame) * 196 , 0, 176, 134, self.x, self.y)
@@ -171,18 +171,20 @@ class Buket_Zombie(): # 상속
         pass
     def update(self):
         self.world_time = get_time()
-        print(self.x)
+
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 5
         if (self.state == self.WALK):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time) % 14
             self.x -= self.velocity * game_framework.frame_time
+
             self.get_bb()
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
                 self.y = self.y = (i + 1) * 100
 
-
+            print(self.x)
+            print(self.Line)
     def get_bb(self):
         return self.x - 25, self.y - 30, self.x + 25, self.y + 30
     def draw_bb(self):
@@ -219,3 +221,7 @@ class Cone_Zombie:
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
                 self.y = self.y = (i + 1) * 100
+    def get_bb(self):
+        return self.x - 25, self.y - 30, self.x + 25, self.y + 30
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())

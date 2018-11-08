@@ -301,7 +301,8 @@ class Stage_state:
             Cone_Zombie.Line = random.randint (0  , 5 )
             Cone_Zombie.x = 1400
             Cone_Zombie.frame = random.randint(0, 17)
-
+        for i in range(Zombie_Count):
+            Zombies[i].x += i * random.randint(100, 400) # 좀비들 거리 띄어줌
         #처음에 생산한 좀비들을 처리
 
     @staticmethod
@@ -319,6 +320,32 @@ class Stage_state:
                 Stage_level_1.stage_time = get_time()  # 20초 마다 자원이 나오게함
                 creat_Sun()
         # 식물과 좀비 상호작용
+        for plant in Plants:
+            Zombie_line = False
+            for i in range(Zombie_Count):
+                if ((plant.Line == Zombies[i].Line) and Zombies[i].x < 1400 and Zombies[i].state != 4):
+                     #라인이 같고 1400 이하일때 쏜다 . 라인이 같은 좀비가 없다면
+                    plant.state = 2
+                    Zombie_line = True
+                if(((plant.Line != Zombies[i].Line) or Zombies[i].x > 1400) and Zombie_line != True):
+                    plant.state = 1
+            if(Zombie_Count == 0):
+                plant.state = 1
+        for plant in Plants:
+            if(plant.state == 2):
+                if Stage_level_1.timer - plant.state_time > 5:
+                    creat_Bullet(plant.x , plant.y + 30)
+                    plant.state_time = get_time()
+
+
+        #타임바 해줘야함
+
+        Collide_check() #객체들의 충돌 체크
+        Delete_all() # 객체들의 삭제
+        # 다음 스테이지로 넘어감 스테이지 클리어
+        if(Zombie_Count == 0): # 스테이지 넘어가는 조건
+            clear()
+
     @staticmethod
     def draw(Stage_level_1):
         Stage_level_1.Stage_level_1_map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
