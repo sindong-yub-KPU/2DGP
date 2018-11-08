@@ -57,7 +57,7 @@ class plant:
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
 
-
+ # 꽃
 class Sun_plant:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     def __init__(self , x, y , line_):
@@ -90,3 +90,13 @@ class Sun_plant:
         if(card_select == 2):
             self.basic_plants_image.clip_draw( 0, 0, 84, 80, mouse_x + 10 , 600 - mouse_y)
 
+    def draw(self): # 식물을 그려준다
+
+        self.basic_plants_image.clip_draw(int(self.frame) * 103 -2 ,  0 , 70 , 90 , self.x , self.y , )
+        self.draw_bb()
+
+    def get_bb(self):
+        return self.x - 42, self.y - 15, self.x + 42, self.y + 15
+
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())

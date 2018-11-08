@@ -76,9 +76,12 @@ def creat_Plant_card():
     Plants_Card = plant(0 , 0, 0)
     Plants_Card2 = Sun_plant(0, 0, 0)
 #식물을 눌렀을때 생산
-def creat_Plants( x, y , Line_ ):
+def creat_Plants( x, y , Line_, select ):
     global Plants , Plant_Count
-    new_plant = plant(x, y , Line_)
+    if(select == 1):
+        new_plant = plant(x, y , Line_)
+    if(select == 2):
+        new_plant = Sun_plant(x, y, Line_)
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
     Plant_Count = Plant_Count + 1
@@ -389,7 +392,7 @@ class Stage_level_1:
                     if (event.x >= i * 140 and event.x <= i * 140 + 140): #가운데 라인 생성
                         global Plant_Count
 
-                        creat_Plants(int(i * 140 + 70) ,int(282) , 2 )
+                        creat_Plants(int(i * 140 + 70) ,int(282) , 2 , self.select_card )
 
 
 
