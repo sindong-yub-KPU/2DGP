@@ -22,7 +22,7 @@ class plant:
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
         self.state = self.IDLE
-        self.Line = line_ ; # 맨위에부터 0 1 2 3 4  개의 라인
+        self.Line = line_  # 맨위에부터 0 1 2 3 4  개의 라인
         self.state_time = 0
         self.world_time =0
         self.hp = 3

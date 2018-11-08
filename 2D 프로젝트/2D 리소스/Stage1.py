@@ -265,9 +265,34 @@ class Move_state:
         Stage_level_1.font.draw(600, 50, 'Defence the Zombies!!', (255, 0, 0))
 
 class Stage_state:
-    pass
-
-
+    global Plants , Plant_Count
+    @staticmethod
+    def enter(Stage_level_1 , event):
+        creat_Plant_card()
+        Stage_level_1.frame = 0
+        Stage_level_1.stage_time = get_time()
+        Stage_level_1.time_bar_time = get_time()
+        Stage_level_1.order = 0
+        Stage_level_1.Tutorial_Start_music.set_volume(64)
+        Stage_level_1.Tutorial_Start_music.play()
+        Stage_level_1.velocity += CHANGE_SPEED_PPS
+        Stage_level_1.game_over_time = 0
+        for Zombie in Zombies:
+            Zombie.state = 1
+            Zombie.y = 300
+            Zombie.x = 1400
+            Zombie.frame = random.randint(0 , 17)
+        for Buket_Zombie in Zombies:
+            Buket_Zombie.state = 1
+            Buket_Zombie.y = 300
+            Buket_Zombie.x = 1400
+            Buket_Zombie.frame = random.randint(0, 17)
+        for Cone_Zombie in Zombies:
+            Cone_Zombie.state = 1
+            Cone_Zombie.y = 300
+            Cone_Zombie.x = 1400
+            Cone_Zombie.frame = random.randint(0, 17)
+        #처음에 생산한 좀비들을 처리
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state ,START : Stage_state },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
