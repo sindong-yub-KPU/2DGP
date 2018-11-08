@@ -15,7 +15,7 @@ class plant:
 
     def __init__(self , x, y , line_):
         self.x , self.y = x, y
-
+        self.y = (line_ + 1) * 100
         self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
 
         self.Bullet_Count = 0
@@ -62,14 +62,14 @@ class Sun_plant:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     def __init__(self , x, y , line_):
         self.x = x
-        self.y = (line_ + 1) * 100
+        self.y = (line_ + 1) * 100 # 식물 라인 설정
 
         self.basic_plants_image = load_image('Stage1/Flower.png')
         self.Bullet_Count = 0
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
         self.state = self.IDLE
-        self.Line = line_ ; # 맨위에부터 0 1 2 3 4  개의 라인
+        self.Line = line_  # 맨위에부터 0 1 2 3 4  개의 라인
         self.state_time = 0
         self.world_time =0
         self.hp = 3

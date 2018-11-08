@@ -112,7 +112,8 @@ class Zombie:
         #line 에 따라서 y 값 관리
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
-                self.y = self.Line * (i + 1)
+                self.y = self.y = (i + 1) * 100
+
 
 
 
@@ -170,7 +171,7 @@ class Buket_Zombie(): # 상속
 
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
-                self.y = self.Line * (i + 1)
+                self.y = self.y = (i + 1) * 100
 
 class Cone_Zombie:
     IDLE, WALK, ATTACK, HEAD_DOWN, DIE, Remove = 0, 1, 2, 3, 4, 5
@@ -202,4 +203,4 @@ class Cone_Zombie:
 
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
-                self.y = self.Line * (i + 1)
+                self.y = self.y = (i + 1) * 100
