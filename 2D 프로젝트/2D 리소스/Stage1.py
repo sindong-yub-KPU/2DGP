@@ -4,6 +4,7 @@ from Zombies import Zombie
 from Zombies import Buket_Zombie
 from Zombies import Cone_Zombie
 from Plants import plant
+from Plants import Sun_plant
 from Sun import Sun_shine
 from Bullets import Bullet
 import game_world
@@ -34,6 +35,7 @@ next_state_table = {
 
 }
 Plants_Card = None
+Plants_Card2 = None
 Zombies = []
 Plants = []
 Sun = []
@@ -70,7 +72,9 @@ def creat_Cone_Zombie(): # 콘 좀비 생산
 #좀비 생산
 def creat_Plant_card():
     global Plants_Card
+    global Plants_Card2
     Plants_Card = plant(0 , 0, 0)
+    Plants_Card2 = Sun_plant(0, 0, 0)
 #식물을 눌렀을때 생산
 def creat_Plants( x, y , Line_ ):
     global Plants , Plant_Count
@@ -273,8 +277,8 @@ class Stage_state:
         Stage_level_1.stage_time = get_time()
         Stage_level_1.time_bar_time = get_time()
         Stage_level_1.order = 0
-        Stage_level_1.Tutorial_Start_music.set_volume(64)
-        Stage_level_1.Tutorial_Start_music.play()
+        Stage_level_1.Stage_level_1_Start_music.set_volume(64)
+        Stage_level_1.Stage_level_1_Start_music.play()
         Stage_level_1.velocity += CHANGE_SPEED_PPS
         Stage_level_1.game_over_time = 0
         for Zombie in Zombies:
@@ -292,7 +296,35 @@ class Stage_state:
             Cone_Zombie.line = random.randint (0  , 5 )
             Cone_Zombie.x = 1400
             Cone_Zombie.frame = random.randint(0, 17)
+        for i in range(Zombie_Count):
+            Zombies[i].x += i * random.randint(200, 400) # 좀비들 거리 띄어줌
         #처음에 생산한 좀비들을 처리
+
+    @staticmethod
+    def exit(Stage_level_1 , event):
+        pass
+    @staticmethod
+    def do(Stage_level_1):
+        if (Stage_level_1.timer - Stage_level_1.stage_time >= 2 and Stage_level_1.order == 0):
+            Stage_level_1.Stage_level_1_GAME_START.set_volume(64)
+            Stage_level_1.Stage_level_1_GAME_START.repeat_play()
+            Stage_level_1.order = 1
+
+        if Stage_level_1.order >= 0:
+            if (Stage_level_1.timer - Stage_level_1.stage_time > 5):
+                Stage_level_1.stage_time = get_time()  # 5초 마다 Sun이 나오게함
+                creat_Sun()
+        # 식물과 좀비 상호작용
+    @staticmethod
+    def draw(Stage_level_1):
+        Stage_level_1.Stage_level_1_map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
+        Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)  # 보드판
+        Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
+        Plants_Card.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
+        Plants_Card2.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
+        Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
+
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state ,START : Stage_state },
     Move_state : {SHOW_MAP: Move_state , START : Stage_state},
@@ -347,16 +379,15 @@ class Stage_level_1:
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1
                 self.sun_value = self.sun_value - 100
-                if(self.Click_order == 0):
-                    self.Click_order = 1
                 pass
+            elif (event.button == SDL_BUTTON_LEFT and event.x > 150 and event.x < 230 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
+                self.select_card = 2
+                self.sun_value = self.sun_value - 100
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 for i in range(9):
                     if (event.x >= i * 140 and event.x <= i * 140 + 140): #가운데 라인 생성
                         global Plant_Count
-                        if(self.Click_order < 3):
-                            self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
 
                         creat_Plants(int(i * 140 + 70) ,int(282) , 2 )
 
