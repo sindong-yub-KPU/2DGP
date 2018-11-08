@@ -166,3 +166,4 @@ class Buket_Zombie(): # 상속
 
 
 
+class 
