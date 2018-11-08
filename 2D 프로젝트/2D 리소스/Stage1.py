@@ -2,6 +2,7 @@ import game_framework
 from pico2d import *
 from Zombies import Zombie
 from Zombies import Buket_Zombie
+from Zombies import Cone_Zombie
 from Plants import plant
 from Sun import Sun_shine
 from Bullets import Bullet
@@ -54,9 +55,15 @@ def creat_Zombie():  # 좀비 생성
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
     Zombie_Count = Zombie_Count +1
-def creat_Buket_Zombie():
+def creat_Buket_Zombie(): #뚜껑 좀비 생산
     global Zombies, Zombie_Count
     new_zombie = Buket_Zombie()
+    game_world.add_object(new_zombie, 1)
+    Zombies.append(new_zombie)
+    Zombie_Count = Zombie_Count + 1
+def creat_Cone_Zombie(): # 콘 좀비 생산
+    global Zombies, Zombie_Count
+    new_zombie = Cone_Zombie()
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
     Zombie_Count = Zombie_Count + 1
@@ -192,7 +199,7 @@ class Start_state:
         Stage_level_1.Stage_level_1_map.clip_draw(0 + Stage_level_1.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
-        Stage_level_1.cards.clip_draw(64, 485, 70, 90, 210, 560, 64, 70)
+        Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Stage 1')
 class Move_state:
@@ -207,10 +214,10 @@ class Move_state:
         Stage_level_1.re = 0
         Stage_level_1.Move_timer = 0  # 무브 타임
 
-        for i in range(2):
+        for i in range(2): # 2마리 씩 생산
             creat_Zombie()
             creat_Buket_Zombie()
-
+            creat_Cone_Zombie()
 
         for Zombie  in Zombies:
 

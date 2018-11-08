@@ -166,4 +166,31 @@ class Buket_Zombie(): # 상속
 
 
 
-class 
+class Cone_Zombie:
+    IDLE, WALK, ATTACK, HEAD_DOWN, DIE, Remove = 0, 1, 2, 3, 4, 5
+    Cone_Zombie_IDLE = None
+    Cone_Zombie_Walk = None
+    def __init__(self):
+        if(self.Cone_Zombie_IDLE == None):
+            self.Cone_Zombie_IDLE = load_image('Stage1/Cone_Zombie_Idle.png')
+        if (self.Cone_Zombie_Walk == None):
+            self.Cone_Zombie_Walk = load_image('Stage1/Cone_Zombie_Walk.png')
+            self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
+            self.frame = random.randint(0, 11)
+            self.Line = 2
+            self.state = self.IDLE
+            self.collide = False
+            self.head = 0
+            self.velocity = Zombie_SPEED_PPS
+            self.Zombie_time = 0
+            print(10102)
+    def draw(self):
+        if (self.state == self.IDLE):
+            self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
+        pass
+    def update(self):
+        self.world_time = get_time()
+
+        if(self.state == self.IDLE):
+            self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 7
+
