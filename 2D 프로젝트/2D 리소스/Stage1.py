@@ -80,10 +80,12 @@ def creat_Plants( x, y , Line_, select ):
     global Plants , Plant_Count
     if(select == 1):
         new_plant = plant(x, y , Line_)
+        game_world.add_object(new_plant, 1)
+        Plants.append(new_plant)
     if(select == 2):
         new_plant = Sun_plant(x, y, Line_)
-    game_world.add_object(new_plant, 1)
-    Plants.append(new_plant)
+        game_world.add_object(new_plant, 1)
+        Plants.append(new_plant)
     Plant_Count = Plant_Count + 1
 #식물 생산
 
@@ -386,17 +388,18 @@ class Stage_level_1:
             elif (event.button == SDL_BUTTON_LEFT and event.x > 150 and event.x < 230 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 50 and self.select_card == 0):
                 self.select_card = 2
                 self.sun_value = self.sun_value - 50
-            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
+            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
-                for i in range(9):
-                    if (event.x >= i * 140 and event.x <= i * 140 + 140): #가운데 라인 생성
-                        global Plant_Count
 
-                        creat_Plants(int(i * 140 + 70) ,int(282) , 2 , self.select_card )
+                for i in range(5): # y  값
+                    for j in range(9): # x 값
+                        if (event.x >= j * 140 and event.x <= j * 140 + 140 and 600 - event.y -1 > (i ) * 90  and 600 - event.y -1 <= (i + 1) * 90 + 100 ):  # 가운데 라인 생성
+                            global Plant_Count
 
+                            creat_Plants(int(j * 140 + 70), i, i , self.select_card)
 
+                            self.select_card = 0
 
-                        self.select_card = 0
 
             # 자원을 얻는것
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):

@@ -61,7 +61,8 @@ class plant:
 class Sun_plant:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     def __init__(self , x, y , line_):
-        self.x , self.y = x, y
+        self.x = x
+        self.y = (line_ + 1) * 100
 
         self.basic_plants_image = load_image('Stage1/Flower.png')
         self.Bullet_Count = 0
