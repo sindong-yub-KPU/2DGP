@@ -301,8 +301,7 @@ class Stage_state:
             Cone_Zombie.Line = random.randint (0  , 5 )
             Cone_Zombie.x = 1400
             Cone_Zombie.frame = random.randint(0, 17)
-        for i in range(Zombie_Count):
-            Zombies[i].x += i * random.randint(200, 400) # 좀비들 거리 띄어줌
+
         #처음에 생산한 좀비들을 처리
 
     @staticmethod

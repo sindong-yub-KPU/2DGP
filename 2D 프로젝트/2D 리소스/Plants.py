@@ -83,7 +83,8 @@ class Sun_plant:
                 self.hp -= 1  # 식물의 피 달음
                 if (self.hp <= 0):
                     self.state = self.DIE
-
+        if(self.world_time - self.state > 10):
+            pass # 태양을 생성해야함
         if (self.state == 4):
             game_world.remove_object(self)
 
