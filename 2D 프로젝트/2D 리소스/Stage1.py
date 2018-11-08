@@ -192,7 +192,8 @@ class Start_state:
         Stage_level_1.Stage_level_1_map.clip_draw(0 + Stage_level_1.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
-        Stage_level_1.font.draw(20, 530, '%d' % Stage_level_1.sun_value)
+        Stage_level_1.cards.clip_draw(64, 485, 70, 90, 210, 560, 64, 70)
+        Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Stage 1')
 class Move_state:
     global Zombies , Zombie_Count
@@ -252,7 +253,8 @@ class Move_state:
         Stage_level_1.Stage_level_1_map.clip_draw(int(Stage_level_1.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
-        Stage_level_1.font.draw(20, 530, '%d' % Stage_level_1.sun_value)
+        Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
+        Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Defence the Zombies!!', (255, 0, 0))
 
 class Stage_state:
@@ -271,7 +273,7 @@ class Stage_level_1:
         self.intro_music = load_music('Stage1/intro_music.mp3')
         self.Stage_level_1_Start_music = load_music('Stage1/Tutorial_start.mp3')  # 초반 도입 음악
         self.Stage_level_1_GAME_START = load_music('Stage1/Tutorial_GAME_START.mp3')  # 게임 스타트 음악
-        self.font = load_font('Stage1/ConsolaMalgun.ttf', 30)
+        self.font = load_font('Stage1/ConsolaMalgun.ttf', 25)
         self.Stage_level_1_Start_logo = load_image('Stage1/Turtorial_Start.png')
         self.cards = load_image('Stage1/cards.png')
         self.arrow = load_image('Stage1/Tutorial_arrow.png')
