@@ -279,17 +279,17 @@ class Stage_state:
         Stage_level_1.game_over_time = 0
         for Zombie in Zombies:
             Zombie.state = 1
-            Zombie.y = 300
+            Zombie.line =  random.randint (0  , 5 )
             Zombie.x = 1400
             Zombie.frame = random.randint(0 , 17)
         for Buket_Zombie in Zombies:
             Buket_Zombie.state = 1
-            Buket_Zombie.y = 300
+            Buket_Zombie.line =  random.randint (0  , 5 )
             Buket_Zombie.x = 1400
             Buket_Zombie.frame = random.randint(0, 17)
         for Cone_Zombie in Zombies:
             Cone_Zombie.state = 1
-            Cone_Zombie.y = 300
+            Cone_Zombie.line = random.randint (0  , 5 )
             Cone_Zombie.x = 1400
             Cone_Zombie.frame = random.randint(0, 17)
         #처음에 생산한 좀비들을 처리

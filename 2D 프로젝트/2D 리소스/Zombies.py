@@ -109,6 +109,10 @@ class Zombie:
         if (self.state == self.ATTACK):
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 20
 
+        #line 에 따라서 y 값 관리
+        for i in range(0, 5):
+            if self.line == i and self.state != self.IDLE:
+                self.y = self.line * (i + 1)
 
 
 
@@ -164,7 +168,9 @@ class Buket_Zombie(): # 상속
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 5
 
-
+        for i in range(0, 5):
+            if self.line == i and self.state != self.IDLE:
+                self.y = self.line * (i + 1)
 
 class Cone_Zombie:
     IDLE, WALK, ATTACK, HEAD_DOWN, DIE, Remove = 0, 1, 2, 3, 4, 5
@@ -194,3 +200,6 @@ class Cone_Zombie:
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 7
 
+        for i in range(0, 5):
+            if self.line == i and self.state != self.IDLE:
+                self.y = self.line * (i + 1)
