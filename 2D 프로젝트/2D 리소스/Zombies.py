@@ -209,7 +209,7 @@ class Cone_Zombie:
             self.head = 0
             self.velocity = Zombie_SPEED_PPS
             self.Zombie_time = 0
-
+            self.hp = 10
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)

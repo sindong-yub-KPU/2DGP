@@ -122,7 +122,19 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
 
                 Zombie.hp -=  1
                 Bullet.state = 1 # 총알을 없에준다
-                break;
+                break
+    for Buket_Zombie in Zombies:
+        for Bullet in Bullets:
+            if collide(Bullet, Buket_Zombie) and Bullet.state != 1 and Zombie.hp > 0:
+                Buket_Zombie.hp -=  1
+                Bullet.state = 1 # 총알을 없에준다
+                break
+    for Cone_Zombie in Zombies:
+        for Bullet in Bullets:
+            if collide(Bullet, Cone_Zombie) and Bullet.state != 1 and Zombie.hp > 0:
+                Cone_Zombie.hp -=  1
+                Bullet.state = 1 # 총알을 없에준다
+                break
     for plant in Plants:
          #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
         for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
