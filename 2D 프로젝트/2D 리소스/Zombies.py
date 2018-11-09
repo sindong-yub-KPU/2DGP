@@ -24,7 +24,8 @@ FRAMES_PER_ACTION_IDLE = 11 # 8개의 프레임
 TIME_PER_ACTION_WALK = 3
 ACTION_PER_TIME_WALK = 1.0 / TIME_PER_ACTION_WALK #1초에 할 액션수 2개
 FRAMES_PER_ACTION_WALK = 17
-
+FRAMES_PER_ACTION_WALK2 = 14
+FRAMES_PER_ACTION_WALK3 = 20
 #공격
 TIME_PER_ACTION_ATTACK = 2
 ACTION_PER_TIME_ATTACK = 1.0 / TIME_PER_ACTION_WALK #1초에 할 액션수 2개
@@ -70,6 +71,7 @@ class Zombie:
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100 # 좀비의 y 값 고정
+        print(self.y)
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 11
 
@@ -211,13 +213,17 @@ class Cone_Zombie:
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
+        if (self.state == self.WALK):
+            self.Cone_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
         pass
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 7
-
+        if (self.state == self.WALK):
+            self.frame = (self.frame + FRAMES_PER_ACTION_WALK3 * ACTION_PER_TIME_WALK * game_framework.frame_time) % 20
+            self.x -= self.velocity * game_framework.frame_time
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
                 self.y = self.y = (i + 1) * 100
