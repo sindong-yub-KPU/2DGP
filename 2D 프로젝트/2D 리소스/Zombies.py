@@ -69,7 +69,7 @@ class Zombie:
         self.world_time = get_time()
     def update(self):
         self.world_time = get_time()
-
+        self.y = (self.Line + 1) * 100 # 좀비의 y 값 고정
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 11
 
@@ -171,7 +171,7 @@ class Buket_Zombie(): # 상속
         pass
     def update(self):
         self.world_time = get_time()
-
+        self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 5
         if (self.state == self.WALK):
@@ -183,8 +183,8 @@ class Buket_Zombie(): # 상속
             if self.Line == i and self.state != self.IDLE:
                 self.y = self.y = (i + 1) * 100
 
-            print(self.x)
-            print(self.Line)
+
+
     def get_bb(self):
         return self.x - 25, self.y - 30, self.x + 25, self.y + 30
     def draw_bb(self):
@@ -207,14 +207,14 @@ class Cone_Zombie:
             self.head = 0
             self.velocity = Zombie_SPEED_PPS
             self.Zombie_time = 0
-            print(10102)
+
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
         pass
     def update(self):
         self.world_time = get_time()
-
+        self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 7
 

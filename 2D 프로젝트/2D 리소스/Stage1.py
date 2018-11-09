@@ -293,7 +293,7 @@ class Stage_state:
             Zombie.frame = random.randint(0 , 17)
         for Buket_Zombie in Zombies:
             Buket_Zombie.state = 1
-            Buket_Zombie.line =  random.randint (0  , 5 )
+            Buket_Zombie.Line =  random.randint (0  , 5 )
             Buket_Zombie.x = 1400
             Buket_Zombie.frame = random.randint(0, 17)
         for Cone_Zombie in Zombies:
@@ -355,6 +355,10 @@ class Stage_state:
         Plants_Card.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Plants_Card2.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
+        for i in range(4):  # y  값
+            for j in range(9):  # x 값
+                draw_rectangle(j * 140 , (i) * 100 + 30 ,j * 140 + 140 ,(i + 1) * 100 + 130)
+
 
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state ,START : Stage_state },
@@ -383,7 +387,7 @@ class Stage_level_1:
         self.cur_state.enter(self, None)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
-        self.sun_value = 100  # 자원량
+        self.sun_value = 5000  # 자원량
         self.select_card = 0  # 무슨 카드를 선택했는지 아는 변수
         self.timer = 0
         self.mouse_x = 0
@@ -417,12 +421,12 @@ class Stage_level_1:
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
 
-                for i in range(5): # y  값
+                for i in range(4): # y  값
                     for j in range(9): # x 값
-                        if (event.x >= j * 140 and event.x <= j * 140 + 140 and 600 - event.y -1 > (i ) * 90  and 600 - event.y -1 <= (i + 1) * 90 + 100 ):  # 가운데 라인 생성
+                        if (event.x >= j * 140 and event.x <= j * 140 + 140 and 600 - event.y -1 > (i) * 100 + 30  and 600 - event.y -1 <= (i + 1) * 100 + 130 ):  # 가운데 라인 생성
                             global Plant_Count
 
-                            creat_Plants(int(j * 140 + 70), i, i , self.select_card)
+                            creat_Plants(int(j * 140 + 70), i+1, i+1 , self.select_card)
 
                             self.select_card = 0
 
