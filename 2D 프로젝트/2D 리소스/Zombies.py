@@ -71,7 +71,7 @@ class Zombie:
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100 # 좀비의 y 값 고정
-        print(self.y)
+
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 11
 

@@ -25,7 +25,7 @@ CHANGE_SPEED_PPS = (CHANGE_SPEED_MPS * PIXEL_PER_METER) # 픽셀 퍼 세크 미�
 #거리 = 시간 * 속도
 
 
-# 튜토리얼 이벤트
+# Stage1 이벤트
 SHOW_HOUSE, SHOW_MAP, SHOW_ZOMBIE, RETURN_MAP, START  = range(5)
 
 next_state_table = {
@@ -54,18 +54,21 @@ def creat_Bullet( x , y ):
 def creat_Zombie():  # 좀비 생성
     global Zombies , Zombie_Count
     new_zombie = Zombie()
+    new_zombie.Line = random.randint(0 , 4)
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
     Zombie_Count = Zombie_Count +1
 def creat_Buket_Zombie(): #뚜껑 좀비 생산
     global Zombies, Zombie_Count
     new_zombie = Buket_Zombie()
+    new_zombie.Line = random.randint(0, 4)
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
     Zombie_Count = Zombie_Count + 1
 def creat_Cone_Zombie(): # 콘 좀비 생산
     global Zombies, Zombie_Count
     new_zombie = Cone_Zombie()
+    new_zombie.Line = random.randint(0, 4)
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
     Zombie_Count = Zombie_Count + 1
