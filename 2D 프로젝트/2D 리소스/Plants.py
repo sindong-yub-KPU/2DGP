@@ -12,12 +12,12 @@ FRAMES_PER_ACTION_WALK = 17
 
 class plant:
     DIE , HIT, ATTACK,IDLE  =4, 3,2 , 1
-
+    basic_plants_image = None
     def __init__(self , x, y , line_):
         self.x , self.y = x, y
         self.y = (line_+ 1) * 100 - 10
-        print (self.y)
-        self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
+        if(self.basic_plants_image == None):
+            self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
 
         self.Bullet_Count = 0
         self.frame = random.randint(0, 11)

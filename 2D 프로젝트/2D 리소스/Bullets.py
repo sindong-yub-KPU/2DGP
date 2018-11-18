@@ -3,6 +3,8 @@ import time
 import game_framework
 import game_world
 import Plants
+
+
 PIXEL_PER_METER = (20.0 / 0.3)
 #이동거리가 10pixsel 에 30cm간다는 뜻 임의로 정함
 Bullet_SPEED_KMPH = 10.0
@@ -43,11 +45,16 @@ class Bullet:
             self.seta += 0.2  # 총알의 회전
         if self.state == 1: # 총알 상태
             self.action += self.velocity * game_framework.frame_time
-            if(self.action > 20):
 
+            if(self.action > 20):
                 self.state = 2
+
+
+
+
         if self.state == 2:
             game_world.remove_object(self)
+
 
         if self.x > 1450 - 25: # 화면 밖에 나가면 사라짐
             self.state = 2

@@ -44,6 +44,8 @@ Zombie_Count = 0
 Plant_Count = 0
 Sun_Count = 0
 Bullet_Count = 0 #객체 개수
+
+
 def creat_Bullet( x , y ):
     global Bullets , Bullet_Count
     New_Bullet = Bullet(x + 30, y )
@@ -155,6 +157,9 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
         if(Plant_Count == 0  and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
             Zombie.state = 1 #좀비의 상태는 워킹
 
+    for Bullet in Bullets:
+        if(Bullet.action > 20 and Bullet.state == 1):
+            Bullet.state = 2
 
     pass
 #충돌체크
@@ -170,6 +175,9 @@ def Delete_all():
             Zombie_Count = Zombie_Count - 1
 
     for Bullet in Bullets:
+        print("Bullet State ")
+        print(Bullet.state)
+
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
             del Bullet
@@ -394,17 +402,29 @@ next_state_table = {
     Stage_state : {START : Stage_state  }
 }
 class Stage_level_1:
+    Stage_level_1_map = None
+    board = None
+    Stage_level_1_GAME_START = None
+    Stage_level_1_Start_logo =  None
+    cards = None
+    time_bar_image = None
     def __init__(self):
-        self.Stage_level_1_map = load_image('Stage1/Tutorial_map.png')
-        self.board = load_image('Stage1/board.png')
+        if (self.Stage_level_1_map == None ):
+            self.Stage_level_1_map = load_image('Stage1/Tutorial_map.png')
+        if (self.board == None):
+             self.board = load_image('Stage1/board.png')
+
         self.intro_music = load_music('Stage1/intro_music.mp3')
+
         self.Stage_level_1_Start_music = load_music('Stage1/Tutorial_start.mp3')  # 초반 도입 음악
         self.Stage_level_1_GAME_START = load_music('Stage1/Tutorial_GAME_START.mp3')  # 게임 스타트 음악
         self.font = load_font('Stage1/ConsolaMalgun.ttf', 25)
-        self.Stage_level_1_Start_logo = load_image('Stage1/Turtorial_Start.png')
-        self.cards = load_image('Stage1/cards.png')
-        self.arrow = load_image('Stage1/Tutorial_arrow.png')
-        self.time_bar_image = load_image('Stage1/progress_bar.png')
+        if(self.Stage_level_1_Start_logo == None):
+            self.Stage_level_1_Start_logo = load_image('Stage1/Turtorial_Start.png')
+        if (self.cards == None ):
+            self.cards = load_image('Stage1/cards.png')
+        if (self.time_bar_image == None ):
+            self.time_bar_image = load_image('Stage1/progress_bar.png')
         self.time_bar = 0
         self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
@@ -470,8 +490,9 @@ class Stage_level_1:
                         Sun_shine.click = 1
                         Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
                         Sun_shine.plus_y = Sun_shine.y
-                        del Sun_shine  # 누르면 삭제
 
+                        Sun.remove(Sun_shine)
+                        del Sun_shine  # 누르면 삭제
                         Sun_Count -= 1 # 자원의 개수를 줄여줌
 
                         self.sun_value = self.sun_value + 30  # 자원 증가
