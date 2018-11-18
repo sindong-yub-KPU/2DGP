@@ -301,20 +301,24 @@ class Stage_state:
         Stage_level_1.Stage_level_1_Start_music.play()
         Stage_level_1.velocity += CHANGE_SPEED_PPS
         Stage_level_1.game_over_time = 0
+        for i in range(10): # 36 마리
+            creat_Zombie()
+            creat_Buket_Zombie()
+            creat_Cone_Zombie()
         for Zombie in Zombies:
             Zombie.state = 1
 
-            Zombie.x = 1400
+
             Zombie.frame = random.randint(0 , 17)
         for Buket_Zombie in Zombies:
             Buket_Zombie.state = 1
 
-            Buket_Zombie.x = 1400
+
             Buket_Zombie.frame = random.randint(0, 17)
         for Cone_Zombie in Zombies:
             Cone_Zombie.state = 1
 
-            Cone_Zombie.x = 300
+
             Cone_Zombie.frame = random.randint(0, 20)
         for i in range(Zombie_Count):
             Zombies[i].x += i * random.randint(100, 400) # 좀비들 거리 띄어줌
@@ -355,6 +359,13 @@ class Stage_state:
 
         #타임바 해줘야함
 
+
+        if(Stage_level_1.timer - Stage_level_1.time_bar_time >= 1):
+            if(Stage_level_1.time_bar <= 300):
+                Stage_level_1.time_bar = (36 - Zombie_Count) * 8  #시간바의 이동속도
+                print((36 - Zombie_Count) * 30)
+                Stage_level_1.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
+
         Collide_check() #객체들의 충돌 체크
         Delete_all() # 객체들의 삭제
         # 다음 스테이지로 넘어감 스테이지 클리어
@@ -370,6 +381,8 @@ class Stage_state:
         Plants_Card.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Plants_Card2.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
+        Stage_level_1.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30) #스테이지 타임바
+        Stage_level_1.time_bar_image.clip_draw_to_origin(0, 60, 300 - Stage_level_1.time_bar, 60, 1080,1)
       #  for i in range(4):  # y  값
         #    for j in range(9):  # x 값
          #       draw_rectangle(j * 140 , (i) * 100 + 30 ,j * 140 + 140 ,(i + 1) * 100 + 130)
