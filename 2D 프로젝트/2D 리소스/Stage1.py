@@ -303,17 +303,17 @@ class Stage_state:
         Stage_level_1.game_over_time = 0
         for Zombie in Zombies:
             Zombie.state = 1
-            Zombie.Line =  random.randint (0  , 4 )
+
             Zombie.x = 1400
             Zombie.frame = random.randint(0 , 17)
         for Buket_Zombie in Zombies:
             Buket_Zombie.state = 1
-            Buket_Zombie.Line =  random.randint (0  , 4 )
+
             Buket_Zombie.x = 1400
             Buket_Zombie.frame = random.randint(0, 17)
         for Cone_Zombie in Zombies:
             Cone_Zombie.state = 1
-            Cone_Zombie.Line = random.randint (0  , 4)
+
             Cone_Zombie.x = 300
             Cone_Zombie.frame = random.randint(0, 20)
         for i in range(Zombie_Count):
@@ -370,10 +370,10 @@ class Stage_state:
         Plants_Card.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Plants_Card2.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
-        for i in range(4):  # y  값
-            for j in range(9):  # x 값
-                draw_rectangle(j * 140 , (i) * 100 + 30 ,j * 140 + 140 ,(i + 1) * 100 + 130)
-
+      #  for i in range(4):  # y  값
+        #    for j in range(9):  # x 값
+         #       draw_rectangle(j * 140 , (i) * 100 + 30 ,j * 140 + 140 ,(i + 1) * 100 + 130)
+#박스 그리기
 
 next_state_table = {
     Start_state : {SHOW_HOUSE : Start_state , SHOW_MAP:Move_state ,START : Stage_state },

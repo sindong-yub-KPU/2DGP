@@ -15,7 +15,7 @@ class plant:
 
     def __init__(self , x, y , line_):
         self.x , self.y = x, y
-        self.y = (line_+ 1) * 100
+        self.y = (line_+ 1) * 100 - 10
         print (self.y)
         self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
 

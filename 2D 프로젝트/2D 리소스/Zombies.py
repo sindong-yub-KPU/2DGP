@@ -170,6 +170,7 @@ class Buket_Zombie(): # 상속
             self.Buket_IDLE.clip_draw(int(self.frame) * 196 , 0, 176, 134, self.x, self.y)
         if (self.state == self.WALK):
             self.Buket_Walk.clip_draw(int(self.frame) * 196 - 9  ,0, 176, 142, self.x, self.y)
+            self.draw_bb()
         pass
     def update(self):
         self.world_time = get_time()
@@ -188,7 +189,7 @@ class Buket_Zombie(): # 상속
 
 
     def get_bb(self):
-        return self.x - 25, self.y - 30, self.x + 25, self.y + 30
+        return self.x - 75, self.y - 30, self.x - 25, self.y + 30
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
 
@@ -215,6 +216,7 @@ class Cone_Zombie:
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
         if (self.state == self.WALK):
             self.Cone_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
+            self.draw_bb()
         pass
     def update(self):
         self.world_time = get_time()
@@ -228,6 +230,6 @@ class Cone_Zombie:
             if self.Line == i and self.state != self.IDLE:
                 self.y = self.y = (i + 1) * 100
     def get_bb(self):
-        return self.x - 25, self.y - 30, self.x + 25, self.y + 30
+        return self.x - 75, self.y - 30, self.x - 25, self.y + 30
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
