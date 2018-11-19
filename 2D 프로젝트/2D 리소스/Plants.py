@@ -59,13 +59,20 @@ class plant:
         draw_rectangle(*self.get_bb())
 
  # 꽃
-class Sun_plant:
-    DIE, HIT, Sun, IDLE = 4, 3, 2, 1
+
+
+
+
+
+
+class Flower:
+    DIE, HIT, IDLE, IDLE = 4, 3, 2, 1
+    basic_flower_image = None
     def __init__(self , x, y , line_):
         self.x = x
-        self.y = (line_ + 1) * 100 # 식물 라인 설정
-
-        self.basic_plants_image = load_image('Stage1/Flower.png')
+        self.y = (line_ + 1) * 100 - 10  # 식물 라인 설정
+        if(self.basic_flower_image == None):
+            self.basic_flower_image = load_image('Stage1/Flower.png')
         self.Bullet_Count = 0
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
@@ -74,7 +81,7 @@ class Sun_plant:
         self.state_time = 0
         self.world_time =0
         self.hp = 3
-
+        self.sun_time =0
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 17
         if (self.state == self.HIT):  # 식물이 지금 맞고 있다.
@@ -84,18 +91,18 @@ class Sun_plant:
                 self.hp -= 1  # 식물의 피 달음
                 if (self.hp <= 0):
                     self.state = self.DIE
-        if(self.world_time - self.state > 10):
-            pass # 태양을 생성해야함
+
+
         if (self.state == 4):
             game_world.remove_object(self)
 
     def draw_card(self , card_select , mouse_x , mouse_y): # 카드를 그려줌 꽃
         if(card_select == 2):
-            self.basic_plants_image.clip_draw( 0, 0, 84, 80, mouse_x + 10 , 600 - mouse_y)
+            self.basic_flower_image.clip_draw( 0, 0, 84, 80, mouse_x + 10 , 600 - mouse_y)
 
     def draw(self): # 식물을 그려준다
 
-        self.basic_plants_image.clip_draw(int(self.frame) * 103 -2 ,  0 , 70 , 90 , self.x , self.y , )
+        self.basic_flower_image.clip_draw(int(self.frame) * 103 -2 ,  0 , 70 , 90 , self.x , self.y , )
         self.draw_bb()
 
     def get_bb(self):
