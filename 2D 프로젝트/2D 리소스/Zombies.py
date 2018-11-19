@@ -171,6 +171,8 @@ class Buket_Zombie(): # 상속
         if (self.state == self.WALK):
             self.Buket_Walk.clip_draw(int(self.frame) * 196 - 9  ,0, 176, 142, self.x, self.y)
             self.draw_bb()
+        if (self.state == self.ATTACK):
+            self.Buket_Attack.clip_draw(int(self.frame) * 196 , 0 , 176, 142 , self.x , self.y)
         pass
     def update(self):
         self.world_time = get_time()
@@ -180,6 +182,8 @@ class Buket_Zombie(): # 상속
         if (self.state == self.WALK):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time) % 14
             self.x -= self.velocity * game_framework.frame_time
+        if (self.state == self.ATTACK):
+            self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
 
             self.get_bb()
         for i in range(0, 5):
@@ -217,6 +221,8 @@ class Cone_Zombie:
         if (self.state == self.WALK):
             self.Cone_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
             self.draw_bb()
+        if (self.state == self.ATTACK):
+            pass
         pass
     def update(self):
         self.world_time = get_time()
