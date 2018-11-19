@@ -77,7 +77,7 @@ class WalkingState:
 
         boy.x = clamp((boy.y - b)  / m, boy.x, -((boy.y - b2)  / m2) + 300)
         boy.y = clamp(70, boy.y, 1070)
-        print((boy.y - b2)  / m2)
+        
     @staticmethod
     def draw(boy):
         cx ,  cy = boy.x - boy.bg.window_left , boy.y - boy.bg.window_bottom
