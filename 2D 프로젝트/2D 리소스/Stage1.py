@@ -3,9 +3,8 @@ from pico2d import *
 from Zombies import Zombie
 from Zombies import Buket_Zombie
 from Zombies import Cone_Zombie
-from Plants import Flower
 from Plants import plant
-
+from Plants import Flower
 from Sun import Sun_shine
 from Bullets import Bullet
 import game_world
@@ -85,20 +84,17 @@ def creat_Plant_card():
 #식물을 눌렀을때 생산
 def creat_Plants( x, y , Line_, select ):
     global Plants , Plant_Count
-
     if(select == 1):
-        game_world.add_object(plant(x, y , Line_), 1)
-        Plants.append(plant(x, y , Line_))
+        new_plant = plant(x, y , Line_)
+        game_world.add_object(new_plant, 1)
+        Plants.append(new_plant)
         Plant_Count = Plant_Count + 1
-
-    elif(select == 2):
-        game_world.add_object(Flower(x, y, Line_), 1)
-        Flowers.append(Flower(x, y, Line_))
+    if(select == 2):
+        new_plant = Flower(x, y, Line_)
+        game_world.add_object(new_plant, 1)
+        Flowers.append(new_plant)
         Plant_Count = Plant_Count + 1
-
-
-
-#식물 생산
+    #식물 생산
 
 def creat_Sun():
     global Sun , Sun_Count
@@ -163,7 +159,7 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
         if(Plant_Count == 0  and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
             Zombie.state = 1 #좀비의 상태는 워킹
 
-    for Bullet in Bullets: # 총알 삭제
+    for Bullet in Bullets:
         if(Bullet.action > 20 and Bullet.state == 1):
             Bullet.state = 2
 
@@ -181,10 +177,14 @@ def Delete_all():
             Zombie_Count = Zombie_Count - 1
 
     for Bullet in Bullets:
+        print("Bullet State ")
+        print(Bullet.state)
+
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
             del Bullet
     for plant in Plants:
+
         if (plant.state == 3 and plant.hp <= 0):
             Plants.remove(plant)
             del plant
@@ -360,7 +360,6 @@ class Stage_state:
                     plant.state = 1
             if(Zombie_Count == 0):
                 plant.state = 1
-        #초마다 총알생성
         for plant in Plants:
             if(plant.state == 2):
                 if Stage_level_1.timer - plant.state_time > 5:
@@ -374,7 +373,7 @@ class Stage_state:
         if(Stage_level_1.timer - Stage_level_1.time_bar_time >= 1):
             if(Stage_level_1.time_bar <= 300):
                 Stage_level_1.time_bar = (36 - Zombie_Count) * 8  #시간바의 이동속도
-
+                print((36 - Zombie_Count) * 30)
                 Stage_level_1.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
@@ -475,12 +474,11 @@ class Stage_level_1:
                 for i in range(-1 , 4): # y  값
                     for j in range(9): # x 값
                         if (event.x >= j * 140 and event.x <= j * 140 + 140 and 600 - event.y -1 > (i) * 100 + 30  and 600 - event.y -1 <= (i + 1) * 100 + 130 ):  # 가운데 라인 생성
-
+                            global Plant_Count
 
                             creat_Plants(int(j * 140 + 70), i + 1, i + 1 , self.select_card)
-
+                            print(i)
                             self.select_card = 0
-                            break
 
 
             # 자원을 얻는것

@@ -66,7 +66,7 @@ class Zombie:
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         if(self.Basic_Zombies_Attack == None):
             self.Basic_Zombies_Attack = load_image('Tutorial/Tutorial_Zombie_Attack.png')
-        self.hp = 2
+        self.hp = 30
         self.world_time = get_time()
     def update(self):
         self.world_time = get_time()
@@ -164,7 +164,7 @@ class Buket_Zombie(): # 상속
             self.velocity = Zombie_SPEED_PPS
             self.Zombie_time = 0
 
-            self.hp = 20
+            self.hp = 30
     def draw(self):
         if (self.state == self.IDLE):
             self.Buket_IDLE.clip_draw(int(self.frame) * 196 , 0, 176, 134, self.x, self.y)
@@ -217,7 +217,7 @@ class Cone_Zombie:
             self.head = 0
             self.velocity = Zombie_SPEED_PPS
             self.Zombie_time = 0
-            self.hp = 10
+            self.hp = 30
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
