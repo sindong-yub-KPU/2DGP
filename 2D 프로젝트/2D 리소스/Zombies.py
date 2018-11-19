@@ -173,7 +173,7 @@ class Buket_Zombie(): # 상속
             self.draw_bb()
         if (self.state == self.ATTACK):
             self.Buket_Attack.clip_draw(int(self.frame) * 196 , 0 , 176, 142 , self.x , self.y)
-        pass
+
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
@@ -201,11 +201,14 @@ class Cone_Zombie:
     IDLE, WALK, ATTACK, HEAD_DOWN, DIE, Remove = 0, 1, 2, 3, 4, 5
     Cone_Zombie_IDLE = None
     Cone_Zombie_Walk = None
+    Cone_Zombie_Attack = None
     def __init__(self):
         if(self.Cone_Zombie_IDLE == None):
             self.Cone_Zombie_IDLE = load_image('Stage1/Cone_Zombie_Idle.png')
         if (self.Cone_Zombie_Walk == None):
             self.Cone_Zombie_Walk = load_image('Stage1/Cone_Zombie_Walk.png')
+        if (self. Cone_Zombie_Attack == None ):
+            self.Cone_Zombie_Attack = load_image('Stage1/Cone_Zombie_Attack.png')
             self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
             self.frame = random.randint(0, 11)
             self.Line = 2
@@ -222,8 +225,8 @@ class Cone_Zombie:
             self.Cone_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
             self.draw_bb()
         if (self.state == self.ATTACK):
-            pass
-        pass
+            self.Cone_Zombie_Attack.clip_draw(int(self.frame) * 196, 0, 176, 142, self.x, self.y)
+
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
@@ -232,6 +235,10 @@ class Cone_Zombie:
         if (self.state == self.WALK):
             self.frame = (self.frame + FRAMES_PER_ACTION_WALK3 * ACTION_PER_TIME_WALK * game_framework.frame_time) % 20
             self.x -= self.velocity * game_framework.frame_time
+        if (self.state == self.ATTACK):
+            self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
+
+
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
                 self.y = self.y = (i + 1) * 100
