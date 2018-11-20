@@ -155,6 +155,12 @@ class Buket_Zombie(): # 상속
             self.Buket_Walk = load_image('Stage1/Buket_Zombie_Walk.png')
         if (self.Buket_Attack == None):
             self.Buket_Attack = load_image('Stage1/BuketAttack.png')
+
+        if (self.Basic_Zombies_NO_Head == None):
+            self.Basic_Zombies_NO_Head = load_image('Tutorial/Tutorial_Zombie_nohead_walk.png')
+        if (self.Basic_Zombies_Die == None):
+            self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
+            
             self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
             self.frame = random.randint(0, 11)
             self.Line = 2
