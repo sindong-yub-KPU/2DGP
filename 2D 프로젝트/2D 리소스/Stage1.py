@@ -104,8 +104,17 @@ def creat_Sun():
     game_world.add_object(new_Sun, 1)
 
     Sun_Count += 1
-def Flower_creat_Sun():
-    pass 
+def Flower_creat_Sun(x_ , y_):
+    global Sun, Sun_Count
+    new_Sun = Sun_shine()
+    new_Sun.x = x_
+    new_Sun.y = y_ + 20
+    new_Sun.limit_y = y_ - 10
+    Sun.append(new_Sun)
+    game_world.add_object(new_Sun, 1)
+
+    Sun_Count += 1
+    pass
 #자원 생산
 def collide(a, b): #사각형 충돌제크
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -391,10 +400,14 @@ class Stage_state:
                     creat_Bullet(plant.x , plant.y + 30)
                     plant.state_time = get_time()
 
+        #Flower 객체의 자원생성
+        for Flower in Flowers:
+            if(Flower.state == 1):
+                if Stage_level_1.timer - Flower.Sun_time > 20:
+                    Flower_creat_Sun(Flower.x , Flower.y)
+                    Flower.Sun_time = get_time()
 
         #타임바 해줘야함
-
-
         if(Stage_level_1.timer - Stage_level_1.time_bar_time >= 1):
             if(Stage_level_1.time_bar <= 300):
                 Stage_level_1.time_bar = (36 - Zombie_Count) * 8  #시간바의 이동속도
@@ -403,6 +416,7 @@ class Stage_state:
 
         Collide_check() #객체들의 충돌 체크
         Delete_all() # 객체들의 삭제
+
         # 다음 스테이지로 넘어감 스테이지 클리어
         if(Zombie_Count == 0): # 스테이지 넘어가는 조건
             clear()

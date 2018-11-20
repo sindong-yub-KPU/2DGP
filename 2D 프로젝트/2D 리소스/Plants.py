@@ -66,7 +66,7 @@ class plant:
 
 
 class Flower:
-    DIE, HIT, IDLE, IDLE = 4, 3, 2, 1
+    DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     basic_flower_image = None
     def __init__(self , x, y , line_):
         self.x = x
@@ -79,6 +79,7 @@ class Flower:
         self.state = self.IDLE
         self.Line = line_  # 맨위에부터 0 1 2 3 4  개의 라인
         self.state_time = 0
+        self.Sun_time = get_time()
         self.world_time =0
         self.hp = 3
         self.sun_time =0
