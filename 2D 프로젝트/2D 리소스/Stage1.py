@@ -5,6 +5,7 @@ from Zombies import Buket_Zombie
 from Zombies import Cone_Zombie
 from Plants import plant
 from Plants import Flower
+from Plants import walnut
 from Sun import Sun_shine
 from Bullets import Bullet
 import game_world
@@ -39,6 +40,7 @@ Plants_Card2 = None
 Zombies = []
 Plants = []
 Flowers = []
+Walnuts = []
 Sun = []
 Bullets = [] # 객체 리스트
 Zombie_Count = 0
