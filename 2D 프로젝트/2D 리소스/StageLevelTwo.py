@@ -257,6 +257,7 @@ class Start_state:
         stageleveltwo.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         stageleveltwo.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
+        stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
         stageleveltwo.font.draw(600, 50, 'Stage 1')
 class Move_state:
@@ -318,6 +319,7 @@ class Move_state:
         stageleveltwo.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         stageleveltwo.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
+        stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
         stageleveltwo.font.draw(600, 50, 'Defence the Zombies!!', (255, 0, 0))
 
@@ -407,6 +409,7 @@ class Stage_state:
         stageleveltwo.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)  # 보드판
         stageleveltwo.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
+        stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         Plants_Card.draw_card(stageleveltwo.select_card, stageleveltwo.mouse_x, stageleveltwo.mouse_y)
         Plants_Card2.draw_card(stageleveltwo.select_card, stageleveltwo.mouse_x, stageleveltwo.mouse_y)
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
@@ -487,6 +490,7 @@ class stageleveltwo:
             elif (event.button == SDL_BUTTON_LEFT and event.x > 180 and event.x < 260 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 50 and self.select_card == 0):
                 self.select_card = 2
                 self.sun_value = self.sun_value - 50
+
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
 
