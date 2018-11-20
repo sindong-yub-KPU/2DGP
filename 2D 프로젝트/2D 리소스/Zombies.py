@@ -240,6 +240,8 @@ class Cone_Zombie:
     Cone_Zombie_IDLE = None
     Cone_Zombie_Walk = None
     Cone_Zombie_Attack = None
+    Basic_Zombies_NO_Head = None
+    Basic_Zombies_Die = None
     def __init__(self):
         if(self.Cone_Zombie_IDLE == None):
             self.Cone_Zombie_IDLE = load_image('Stage1/Cone_Zombie_Idle.png')
@@ -247,6 +249,10 @@ class Cone_Zombie:
             self.Cone_Zombie_Walk = load_image('Stage1/Cone_Zombie_Walk.png')
         if (self. Cone_Zombie_Attack == None ):
             self.Cone_Zombie_Attack = load_image('Stage1/Cone_Zombie_Attack.png')
+        if (self.Basic_Zombies_NO_Head == None):
+            self.Basic_Zombies_NO_Head = load_image('Tutorial/Tutorial_Zombie_nohead_walk.png')
+        if (self.Basic_Zombies_Die == None):
+            self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
             self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
             self.frame = random.randint(0, 11)
             self.Line = 2
@@ -255,7 +261,7 @@ class Cone_Zombie:
             self.head = 0
             self.velocity = Zombie_SPEED_PPS
             self.Zombie_time = 0
-            self.hp = 30
+            self.hp = 5
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
@@ -264,6 +270,10 @@ class Cone_Zombie:
             self.draw_bb()
         if (self.state == self.ATTACK):
             self.Cone_Zombie_Attack.clip_draw(int(self.frame) * 196, 0, 176, 142, self.x, self.y)
+        if (self.state == self.HEAD_DOWN):
+            self.Basic_Zombies_NO_Head.clip_draw(int(self.frame) * 181 - 3, 0, 90, 95, self.x, self.y , 90 , 100)
+        if (self.state == self.DIE):
+            self.Basic_Zombies_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
 
     def update(self):
         self.world_time = get_time()
@@ -272,10 +282,38 @@ class Cone_Zombie:
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 7
         if (self.state == self.WALK):
             self.frame = (self.frame + FRAMES_PER_ACTION_WALK3 * ACTION_PER_TIME_WALK * game_framework.frame_time) % 20
+            if(self.hp <= 0):
+                self.state = self.HEAD_DOWN # 머리가 떨어져서 걷다가 죽어야함
+                self.head = 1 # 머리가 떨어짐
+                self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
             self.x -= self.velocity * game_framework.frame_time
         if (self.state == self.ATTACK):
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
 
+
+
+
+        if (self.state == self.ATTACK):
+            if (self.hp <= 0):
+                self.state = self.HEAD_DOWN  # 머리가 떨어져서 걷다가 죽어야함
+                self.head = 1  # 머리가 떨어짐
+                self.Zombie_time = get_time()  # 머리가 떨어진 시간을 잰다 .
+        #좀비 머리 떨어짐
+        if(self.state == self.HEAD_DOWN): #머리가 떨어져서 걷고 있을때
+            self.frame = (self.frame + FRAMES_PER_ACTION_WALK * ACTION_PER_TIME_WALK * game_framework.frame_time) % 17
+            self.x -= self.velocity * game_framework.frame_time
+            if(self.world_time - self.Zombie_time > 4):
+                self.state = self.DIE
+                self.Zombie_time = get_time() # 상태변화 시간을 잰다 .
+                self.frame = 0
+        #좀비 사망
+        if (self.state == self.DIE):
+            if(self.frame > 8):
+                if(self.world_time - self.Zombie_time > 5):
+                    self.state = self.Remove
+                    game_world.remove_object(self)
+            elif(self.frame < 8):
+                self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 9
 
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
