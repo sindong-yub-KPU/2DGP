@@ -111,3 +111,7 @@ class Flower:
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
+
+
+class walnut:
+    pass 
