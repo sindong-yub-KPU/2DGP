@@ -115,13 +115,15 @@ class Flower:
 
 class walnut:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
-    basic_flower_image = None
-
+    basic_walnut_image = None
+    worst_walnut_image = None
     def __init__(self, x, y, line_):
         self.x = x
         self.y = (line_ + 1) * 100 - 10  # 식물 라인 설정
         if (self.basic_walnut_image == None):
             self.basic_walnut_image = load_image('Stageleveltwo/Potato_state_good.png')
+        if (self.worst_walnut_image == None):
+            self.worst_walnut_image = load_image('Stageleveltwo/Potato_state_Worst.png')
         self.Bullet_Count = 0
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
