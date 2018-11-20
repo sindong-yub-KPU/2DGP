@@ -431,7 +431,7 @@ class stageleveltwo:
     time_bar_image = None
     def __init__(self):
         if (self.stageleveltwo_map == None ):
-            self.stageleveltwo_map = load_image('Stage1/Tutorial_map.png')
+            self.stageleveltwo_map = load_image('Stageleveltwo/Stagelevel2map.png')
         if (self.board == None):
              self.board = load_image('Stage1/board.png')
 
