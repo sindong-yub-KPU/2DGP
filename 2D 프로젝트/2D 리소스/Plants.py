@@ -122,8 +122,7 @@ class walnut:
         self.y = (line_ + 1) * 100 - 10  # 식물 라인 설정
         if (self.basic_walnut_image == None):
             self.basic_walnut_image = load_image('Stageleveltwo/Potato_state_good.png')
-        if (self.worst_walnut_image == None):
-            self.worst_walnut_image = load_image('Stageleveltwo/Potato_state_Worst.png')
+
         self.Bullet_Count = 0
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
@@ -149,12 +148,12 @@ class walnut:
             game_world.remove_object(self)
 
     def draw_card(self, card_select, mouse_x, mouse_y):  # 카드를 그려줌 꽃
-        if (card_select == 2):
-            self.basic_flower_image.clip_draw(0, 0, 84, 80, mouse_x + 10, 600 - mouse_y)
+        if (card_select == 3):
+            self.basic_walnut_image.clip_draw(0, 0, 84, 80, mouse_x + 10, 600 - mouse_y)
 
     def draw(self):  # 식물을 그려준다
 
-        self.basic_flower_image.clip_draw(int(self.frame) * 103 - 2, 0, 70, 90, self.x, self.y, )
+        self.basic_walnut_image.clip_draw(int(self.frame) * 103 - 2, 0, 70, 90, self.x, self.y, )
         self.draw_bb()
 
     def get_bb(self):

@@ -37,6 +37,7 @@ next_state_table = {
 }
 Plants_Card = None
 Plants_Card2 = None
+Plants_Card3 = None
 Zombies = []
 Plants = []
 Flowers = []
@@ -81,8 +82,10 @@ def creat_Cone_Zombie(): # 콘 좀비 생산
 def creat_Plant_card():
     global Plants_Card
     global Plants_Card2
+    global Plants_Card3
     Plants_Card = plant(0 , 0, 0)
     Plants_Card2 = Flower(0, 0, 0)
+    Plants_Card3 = walnut(0 , 0 , 0)
 #식물을 눌렀을때 생산
 def creat_Plants( x, y , Line_, select ):
     global Plants , Plant_Count
@@ -411,6 +414,7 @@ class Stage_state:
         Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         Plants_Card.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Plants_Card2.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
+
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
         Stage_level_1.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30) #스테이지 타임바
         Stage_level_1.time_bar_image.clip_draw_to_origin(0, 60, 300 - Stage_level_1.time_bar, 60, 1080,1)
@@ -479,16 +483,16 @@ class Stage_level_1:
         self.cur_state.draw(self) #현재 상태를 드로우
         pass
     def handle_event(self,event):
-        if(self.cur_state == Stage_state
-        and event.type == SDL_MOUSEBUTTONDOWN): #마우스 버튼 다운시
+        if(self.cur_state == Stage_state and event.type == SDL_MOUSEBUTTONDOWN): #마우스 버튼 다운시
             #카드 고르기
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
-                self.select_card = 1
+                self.select_card = 1#탄식물
                 self.sun_value = self.sun_value - 100
                 pass
             elif (event.button == SDL_BUTTON_LEFT and event.x > 180 and event.x < 260 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 50 and self.select_card == 0):
-                self.select_card = 2
+                self.select_card = 2 #꽃
                 self.sun_value = self.sun_value - 50
+
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
 
