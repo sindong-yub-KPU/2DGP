@@ -354,13 +354,6 @@ class Stage_state:
 
 
             Zombie.frame = random.randint(0 , 17)
-        for Buket_Zombie in Zombies:
-            Buket_Zombie.state = 1
-
-
-            Buket_Zombie.frame = random.randint(0, 17)
-        for Cone_Zombie in Zombies:
-            Cone_Zombie.state = 1
 
 
             Cone_Zombie.frame = random.randint(0, 20)
