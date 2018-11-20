@@ -196,6 +196,8 @@ class Move_state: # 맵을 움직이는 스테이트
     def enter(tutorial ,event):
         for i in range(5):  # 객체 생성
             creat_Zombie()
+            Zombies[i].Line = random.randint(0, 4)
+            Zombies[i].x += 300
         tutorial.frame = 0
         tutorial.move_time = get_time()
         tutorial.velocity += CHANGE_SPEED_PPS
@@ -263,13 +265,14 @@ class Stage_state:
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
         tutorial.game_over_time = 0
-        for i in range(1):
+        for i in range(5):
 
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
             Zombies[i].x = 1400
             Zombies[i].frame = random.randint(0, 17)
-        for i in range(1):
+            Zombies[i].Line = 2
+        for i in range(5):
             Zombies[i].x += i * random.randint(200 , 400)
     @staticmethod
     def exit(tutorial, event):

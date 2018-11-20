@@ -66,7 +66,7 @@ class Zombie:
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         if(self.Basic_Zombies_Attack == None):
             self.Basic_Zombies_Attack = load_image('Tutorial/Tutorial_Zombie_Attack.png')
-        self.hp = 30
+        self.hp = 5
         self.world_time = get_time()
     def update(self):
         self.world_time = get_time()

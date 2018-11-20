@@ -136,23 +136,12 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
 
     for Zombie in Zombies:
         for Bullet in Bullets:
-            if collide(Bullet, Zombie) and Bullet.state != 1 and Zombie.hp > 0:
+            if collide(Bullet, Zombie) and Bullet.state != 1 and Zombie.hp > 0 and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state !=5:
 
                 Zombie.hp -=  1
                 Bullet.state = 1 # 총알을 없에준다
                 break
-    for Buket_Zombie in Zombies:
-        for Bullet in Bullets:
-            if collide(Bullet, Buket_Zombie) and Bullet.state != 1 and Zombie.hp > 0:
-                Buket_Zombie.hp -=  1
-                Bullet.state = 1 # 총알을 없에준다
-                break
-    for Cone_Zombie in Zombies:
-        for Bullet in Bullets:
-            if collide(Bullet, Cone_Zombie) and Bullet.state != 1 and Zombie.hp > 0:
-                Cone_Zombie.hp -=  1
-                Bullet.state = 1 # 총알을 없에준다
-                break
+
     for plant in Plants:
          #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
         for Zombie in Zombies: #좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
@@ -201,7 +190,7 @@ def Delete_all():
             Zombies.remove(Zombie)
             del Zombie
             Zombie_Count = Zombie_Count - 1
-
+            print(len(Zombies))
     for Bullet in Bullets:
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
@@ -355,8 +344,6 @@ class Stage_state:
 
             Zombie.frame = random.randint(0 , 17)
 
-
-            Cone_Zombie.frame = random.randint(0, 20)
         for i in range(Zombie_Count):
             Zombies[i].x += i * random.randint(100, 400) # 좀비들 거리 띄어줌
         #처음에 생산한 좀비들을 처리
@@ -404,7 +391,7 @@ class Stage_state:
         if(Stage_level_1.timer - Stage_level_1.time_bar_time >= 1):
             if(Stage_level_1.time_bar <= 300):
                 Stage_level_1.time_bar = (36 - Zombie_Count) * 8  #시간바의 이동속도
-                print((36 - Zombie_Count) * 30)
+
                 Stage_level_1.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
@@ -509,7 +496,7 @@ class Stage_level_1:
                             global Plant_Count
 
                             creat_Plants(int(j * 140 + 70), i + 1, i + 1 , self.select_card)
-                            print(i)
+
                             self.select_card = 0
 
 

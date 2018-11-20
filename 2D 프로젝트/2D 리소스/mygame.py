@@ -6,6 +6,6 @@ import Stage1_state
 GAME_WIDTH = 1400
 GAME_HEIGHT = 600
 pico2d.open_canvas(GAME_WIDTH, GAME_HEIGHT)
-game_framework.run(Stage1_state)
+game_framework.run(start_state)
 pico2d.close_canvas()
 
