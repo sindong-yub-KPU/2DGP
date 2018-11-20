@@ -104,6 +104,8 @@ def creat_Sun():
     game_world.add_object(new_Sun, 1)
 
     Sun_Count += 1
+def Flower_creat_Sun():
+    pass 
 #자원 생산
 def collide(a, b): #사각형 충돌제크
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -202,6 +204,7 @@ def Delete_all():
 
             Plant_Count = Plant_Count - 1
             break
+    # Flower 충돌 체크
     for Flower in Flowers:
 
         if (Flower.state == 3 and Flower.hp <= 0):
