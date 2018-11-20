@@ -438,7 +438,7 @@ class stageleveltwo:
         self.intro_music = load_music('Stage1/intro_music.mp3')
 
         self.stageleveltwo_Start_music = load_music('Stage1/Tutorial_start.mp3')  # 초반 도입 음악
-        self.stageleveltwo_GAME_START = load_music('Stage1/Tutorial_GAME_START.mp3')  # 게임 스타트 음악
+        self.stageleveltwo_GAME_START = load_music('Stageleveltwo/Stagelevel2music.mp3')  # 게임 스타트 음악
         self.font = load_font('Stage1/ConsolaMalgun.ttf', 25)
         if(self.stageleveltwo_Start_logo == None):
             self.stageleveltwo_Start_logo = load_image('Stage1/Turtorial_Start.png')
