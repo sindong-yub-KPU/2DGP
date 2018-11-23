@@ -175,7 +175,15 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
                 Zombie.state = 1
         #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
         #   plant.state = 1
+    for walnut in Walnuts:
+        for Zombie in Zombies:  # 좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
+            if collide(Flower, Zombie) and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5:
+                Zombie.state = 2
+                Zombie.collide = True
+                Flower.state = 3
 
+            elif (Zombie.collide != True and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
+                Zombie.state = 1
     for Zombie in Zombies: # 모든 좀비에 대하여
         Zombie.collide = False
         if(Plant_Count == 0  and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
@@ -209,7 +217,7 @@ def Delete_all():
 
             Plant_Count = Plant_Count - 1
             break
-    # Flower 충돌 체크
+    # Flower 삭제
     for Flower in Flowers:
 
         if (Flower.state == 3 and Flower.hp <= 0):
@@ -217,7 +225,13 @@ def Delete_all():
 
             Plant_Count = Plant_Count - 1
             break
+    #walnut 삭제
+    for walnut in Walnuts:
+        if (walnut.state == 3 and walnut.hp <= 0):
+            Walnuts.remove(walnut)
 
+            Plant_Count = Plant_Count - 1
+            break
 
 #객체들이 경우에 따라서 삭제됨
 

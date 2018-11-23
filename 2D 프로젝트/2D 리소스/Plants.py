@@ -116,7 +116,7 @@ class Flower:
 class walnut:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     basic_walnut_image = None
-    worst_walnut_image = None
+
     def __init__(self, x, y, line_):
         self.x = x
         self.y = (line_ + 1) * 100 - 10  # 식물 라인 설정
@@ -131,7 +131,7 @@ class walnut:
         self.state_time = 0
         self.Sun_time = get_time()
         self.world_time = 0
-        self.hp = 50
+        self.hp = 10
         self.sun_time = 0
 
     def update(self):
