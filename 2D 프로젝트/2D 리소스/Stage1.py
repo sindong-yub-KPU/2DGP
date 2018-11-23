@@ -87,15 +87,15 @@ def creat_Plant_card():
     Plants_Card2 = Flower(0, 0, 0)
     Plants_Card3 = walnut(0 , 0 , 0)
 #식물을 눌렀을때 생산
-def creat_Plants( x, y , Line_, select ):
+def creat_Plants( x, y , Line_, select ,sitting):
     global Plants , Plant_Count
     if(select == 1):
-        new_plant = plant(x, y , Line_)
+        new_plant = plant(x, y , Line_ , sitting)
         game_world.add_object(new_plant, 1)
         Plants.append(new_plant)
         Plant_Count = Plant_Count + 1
     if(select == 2):
-        new_plant = Flower(x, y, Line_)
+        new_plant = Flower(x, y, Line_ , sitting)
         game_world.add_object(new_plant, 1)
         Flowers.append(new_plant)
         Plant_Count = Plant_Count + 1
@@ -225,13 +225,7 @@ def Delete_all():
 
             Plant_Count = Plant_Count - 1
             break
-    #walnut 삭제
-    for walnut in Walnuts:
-        if (walnut.state == 3 and walnut.hp <= 0):
-            Walnuts.remove(walnut)
 
-            Plant_Count = Plant_Count - 1
-            break
 
 #객체들이 경우에 따라서 삭제됨
 
@@ -527,7 +521,7 @@ class Stage_level_1:
                                     break
                             if(count == False):
 
-                                creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card)
+                                creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card , self.plant_setting)
                                 self.select_card = 0
                                 self.count.append(self.plant_setting)
                                 self.plant_setting = 0

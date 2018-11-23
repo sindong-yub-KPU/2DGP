@@ -13,7 +13,7 @@ FRAMES_PER_ACTION_WALK = 17
 class plant:
     DIE , HIT, ATTACK,IDLE  =4, 3,2 , 1
     basic_plants_image = None
-    def __init__(self , x, y , line_):
+    def __init__(self , x, y , line_ ,sit_):
         self.x , self.y = x, y
         self.y = (line_+ 1) * 100 - 10
         if(self.basic_plants_image == None):
@@ -27,6 +27,7 @@ class plant:
         self.state_time = 0
         self.world_time =0
         self.hp = 3
+        self.sitting = sit_  # 자리
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 12
         if(self.state == 3): #식물이 지금 맞고 있다.
@@ -68,7 +69,7 @@ class plant:
 class Flower:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     basic_flower_image = None
-    def __init__(self , x, y , line_):
+    def __init__(self , x, y , line_,sit):
         self.x = x
         self.y = (line_ + 1) * 100 - 10  # 식물 라인 설정
         if(self.basic_flower_image == None):
@@ -83,6 +84,7 @@ class Flower:
         self.world_time =0
         self.hp = 3
         self.sun_time =0
+        self.sitting = sit  # 자리
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 17
         if (self.state == self.HIT):  # 식물이 지금 맞고 있다.
@@ -117,7 +119,7 @@ class walnut:
     DIE, HIT, Sun, IDLE = 4, 3, 2, 1
     basic_walnut_image = None
 
-    def __init__(self, x, y, line_):
+    def __init__(self, x, y, line_ , sit):
         self.x = x
         self.y = (line_ + 1) * 100 - 10  # 식물 라인 설정
         if (self.basic_walnut_image == None):
@@ -131,9 +133,9 @@ class walnut:
         self.state_time = 0
         self.Sun_time = get_time()
         self.world_time = 0
-        self.hp = 10
+        self.hp = 5
         self.sun_time = 0
-
+        self.sitting = sit #자리
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME * game_framework.frame_time) % 14
         if (self.state == self.HIT):  # 식물이 지금 맞고 있다.

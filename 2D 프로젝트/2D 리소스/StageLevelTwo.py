@@ -83,24 +83,24 @@ def creat_Plant_card():
     global Plants_Card
     global Plants_Card2
     global Plants_Card3
-    Plants_Card = plant(0 , 0, 0)
-    Plants_Card2 = Flower(0, 0, 0)
-    Plants_Card3 =  walnut(0,0,0)
+    Plants_Card = plant(0 , 0, 0 , 0)
+    Plants_Card2 = Flower(0, 0, 0 , 0)
+    Plants_Card3 =  walnut(0,0,0 , 0)
 #식물을 눌렀을때 생산
-def creat_Plants( x, y , Line_, select ):
+def creat_Plants( x, y , Line_, select  ,sitting):
     global Plants , Plant_Count
     if(select == 1):
-        new_plant = plant(x, y , Line_)
+        new_plant = plant(x, y , Line_ , sitting)
         game_world.add_object(new_plant, 1)
         Plants.append(new_plant)
         Plant_Count = Plant_Count + 1
     if(select == 2):
-        new_plant = Flower(x, y, Line_)
+        new_plant = Flower(x, y, Line_ , sitting)
         game_world.add_object(new_plant, 1)
         Flowers.append(new_plant)
         Plant_Count = Plant_Count + 1
     if(select == 3):
-        new_plant = walnut(x, y, Line_)
+        new_plant = walnut(x, y, Line_ , sitting)
         game_world.add_object(new_plant, 1)
         Flowers.append(new_plant)
         Plant_Count = Plant_Count + 1
@@ -194,32 +194,17 @@ def Delete_all():
     global Zombies, Plants, Bullets
     global Zombie_Count
     global Plant_Count
+
     for Zombie in Zombies:
         if(Zombie.state == 5):
-
             Zombies.remove(Zombie)
             del Zombie
             Zombie_Count = Zombie_Count - 1
-            print(len(Zombies))
+
     for Bullet in Bullets:
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
             del Bullet
-    for plant in Plants:
-
-        if (plant.state == 3 and plant.hp <= 0):
-            Plants.remove(plant)
-
-            Plant_Count = Plant_Count - 1
-            break
-    # Flower 충돌 체크
-    for Flower in Flowers:
-
-        if (Flower.state == 3 and Flower.hp <= 0):
-            Flowers.remove(Flower)
-
-            Plant_Count = Plant_Count - 1
-            break
 
 
 #객체들이 경우에 따라서 삭제됨
@@ -407,6 +392,41 @@ class Stage_state:
                 stageleveltwo.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
+        global Plant_Count
+        for plant in Plants:
+            if (plant.state == 3 and plant.hp <= 0):
+                for i in range(len(stageleveltwo.count)):
+                    if (plant.sitting == stageleveltwo.count[i]):
+                        stageleveltwo.count.remove(plant.sitting)
+                        break
+                Plants.remove(plant)
+
+                Plant_Count = Plant_Count - 1
+                break
+        # Flower 충돌 체크
+        for Flower in Flowers:
+
+            if (Flower.state == 3 and Flower.hp <= 0):
+                for i in range(len(stageleveltwo.count)):
+                    if (Flower.sitting == stageleveltwo.count[i]):
+                        stageleveltwo.count.remove(Flower.sitting)
+                        break
+                Flowers.remove(Flower)
+
+                Plant_Count = Plant_Count - 1
+                break
+
+        for walnut in Walnuts:
+
+            if (walnut.state == 3 and walnut.hp <= 0):
+                for i in range(len(stageleveltwo.count)):
+                    if (walnut.sitting == stageleveltwo.count[i]):
+                        stageleveltwo.count.remove(walnut.sitting)
+                        break
+                Walnuts.remove(walnut)
+                print(len(Walnuts))
+                Plant_Count = Plant_Count - 1
+                break
         Delete_all() # 객체들의 삭제
 
         # 다음 스테이지로 넘어감 스테이지 클리어
@@ -477,7 +497,8 @@ class stageleveltwo:
         self.mouse_y = 0
         self.game_over =0 # 게엠 오버 확인
         self.plant_setting = 0 # 식물 못 겹치게 하기
-        self.count = []
+        self.count = [] # 식물 중복 금지
+        self.what_plants = [] # 어떤 식물을 넣었는지 알게하기
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
     def update(self):
@@ -522,9 +543,10 @@ class stageleveltwo:
                                     self.plant_setting = 0
                                     break
                             if (count == False):
-                                creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card)
+                                creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card , self.plant_setting)
                                 self.select_card = 0
                                 self.count.append(self.plant_setting)
+
                                 self.plant_setting = 0
                                 print(i)
                                 count = True
