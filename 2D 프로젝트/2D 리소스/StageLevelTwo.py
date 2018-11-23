@@ -99,6 +99,11 @@ def creat_Plants( x, y , Line_, select ):
         game_world.add_object(new_plant, 1)
         Flowers.append(new_plant)
         Plant_Count = Plant_Count + 1
+    if(select == 3):
+        new_plant = walnut(x, y, Line_)
+        game_world.add_object(new_plant, 1)
+        Flowers.append(new_plant)
+        Plant_Count = Plant_Count + 1
     #식물 생산
 
 def creat_Sun():
