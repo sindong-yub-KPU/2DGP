@@ -153,7 +153,7 @@ class walnut:
 
     def draw(self):  # 식물을 그려준다
 
-        self.basic_walnut_image.clip_draw(int(self.frame) * 103 - 2, 0, 70, 90, self.x, self.y, )
+        self.basic_walnut_image.clip_draw(int(self.frame) * 95 - 2, 0, 70, 90, self.x, self.y, )
         self.draw_bb()
 
     def get_bb(self):
