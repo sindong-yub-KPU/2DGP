@@ -327,7 +327,7 @@ class Stage_state:
         if(tutorial.timer - tutorial.time_bar_time >= 1):
             if(tutorial.time_bar <= 300):
                 tutorial.time_bar = (5 - Zombie_Count) * 60  #시간바의 이동속도
-                print((5 - Zombie_Count) * 30)
+
             tutorial.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
@@ -413,6 +413,8 @@ class Tutorial:
         self.mouse_y = 0
         self.Click_order = 0
         self.game_over =0
+        self.plant_setting = 0 # 식물 못 겹치게 하기
+        self.count = []
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
     def update(self):
@@ -437,17 +439,26 @@ class Tutorial:
                 pass
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
+                count = False
                 for i in range(9):
+                    self.plant_setting += 1
                     if (event.x >= i * 140 and event.x <= i * 140 + 140): #가운데 라인 생성
                         global Plant_Count
-                        if(self.Click_order < 3):
-                            self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
+                        for j in range(len(self.count)):
+                            if(self.count[j] == self.plant_setting):
+                                self.plant_setting = 0
+                                count = True
+                                break
 
-                        creat_Plants(int(i * 140 + 70) ,int(282) , 2 )
-
-
-
-                        self.select_card = 0
+                        if(count == False):
+                            if (self.Click_order < 3):
+                                self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
+                            self.count.append(self.plant_setting)
+                            creat_Plants(int(i * 140 + 70), int(282), 2)
+                            self.select_card = 0
+                            self.plant_setting = 0
+                            break
+                self.plant_setting = 0
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
                 global Sun_Count , Sun
                 for Sun_shine in Sun:

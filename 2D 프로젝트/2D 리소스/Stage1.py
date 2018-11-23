@@ -470,7 +470,7 @@ class Stage_level_1:
         self.mouse_x = 0
         self.mouse_y = 0
         self.game_over =0 # 게엠 오버 확인
-        self.plant_setting = 0
+        self.plant_setting = 0 # 식물 못 겹치게 하기
         self.count = []
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
