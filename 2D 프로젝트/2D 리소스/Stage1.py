@@ -99,6 +99,8 @@ def creat_Plants( x, y , Line_, select ):
         game_world.add_object(new_plant, 1)
         Flowers.append(new_plant)
         Plant_Count = Plant_Count + 1
+
+
     #식물 생산
 
 def creat_Sun():
@@ -468,7 +470,8 @@ class Stage_level_1:
         self.mouse_x = 0
         self.mouse_y = 0
         self.game_over =0 # 게엠 오버 확인
-
+        self.plant_setting = 0
+        self.count = []
     def add_event(self , event):
         self.event_que.insert(0,event) # 이벤트를 추가
     def update(self):
@@ -495,16 +498,29 @@ class Stage_level_1:
 
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
-
+                count = False
                 for i in range(-1 , 4): # y  값
+                    if(count == True):
+                        break
                     for j in range(9): # x 값
+                        self.plant_setting += 1
                         if (event.x >= j * 140 and event.x <= j * 140 + 140 and 600 - event.y -1 > (i) * 100 + 30  and 600 - event.y -1 <= (i + 1) * 100 + 130 ):  # 가운데 라인 생성
                             global Plant_Count
+                            for k in range(len(self.count)):
+                                if(self.plant_setting == self.count[k]):
+                                    count = True
+                                    self.plant_setting = 0
+                                    break
+                            if(count == False):
 
-                            creat_Plants(int(j * 140 + 70), i + 1, i + 1 , self.select_card)
-
-                            self.select_card = 0
-
+                                creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card)
+                                self.select_card = 0
+                                self.count.append(self.plant_setting)
+                                self.plant_setting = 0
+                                print(i)
+                                count = True
+                                break
+                self.plant_setting = 0
 
             # 자원을 얻는것
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
