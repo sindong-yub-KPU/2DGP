@@ -236,7 +236,7 @@ def Delete_all():
 #객체들이 경우에 따라서 삭제됨
 
 def clear(): #객체 리스트 다 삭제
-    global Zombies, Plants, Bullets , Sun
+    global Zombies, Plants, Bullets , Sun , Flowers
     global Zombie_Count
     global Plant_Count
     global Bullet_Count
@@ -244,12 +244,12 @@ def clear(): #객체 리스트 다 삭제
     del Plants
     del Bullets
     del Sun
-
+    del Flowers
     Zombies = []
     Plants = []
     Sun = []
     Bullets = []  # 객체 리스트
-
+    Flowers = []
     Plant_Count =0
     Zombie_Count =0
     Bullet_Count=0
