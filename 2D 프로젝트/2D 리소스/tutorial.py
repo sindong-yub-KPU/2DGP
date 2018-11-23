@@ -56,10 +56,10 @@ def creat_Zombie():  # 좀비 생성
     Zombie_Count = Zombie_Count +1
 def creat_Plant_card():
     global Plants_Card
-    Plants_Card = plant(0 , 0, 0)
-def creat_Plants( x, y , Line_ ):
+    Plants_Card = plant(0 , 0, 0 , 0)
+def creat_Plants( x, y , Line_  , sitting):
     global Plants , Plant_Count
-    new_plant = plant(x, y , Line_)
+    new_plant = plant(x, y , Line_ ,sitting)
     game_world.add_object(new_plant, 1)
     Plants.append(new_plant)
     Plant_Count = Plant_Count + 1
@@ -132,12 +132,7 @@ def Delete_all():
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
             del Bullet
-    for plant in Plants:
 
-        if (plant.state == 3 and plant.hp <= 0):
-            Plants.remove(plant)
-            del plant
-            Plant_Count = Plant_Count - 1
 
 
 def clear(): #객체 리스트 다 삭제
@@ -331,7 +326,19 @@ class Stage_state:
             tutorial.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
+
         Delete_all() # 객체들의 삭제
+        global Plant_Count
+        for plant in Plants:
+
+            if (plant.state == 3 and plant.hp <= 0):
+                for i in range(len(tutorial.count)):
+                    if (plant.sitting == tutorial.count[i]):
+                        tutorial.count.remove(plant.sitting)
+                        break
+                Plants.remove(plant)
+                del plant
+                Plant_Count = Plant_Count - 1
         # 다음 스테이지로 넘어감 스테이지 클리어
         if(Zombie_Count == 0): # 스테이지 넘어가는 조건
             clear()
@@ -454,7 +461,7 @@ class Tutorial:
                             if (self.Click_order < 3):
                                 self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
                             self.count.append(self.plant_setting)
-                            creat_Plants(int(i * 140 + 70), int(282), 2)
+                            creat_Plants(int(i * 140 + 70), int(282), 2 , self.plant_setting)
                             self.select_card = 0
                             self.plant_setting = 0
                             break

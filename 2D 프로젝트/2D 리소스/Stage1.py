@@ -83,9 +83,9 @@ def creat_Plant_card():
     global Plants_Card
     global Plants_Card2
     global Plants_Card3
-    Plants_Card = plant(0 , 0, 0)
-    Plants_Card2 = Flower(0, 0, 0)
-    Plants_Card3 = walnut(0 , 0 , 0)
+    Plants_Card = plant(0 , 0, 0 , 0)
+    Plants_Card2 = Flower(0, 0, 0 , 0)
+    Plants_Card3 = walnut(0 , 0 , 0 , 0)
 #식물을 눌렀을때 생산
 def creat_Plants( x, y , Line_, select ,sitting):
     global Plants , Plant_Count
@@ -210,21 +210,7 @@ def Delete_all():
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
             del Bullet
-    for plant in Plants:
 
-        if (plant.state == 3 and plant.hp <= 0):
-            Plants.remove(plant)
-
-            Plant_Count = Plant_Count - 1
-            break
-    # Flower 삭제
-    for Flower in Flowers:
-
-        if (Flower.state == 3 and Flower.hp <= 0):
-            Flowers.remove(Flower)
-
-            Plant_Count = Plant_Count - 1
-            break
 
 
 #객체들이 경우에 따라서 삭제됨
@@ -410,6 +396,31 @@ class Stage_state:
                 Stage_level_1.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
         Collide_check() #객체들의 충돌 체크
+        global Plant_Count
+        #식물 삭제 ..
+        for plant in Plants:
+            if (plant.state == 3 and plant.hp <= 0):
+                for i in range(len(Stage_level_1.count)):
+                    if (plant.sitting == Stage_level_1.count[i]):
+                        Stage_level_1.count.remove(plant.sitting)
+                        break
+                Plants.remove(plant)
+
+                Plant_Count = Plant_Count - 1
+                break
+        # Flower 충돌 체크
+        for Flower in Flowers:
+
+            if (Flower.state == 3 and Flower.hp <= 0):
+                for i in range(len(Stage_level_1.count)):
+                    if (Flower.sitting == Stage_level_1.count[i]):
+                        Stage_level_1.count.remove(Flower.sitting)
+                        break
+                Flowers.remove(Flower)
+
+                Plant_Count = Plant_Count - 1
+                break
+
         Delete_all() # 객체들의 삭제
 
         # 다음 스테이지로 넘어감 스테이지 클리어
