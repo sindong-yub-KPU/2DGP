@@ -340,15 +340,15 @@ class Stage_state:
         stageleveltwo.velocity += CHANGE_SPEED_PPS
         stageleveltwo.game_over_time = 0
         for i in range(10): # 48 마리
-            creat_Helmet_Zombie()
             creat_Zombie()
             creat_Buket_Zombie()
             creat_Cone_Zombie()
+            creat_Helmet_Zombie()
         for Zombie in Zombies:
             Zombie.state = 1
 
 
-            Zombie.frame = random.randint(0 , 17)
+            Zombie.frame = random.randint(0 , 10)
 
         for i in range(Zombie_Count):
             Zombies[i].x += i * random.randint(100, 400) # 좀비들 거리 띄어줌

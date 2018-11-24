@@ -352,19 +352,20 @@ class Helmet_Zombie:
         if (self.state == self.IDLE):
             self.Helmet_Zombie_Zombie_IDLE.clip_draw(int(self.frame) * 184, 0, 176, 143, self.x, self.y)
         if (self.state == self.WALK):
-            self.Helmet_Zombie_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
+            self.Helmet_Zombie_Zombie_Walk.clip_draw(int(self.frame) * 184 - 10, 0, 176, 160, self.x, self.y)
             self.draw_bb()
         if (self.state == self.ATTACK):
-            self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 196, 0, 176, 142, self.x, self.y)
+            self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 192, 0, 176, 142, self.x, self.y)
         if (self.state == self.DIE):
             self.Helmet_Zombie_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
+
         if(self.state == self.IDLE):
             self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 14
         if (self.state == self.WALK):
-            self.frame = (self.frame + FRAMES_PER_ACTION_WALK3 * ACTION_PER_TIME_WALK * game_framework.frame_time) % 20
+            self.frame = (self.frame + FRAMES_PER_ACTION_WALK3 * ACTION_PER_TIME_WALK * game_framework.frame_time) % 10
             if(self.hp <= 0):
                 self.state = self.DIE # 머리가 떨어져서 걷다가 죽어야함
                 self.Zombie_time = get_time()  # 상태변화 시간을 잰다 .
