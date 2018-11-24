@@ -3,6 +3,7 @@ from pico2d import *
 from Zombies import Zombie
 from Zombies import Buket_Zombie
 from Zombies import Cone_Zombie
+from Zombies import Helmet_Zombie
 from Plants import plant
 from Plants import Flower
 from Plants import walnut
@@ -74,6 +75,13 @@ def creat_Buket_Zombie(): #뚜껑 좀비 생산
 def creat_Cone_Zombie(): # 콘 좀비 생산
     global Zombies, Zombie_Count
     new_zombie = Cone_Zombie()
+    new_zombie.Line = random.randint(0, 4)
+    game_world.add_object(new_zombie, 1)
+    Zombies.append(new_zombie)
+    Zombie_Count = Zombie_Count + 1
+def creat_Helmet_Zombie():
+    global Zombies, Zombie_Count
+    new_zombie = Helmet_Zombie()
     new_zombie.Line = random.randint(0, 4)
     game_world.add_object(new_zombie, 1)
     Zombies.append(new_zombie)
@@ -271,7 +279,7 @@ class Move_state:
             creat_Zombie()
             creat_Buket_Zombie()
             creat_Cone_Zombie()
-
+            creat_Helmet_Zombie()
         for Zombie  in Zombies:
 
             Zombie.x += random.randint(100, 200)

@@ -338,4 +338,53 @@ class Helmet_Zombie:
             self.Helmet_Zombie_Zombie_Attack = load_image('Stageleveltwo/Helmet_Zombie_Attack.png')
         if (self.Helmet_Zombie_Die == None):
             self.Helmet_Zombie_Die = load_image('Stageleveltwo/Helmet_Zombie_die.png')
+        self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
+        self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
+        self.frame = random.randint(0, 11)
+        self.Line = 2
+        self.state = self.IDLE
+        self.collide = False
+        self.head = 0
+        self.velocity = Zombie_SPEED_PPS
+        self.Zombie_time = 0
+        self.hp = 4
+    def draw(self):
+        if (self.state == self.IDLE):
+            self.Helmet_Zombie_Zombie_IDLE.clip_draw(int(self.frame) * 184, 0, 176, 143, self.x, self.y)
+        if (self.state == self.WALK):
+            self.Helmet_Zombie_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
+            self.draw_bb()
+        if (self.state == self.ATTACK):
+            self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 196, 0, 176, 142, self.x, self.y)
+        if (self.state == self.DIE):
+            self.Helmet_Zombie_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
+    def update(self):
+        self.world_time = get_time()
+        self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
+        if(self.state == self.IDLE):
+            self.frame = (self.frame + FRAMES_PER_ACTION_IDLE * ACTION_PER_TIME_IDLE * game_framework.frame_time ) % 14
+        if (self.state == self.WALK):
+            self.frame = (self.frame + FRAMES_PER_ACTION_WALK3 * ACTION_PER_TIME_WALK * game_framework.frame_time) % 20
+            if(self.hp <= 0):
+                self.state = self.DIE # 머리가 떨어져서 걷다가 죽어야함
+                self.Zombie_time = get_time()  # 상태변화 시간을 잰다 .
+                self.frame = 0
 
+            self.x -= self.velocity * game_framework.frame_time
+        if (self.state == self.ATTACK):
+            self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
+
+
+
+
+        if (self.state == self.ATTACK):
+            if (self.hp <= 0):
+                self.state = self.HEAD_DOWN  # 머리가 떨어져서 걷다가 죽어야함
+                self.head = 1  # 머리가 떨어짐
+                self.Zombie_time = get_time()  # 머리가 떨어진 시간을 잰다 .
+
+    def get_bb(self):
+        return self.x - 75, self.y - 30, self.x - 25, self.y + 30
+
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())
