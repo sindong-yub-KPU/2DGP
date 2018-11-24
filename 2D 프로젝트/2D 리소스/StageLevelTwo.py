@@ -339,7 +339,8 @@ class Stage_state:
         stageleveltwo.stageleveltwo_Start_music.play()
         stageleveltwo.velocity += CHANGE_SPEED_PPS
         stageleveltwo.game_over_time = 0
-        for i in range(10): # 36 마리
+        for i in range(10): # 48 마리
+            creat_Helmet_Zombie()
             creat_Zombie()
             creat_Buket_Zombie()
             creat_Cone_Zombie()
@@ -395,7 +396,7 @@ class Stage_state:
         #타임바 해줘야함
         if(stageleveltwo.timer - stageleveltwo.time_bar_time >= 1):
             if(stageleveltwo.time_bar <= 300):
-                stageleveltwo.time_bar = (36 - Zombie_Count) * 8  #시간바의 이동속도
+                stageleveltwo.time_bar = (48 - Zombie_Count) * 8  #시간바의 이동속도
 
                 stageleveltwo.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
