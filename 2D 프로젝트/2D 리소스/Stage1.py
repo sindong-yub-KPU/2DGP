@@ -41,7 +41,7 @@ Plants_Card3 = None
 Zombies = []
 Plants = []
 Flowers = []
-Walnuts = []
+
 Sun = []
 Bullets = [] # 객체 리스트
 Zombie_Count = 0
@@ -175,12 +175,7 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
                 Zombie.state = 1
         #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
         #   plant.state = 1
-    for walnut in Walnuts:
-        for Zombie in Zombies:  # 좀비가 충돌이 아닌상태라면 상태를 바꿔줘야한다.
-            if collide(Flower, Zombie) and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5:
-                Zombie.state = 2
-                Zombie.collide = True
-                Flower.state = 3
+
 
             elif (Zombie.collide != True and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
