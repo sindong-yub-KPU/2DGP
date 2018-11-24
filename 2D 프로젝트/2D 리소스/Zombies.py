@@ -186,6 +186,7 @@ class Buket_Zombie(): # 상속
             self.Basic_Zombies_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
 
     def update(self):
+
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
         if(self.state == self.IDLE):
@@ -339,7 +340,7 @@ class Helmet_Zombie:
         if (self.Helmet_Zombie_Die == None):
             self.Helmet_Zombie_Die = load_image('Stageleveltwo/Helmet_Zombie_die.png')
         self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
-        self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
+        self.x, self.y = -1500, random.randint(100, 450)
         self.frame = random.randint(0, 11)
         self.Line = 2
         self.state = self.IDLE
@@ -357,7 +358,7 @@ class Helmet_Zombie:
         if (self.state == self.ATTACK):
             self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 192, 0, 176, 142, self.x, self.y)
         if (self.state == self.DIE):
-            self.Helmet_Zombie_Die.clip_draw(int(self.frame) * 173 - 20, 0, 180, 95, self.x, self.y)  # 여백 안둬서
+            self.Helmet_Zombie_Die.clip_draw(int(self.frame) * 274, 0, 180, 130, self.x, self.y)  # 여백 안둬서
     def update(self):
         self.world_time = get_time()
         self.y = (self.Line + 1) * 100  # 좀비의 y 값 고정
@@ -375,6 +376,14 @@ class Helmet_Zombie:
         if (self.state == self.ATTACK):
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
 
+        if (self.state == self.DIE):
+            if(self.frame >= 6):
+                if(self.world_time - self.Zombie_time > 5):
+                    print(self.world_time - self.Zombie_time)
+                    self.state = self.Remove
+                    game_world.remove_object(self)
+            elif(self.frame < 6):
+                self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 6
 
 
 
