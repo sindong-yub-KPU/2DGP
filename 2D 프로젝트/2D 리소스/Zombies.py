@@ -340,7 +340,7 @@ class Helmet_Zombie:
         if (self.Helmet_Zombie_Die == None):
             self.Helmet_Zombie_Die = load_image('Stageleveltwo/Helmet_Zombie_die.png')
         self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
-        self.x, self.y = -1500, random.randint(100, 450)
+        self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
         self.frame = random.randint(0, 11)
         self.Line = 2
         self.state = self.IDLE
@@ -356,7 +356,7 @@ class Helmet_Zombie:
             self.Helmet_Zombie_Zombie_Walk.clip_draw(int(self.frame) * 184 - 10, 0, 176, 160, self.x, self.y)
             self.draw_bb()
         if (self.state == self.ATTACK):
-            self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 192, 0, 176, 142, self.x, self.y)
+            self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 184, 0, 176, 142, self.x, self.y)
         if (self.state == self.DIE):
             self.Helmet_Zombie_Die.clip_draw(int(self.frame) * 274, 0, 180, 130, self.x, self.y)  # 여백 안둬서
     def update(self):
@@ -374,15 +374,15 @@ class Helmet_Zombie:
 
             self.x -= self.velocity * game_framework.frame_time
         if (self.state == self.ATTACK):
-            self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
+            self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 9
 
         if (self.state == self.DIE):
-            if(self.frame >= 6):
+            if(self.frame >= 5):
                 if(self.world_time - self.Zombie_time > 5):
-                    print(self.world_time - self.Zombie_time)
+
                     self.state = self.Remove
                     game_world.remove_object(self)
-            elif(self.frame < 6):
+            elif(self.frame < 5):
                 self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 6
 
 
@@ -394,7 +394,7 @@ class Helmet_Zombie:
                 self.Zombie_time = get_time()  # 머리가 떨어진 시간을 잰다 .
 
     def get_bb(self):
-        return self.x - 75, self.y - 30, self.x - 25, self.y + 30
+        return self.x - 25, self.y - 25, self.x + 25, self.y + 30
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
