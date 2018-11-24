@@ -110,7 +110,7 @@ def creat_Plants( x, y , Line_, select  ,sitting):
     if(select == 3):
         new_plant = walnut(x, y, Line_ , sitting)
         game_world.add_object(new_plant, 1)
-        Flowers.append(new_plant)
+        Walnuts.append(new_plant)
         Plant_Count = Plant_Count + 1
     #식물 생산
 
@@ -184,6 +184,7 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
 
             elif (Zombie.collide != True and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
+        
         #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
         #   plant.state = 1
 
