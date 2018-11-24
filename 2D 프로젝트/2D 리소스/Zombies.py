@@ -324,4 +324,18 @@ class Cone_Zombie:
         draw_rectangle(*self.get_bb())
 
 class Helmet_Zombie:
-    pass
+    IDLE, WALK, ATTACK, HEAD_DOWN, DIE, Remove = 0, 1, 2, 3, 4, 5
+    Helmet_Zombie_Zombie_IDLE = None
+    Helmet_Zombie_Zombie_Walk = None
+    Helmet_Zombie_Zombie_Attack = None
+    Helmet_Zombie_Die = None
+    def __init__(self):
+        if(self.Helmet_Zombie_Zombie_IDLE == None):
+            self.Helmet_Zombie_Zombie_IDLE = load_image('Stageleveltwo/helmetZombie_Idle.png')
+        if (self.Helmet_Zombie_Zombie_Walk == None):
+            self.Helmet_Zombie_Zombie_Walk = load_image('Stageleveltwo/Helmet_Zombie_walk.png')
+        if (self. Helmet_Zombie_Zombie_Attack == None ):
+            self.Helmet_Zombie_Zombie_Attack = load_image('Stageleveltwo/Helmet_Zombie_Attack.png')
+        if (self.Helmet_Zombie_Die == None):
+            self.Helmet_Zombie_Die = load_image('Stageleveltwo/Helmet_Zombie_die.png')
+
