@@ -322,3 +322,6 @@ class Cone_Zombie:
         return self.x - 75, self.y - 30, self.x - 25, self.y + 30
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
+
+class Helmet_Zombie:
+    pass
