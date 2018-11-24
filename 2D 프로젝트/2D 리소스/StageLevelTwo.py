@@ -593,8 +593,13 @@ class stageleveltwo:
                         break
             #카드 선택 해제
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
+                if(self.select_card == 1):
+                    self.sun_value = self.sun_value + 100
+                elif(self.select_card == 2 or self.select_card == 3):
+                    self.sun_value = self.sun_value + 50
                 self.select_card = 0  # 오른쪽 버튼을 누르면 초기화
-                self.sun_value = self.sun_value + 100
+
+
 
         # 마우스 모션
         if (self.cur_state == Stage_state
