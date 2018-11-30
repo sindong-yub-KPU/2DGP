@@ -3,6 +3,7 @@ import game_framework
 import random
 import game_world
 PIXEL_PER_METER = (10.0 / 0.3)
+Helmet_PIXEL_PER_METER = (10.0 / 0.2)
 #이동거리가 10pixsel 에 30cm간다는 뜻 임의로 정함
 Zombie_SPEED_KMPH = 2.0
 # 10.0 속도
@@ -13,10 +14,10 @@ Zombie_SPEED_MPS = (Zombie_SPEED_MPM / 60.0)
 # 경과시간을 초로 바꿈
 Zombie_SPEED_PPS = (Zombie_SPEED_MPS * PIXEL_PER_METER) # 픽셀 퍼 세크 미터 퍼세크에다가 픽셀퍼 미터를 곱한것
 
-Helmet_Zombie_SPEED_KMPH = 4.0
+Helmet_Zombie_SPEED_KMPH = 6.0
 Helmet_Zombie_SPEED_MPM = (Helmet_Zombie_SPEED_KMPH * 1000.0 / 60 )
 Helmet_Zombie_SPEED_MPS = (Zombie_SPEED_MPM/ 60.0)
-Helmet_Zombie_SPEED_PPS = (Helmet_Zombie_SPEED_MPS * PIXEL_PER_METER)
+Helmet_Zombie_SPEED_PPS = (Helmet_Zombie_SPEED_MPS * Helmet_PIXEL_PER_METER)
 
 #액션 타임
 TIME_PER_ACTION_IDLE = 2
@@ -40,6 +41,9 @@ FRAMES_PER_ACTION_ATTACK = 20 # 21 개
 TIME_PER_ACTION_Dead = 3.5
 ACTION_PER_TIME_Dead = 1.0 / TIME_PER_ACTION_Dead #1초에 할 액션수 2개
 FRAMES_PER_ACTION_Dead = 9
+
+
+
 class Zombie:
     IDLE, WALK, ATTACK ,HEAD_DOWN , DIE , Remove = 0, 1, 2 ,3 , 4 , 5
     start_frame = 0
@@ -50,6 +54,7 @@ class Zombie:
     Basic_Zombies_NO_Head = None
     Basic_Zombies_Die = None
     Basic_Zombies_Attack = None
+    Attack_sound = None
     def __init__(self):
         self.x, self.y = random.randint(1700 , 1800) , random.randint(100 , 450)
         self.frame = random.randint(0, 11)
@@ -71,6 +76,8 @@ class Zombie:
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         if(self.Basic_Zombies_Attack == None):
             self.Basic_Zombies_Attack = load_image('Tutorial/Tutorial_Zombie_Attack.png')
+        if(self.Attack_sound == None):
+            self.Attack_sound = load_wav('Gamesoundeffect/chompsoft.ogg')
         self.hp = 5
         self.world_time = get_time()
     def update(self):
@@ -114,6 +121,7 @@ class Zombie:
                 self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 9
         #좀비 공격
         if (self.state == self.ATTACK):
+            self.Attack_sound.play()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 20
 
         #line 에 따라서 y 값 관리
@@ -155,6 +163,7 @@ class Buket_Zombie(): # 상속
     Buket_Attack = None
     Basic_Zombies_NO_Head = None
     Basic_Zombies_Die = None
+    Attack_sound =None
     def __init__(self):
         if(self.Buket_IDLE == None):
             self.Buket_IDLE = load_image('Stage1/Buket_Zombie_Idle.png')
@@ -166,6 +175,8 @@ class Buket_Zombie(): # 상속
             self.Basic_Zombies_NO_Head = load_image('Tutorial/Tutorial_Zombie_nohead_walk.png')
         if (self.Basic_Zombies_Die == None):
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
+        if (self.Attack_sound == None):
+            self.Attack_sound = load_wav('Gamesoundeffect/chompsoft.ogg')
 
             self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
             self.frame = random.randint(0, 11)
@@ -205,7 +216,7 @@ class Buket_Zombie(): # 상속
                 self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
         if (self.state == self.ATTACK):
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
-
+            self.Attack_sound.play()
             self.get_bb()
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
@@ -248,6 +259,7 @@ class Cone_Zombie:
     Cone_Zombie_Attack = None
     Basic_Zombies_NO_Head = None
     Basic_Zombies_Die = None
+    Attack_sound = None
     def __init__(self):
         if(self.Cone_Zombie_IDLE == None):
             self.Cone_Zombie_IDLE = load_image('Stage1/Cone_Zombie_Idle.png')
@@ -259,6 +271,8 @@ class Cone_Zombie:
             self.Basic_Zombies_NO_Head = load_image('Tutorial/Tutorial_Zombie_nohead_walk.png')
         if (self.Basic_Zombies_Die == None):
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
+        if (self.Attack_sound == None):
+            self.Attack_sound = load_wav('Gamesoundeffect/chompsoft.ogg')
             self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
             self.frame = random.randint(0, 11)
             self.Line = 2
@@ -295,7 +309,7 @@ class Cone_Zombie:
             self.x -= self.velocity * game_framework.frame_time
         if (self.state == self.ATTACK):
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
-
+            self.Attack_sound.play()
 
 
 
@@ -335,6 +349,7 @@ class Helmet_Zombie:
     Helmet_Zombie_Zombie_Walk = None
     Helmet_Zombie_Zombie_Attack = None
     Helmet_Zombie_Die = None
+    Attack_sound = None
     def __init__(self):
         if(self.Helmet_Zombie_Zombie_IDLE == None):
             self.Helmet_Zombie_Zombie_IDLE = load_image('Stageleveltwo/helmetZombie_Idle.png')
@@ -344,6 +359,8 @@ class Helmet_Zombie:
             self.Helmet_Zombie_Zombie_Attack = load_image('Stageleveltwo/Helmet_Zombie_Attack.png')
         if (self.Helmet_Zombie_Die == None):
             self.Helmet_Zombie_Die = load_image('Stageleveltwo/Helmet_Zombie_die.png')
+        if (self.Attack_sound == None):
+            self.Attack_sound =  load_wav('Gamesoundeffect/chompsoft.ogg')
         self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
         self.frame = random.randint(0, 11)
@@ -380,7 +397,7 @@ class Helmet_Zombie:
             self.x -= self.velocity * game_framework.frame_time
         if (self.state == self.ATTACK):
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 9
-
+            self.Attack_sound.play()
         if (self.state == self.DIE):
             if(self.frame >= 5):
                 if(self.world_time - self.Zombie_time > 5):
