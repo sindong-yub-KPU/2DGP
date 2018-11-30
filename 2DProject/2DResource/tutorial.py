@@ -430,6 +430,8 @@ class Tutorial:
         self.shoot = load_wav('Gamesoundeffect/Shoot.ogg')
         self.shoot.set_volume(64)
 
+        self.buttonclick = load_wav('Gamesoundeffect/buttonclick.ogg')
+        self.buttonclick.set_volume(64)
         self.time_bar = 0
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
@@ -469,6 +471,7 @@ class Tutorial:
         and event.type == SDL_MOUSEBUTTONDOWN): #마우스 버튼 다운시
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1
+                self.buttonclick.play()
                 self.sun_value = self.sun_value - 100
                 if(self.Click_order == 0):
                     self.Click_order = 1
