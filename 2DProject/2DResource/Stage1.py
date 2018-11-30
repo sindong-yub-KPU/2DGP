@@ -487,6 +487,9 @@ class Stage_level_1:
         self.shoot = load_wav('Gamesoundeffect/Shoot.ogg')
         self.shoot.set_volume(64)
 
+        self.buttonclick = load_wav('Gamesoundeffect/buttonclick.ogg')
+        self.buttonclick.set_volume(64)
+
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)
         self.zombiecome = False
@@ -527,11 +530,12 @@ class Stage_level_1:
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1#탄식물
                 self.sun_value = self.sun_value - 100
+                self.buttonclick.play()
                 pass
             elif (event.button == SDL_BUTTON_LEFT and event.x > 180 and event.x < 260 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 50 and self.select_card == 0):
                 self.select_card = 2 #꽃
                 self.sun_value = self.sun_value - 50
-
+                self.buttonclick.play()
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 count = False

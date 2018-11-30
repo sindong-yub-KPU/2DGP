@@ -518,6 +518,9 @@ class stageleveltwo:
         self.splat.set_volume(64)
         self.shoot = load_wav('Gamesoundeffect/Shoot.ogg')
         self.shoot.set_volume(64)
+        self.buttonclick = load_wav('Gamesoundeffect/buttonclick.ogg')
+        self.buttonclick.set_volume(64)
+
 
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
@@ -557,13 +560,16 @@ class stageleveltwo:
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1
                 self.sun_value = self.sun_value - 100
+                self.buttonclick.play()
                 pass
             elif (event.button == SDL_BUTTON_LEFT and event.x > 180 and event.x < 260 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 50 and self.select_card == 0):
                 self.select_card = 2
                 self.sun_value = self.sun_value - 50
+                self.buttonclick.play()
             if (event.button == SDL_BUTTON_LEFT and event.x > 260 and event.x < 340 and 0 + 600 - event.y - 1 < 0 + 600 and 0 + 600 - event.y - 1 > 0 + 600 - 80 and self.sun_value >= 50 and self.select_card == 0):
                 self.select_card = 3 #walnut
                 self.sun_value = self.sun_value - 50
+                self.buttonclick.play()
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 count = False

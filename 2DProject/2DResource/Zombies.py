@@ -13,6 +13,11 @@ Zombie_SPEED_MPS = (Zombie_SPEED_MPM / 60.0)
 # 경과시간을 초로 바꿈
 Zombie_SPEED_PPS = (Zombie_SPEED_MPS * PIXEL_PER_METER) # 픽셀 퍼 세크 미터 퍼세크에다가 픽셀퍼 미터를 곱한것
 
+Helmet_Zombie_SPEED_KMPH = 4.0
+Helmet_Zombie_SPEED_MPM = (Helmet_Zombie_SPEED_KMPH * 1000.0 / 60 )
+Helmet_Zombie_SPEED_MPS = (Zombie_SPEED_MPM/ 60.0)
+Helmet_Zombie_SPEED_PPS = (Helmet_Zombie_SPEED_MPS * PIXEL_PER_METER)
+
 #액션 타임
 TIME_PER_ACTION_IDLE = 2
 ACTION_PER_TIME_IDLE = 1.0 / TIME_PER_ACTION_IDLE #1초에 할 액션수 2개
@@ -346,7 +351,7 @@ class Helmet_Zombie:
         self.state = self.IDLE
         self.collide = False
         self.head = 0
-        self.velocity = Zombie_SPEED_PPS
+        self.velocity = Helmet_Zombie_SPEED_PPS
         self.Zombie_time = 0
         self.hp = 4
     def draw(self):
