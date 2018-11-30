@@ -377,6 +377,7 @@ class Stage_state:
         for plant in Plants:
             if(plant.state == 2):
                 if Stage_level_1.timer - plant.state_time > 5:
+                    Stage_level_1.shoot.play()
                     creat_Bullet(plant.x , plant.y + 30)
                     plant.state_time = get_time()
 
@@ -482,6 +483,9 @@ class Stage_level_1:
 
         self.splat = load_wav('Gamesoundeffect/splat1.wav')
         self.splat.set_volume(64)
+
+        self.shoot = load_wav('Gamesoundeffect/Shoot.ogg')
+        self.shoot.set_volume(64)
 
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)

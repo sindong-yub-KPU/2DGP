@@ -397,6 +397,7 @@ class Stage_state:
         for plant in Plants:
             if(plant.state == 2):
                 if stageleveltwo.timer - plant.state_time > 5:
+                    stageleveltwo.shoot.play()
                     creat_Bullet(plant.x , plant.y + 30)
                     plant.state_time = get_time()
 
@@ -515,6 +516,9 @@ class stageleveltwo:
         self.pausego.set_volume(64)
         self.splat = load_wav('Gamesoundeffect/splat1.wav')
         self.splat.set_volume(64)
+        self.shoot = load_wav('Gamesoundeffect/Shoot.ogg')
+        self.shoot.set_volume(64)
+
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
