@@ -358,6 +358,7 @@ class Stage_state:
             for Zombie in Zombies:
                 if (Zombie.x < 0):
                     tutorial.game_over = 1
+                    tutorial.game_over_sound.play()
 
         if(tutorial.game_over == 1):
             tutorial.game_over_time = get_time()
@@ -391,6 +392,7 @@ class Stage_state:
 
         #게임 오버
         if(tutorial.game_over > 0):
+
             tutorial.font.draw(600 , 550 , 'GAME OVER.....', (0 , 150, 0))
 
 
@@ -432,6 +434,9 @@ class Tutorial:
 
         self.buttonclick = load_wav('Gamesoundeffect/buttonclick.ogg')
         self.buttonclick.set_volume(64)
+
+        self.game_over_sound = load_wav('Gamesoundeffect/scream.ogg')
+        self.game_over_sound.set_volume(64)
         self.time_bar = 0
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
@@ -532,5 +537,7 @@ class Tutorial:
                 game_framework.change_state(Stage1_state)
             if(event.key == SDLK_2):
                 self.add_event(START)
-
+            if(event.key == SDLK_3):
+                global Zombies
+                Zombies[0].x = 100
 
