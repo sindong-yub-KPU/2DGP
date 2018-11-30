@@ -1,21 +1,18 @@
 import random
 import json
+import pickle
 import os
 
 from pico2d import *
 import game_framework
 import game_world
 
-from boy import Boy
-from ground import Ground
+import world_build_state
 
-
-name = "MainState"
-
-boy = None
-zombie = None
-
-
+name = "Rankstate"
+rank = []
+font = None
+Ranking = []
 def collide(a, b):
     # fill here
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -28,23 +25,17 @@ def collide(a, b):
 
     return True
 
-
-
-def get_boy():
-    return boy
-
+boy = None
 
 def enter():
-    global boy
-    boy = Boy()
-    game_world.add_object(boy, 1)
-
-
-    ground = Ground()
-    game_world.add_object(ground, 0)
+    global font
+    hide_cursor()
+    hide_lattice()
+    load_rank()
+    font = load_font('ENCR10B.TTF', 20)
 
 def exit():
-    game_world.clear()
+    pass
 
 def pause():
     pass
@@ -60,24 +51,30 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
-        else:
-            boy.handle_event(event)
+            game_framework.change_state(world_build_state)
+
 
 
 def update():
-    for game_object in game_world.all_objects():
-        game_object.update()
+    pass
 
 
 def draw():
+    global rank
+    global font
     clear_canvas()
-    for game_object in game_world.all_objects():
-        game_object.draw()
+    count = 0
+    for data in rank:
+        count += 20
+        font.draw(150 , 800 -count ,'player %d Time: %3.2f' % (data[0], data[1]), (0, 0, 0))
+
+
     update_canvas()
+def load_rank():
+    global rank
+    global Ranking
 
+    with open('rank_data.json', 'r') as f:
+        rank = json.load(f)
 
-
-
-
-
+    rank.sort(key=lambda element: element[1])

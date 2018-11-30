@@ -1,19 +1,15 @@
 import random
 import json
+import pickle
 import os
 
 from pico2d import *
 import game_framework
 import game_world
 
-from boy import Boy
-from ground import Ground
-
+import world_build_state
 
 name = "MainState"
-
-boy = None
-zombie = None
 
 
 def collide(a, b):
@@ -28,20 +24,13 @@ def collide(a, b):
 
     return True
 
-
-
-def get_boy():
-    return boy
-
+boy = None
 
 def enter():
+    # game world is prepared already in world_build_state
     global boy
-    boy = Boy()
-    game_world.add_object(boy, 1)
-
-
-    ground = Ground()
-    game_world.add_object(ground, 0)
+    boy = world_build_state.get_boy()
+    pass
 
 def exit():
     game_world.clear()
@@ -60,7 +49,9 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.change_state(world_build_state)
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_s:
+            game_world.save()
         else:
             boy.handle_event(event)
 

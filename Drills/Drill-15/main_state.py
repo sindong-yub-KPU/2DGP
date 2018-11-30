@@ -1,20 +1,16 @@
 import random
 import json
+import pickle
 import os
-
 from pico2d import *
 import game_framework
 import game_world
-
-from boy import Boy
-from ground import Ground
-
+import ranking_state
+import world_build_state
 
 name = "MainState"
-
 boy = None
-zombie = None
-
+zombies = []
 
 def collide(a, b):
     # fill here
@@ -28,20 +24,14 @@ def collide(a, b):
 
     return True
 
-
-
-def get_boy():
-    return boy
-
+boy = None
 
 def enter():
+    # game world is prepared already in world_build_state
     global boy
-    boy = Boy()
-    game_world.add_object(boy, 1)
+    boy = world_build_state.get_boy()
 
-
-    ground = Ground()
-    game_world.add_object(ground, 0)
+    pass
 
 def exit():
     game_world.clear()
@@ -60,12 +50,22 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.change_state(world_build_state)
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_s:
+            game_world.save()
         else:
             boy.handle_event(event)
 
 
 def update():
+    for object in game_world.all_objects():
+        if object != boy:
+            if(collide(boy , object)):
+                boy.collide_zombie()
+                save_game_inform()
+                game_framework.change_state(ranking_state)
+
+
     for game_object in game_world.all_objects():
         game_object.update()
 
@@ -76,8 +76,25 @@ def draw():
         game_object.draw()
     update_canvas()
 
+def save_game():
+    pass
 
 
 
+def save_game_inform():
+    count = 0
+    file = []
+    with open('rank_data.json', 'r') as f:
+        files = json.load(f)
+
+    for z in files:
+        count += 1
+        file.append(z)
+
+    boy_inform = [count, float(boy.end_time)]
+    file.append(boy_inform)
+
+    with open('rank_data.json', 'w') as f:
+        json.dump(file, f)
 
 

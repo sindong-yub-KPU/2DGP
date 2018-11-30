@@ -7,6 +7,7 @@ from Zombies import Helmet_Zombie
 from Plants import plant
 from Plants import Flower
 from Plants import walnut
+from Plants import cherryboom
 from Sun import Sun_shine
 from Bullets import Bullet
 import game_world
@@ -170,8 +171,7 @@ def Collide_check(): # 충돌체크 편하기 위해 만듬
 
             elif (Zombie.collide != True  and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
-         #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
-             #   plant.state = 1
+
 
     #Flower하고도 체크
     for Flower in Flowers:

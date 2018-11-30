@@ -163,3 +163,7 @@ class walnut:
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
+
+
+class cherryboom:
+    pass
