@@ -409,6 +409,8 @@ class Tutorial:
         self.arrow = load_image('Tutorial/Tutorial_arrow.png')
         self.time_bar_image = load_image('Tutorial/progress_bar.png')
         self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
+        self.getpoint = load_wav('Gamesoundeffect/points.ogg')
+        self.getpoint.set_volume(64)
 
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)
@@ -490,6 +492,7 @@ class Tutorial:
                         Sun_shine.click = 1
                         Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
                         Sun_shine.plus_y = Sun_shine.y
+                        self.getpoint.play()
                         del Sun_shine  # 누르면 삭제
 
                         Sun_Count -= 1 # 자원의 개수를 줄여줌

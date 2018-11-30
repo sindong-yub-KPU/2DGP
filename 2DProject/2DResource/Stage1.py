@@ -474,6 +474,9 @@ class Stage_level_1:
             self.time_bar_image = load_image('Stage1/progress_bar.png')
         self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
         self.ZombiescomingSound.set_volume(64)
+        self.getpoint = load_wav('Gamesoundeffect/points.ogg')
+        self.getpoint.set_volume(64)
+
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)
         self.zombiecome = False
@@ -540,7 +543,7 @@ class Stage_level_1:
                                 self.select_card = 0
                                 self.count.append(self.plant_setting)
                                 self.plant_setting = 0
-                                self.Planting_plant.set_volume(64)
+                                self.Planting_plant.play()
                                 print(i)
                                 count = True
                                 break
@@ -557,7 +560,7 @@ class Stage_level_1:
                         Sun_shine.click = 1
                         Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
                         Sun_shine.plus_y = Sun_shine.y
-
+                        self.getpoint.play()
                         Sun.remove(Sun_shine)
                         del Sun_shine  # 누르면 삭제
                         Sun_Count -= 1 # 자원의 개수를 줄여줌

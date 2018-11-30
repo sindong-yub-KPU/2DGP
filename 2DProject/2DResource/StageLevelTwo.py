@@ -507,6 +507,8 @@ class stageleveltwo:
         self.ZombiescomingSound.set_volume(64)
         self.zombiecome = False
         self.time_bar = 0
+        self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
+        self.Planting_plant.set_volume(64)
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
@@ -572,7 +574,7 @@ class stageleveltwo:
                                 creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card , self.plant_setting)
                                 self.select_card = 0
                                 self.count.append(self.plant_setting)
-
+                                self.Planting_plant.play()
                                 self.plant_setting = 0
                                 print(i)
                                 count = True
