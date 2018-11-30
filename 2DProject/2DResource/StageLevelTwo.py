@@ -452,7 +452,18 @@ class Stage_state:
                 Plant_Count = Plant_Count - 1
                 break
         Delete_all() # 객체들의 삭제
+        if (stageleveltwo.game_over == 0):
+            for Zombie in Zombies:
+                if (Zombie.x < 0):
+                    stageleveltwo.game_over = 1
+                    stageleveltwo.game_over_sound.play()
 
+        if (stageleveltwo.game_over == 1):
+            stageleveltwo.game_over_time = get_time()
+            stageleveltwo.game_over = 2
+        if (stageleveltwo.game_over == 2 and stageleveltwo.timer - stageleveltwo.game_over_time > 8):
+            clear()
+            game_framework.change_state(title_state)
         # 다음 스테이지로 넘어감 스테이지 클리어
         if(Zombie_Count == 0): # 스테이지 넘어가는 조건
             clear()
@@ -470,9 +481,9 @@ class Stage_state:
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
         stageleveltwo.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30) #스테이지 타임바
         stageleveltwo.time_bar_image.clip_draw_to_origin(0, 60, 300 - stageleveltwo.time_bar, 60, 1080,1)
-      #  for i in range(4):  # y  값
-        #    for j in range(9):  # x 값
-         #       draw_rectangle(j * 140 , (i) * 100 + 30 ,j * 140 + 140 ,(i + 1) * 100 + 130)
+        if (stageleveltwo.game_over > 0):
+            stageleveltwo.font.draw(600, 550, 'GAME OVER.....', (0, 150, 0))
+
 #박스 그리기
 
 next_state_table = {
@@ -521,6 +532,8 @@ class stageleveltwo:
         self.buttonclick = load_wav('Gamesoundeffect/buttonclick.ogg')
         self.buttonclick.set_volume(64)
 
+        self.game_over_sound = load_wav('Gamesoundeffect/scream.ogg')
+        self.game_over_sound.set_volume(64)
 
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
@@ -636,5 +649,7 @@ class stageleveltwo:
                 self.add_event(SHOW_MAP)
             if(event.key == SDLK_2):
                 self.add_event(START)
-
+            if(event.key == SDLK_3):
+                global Zombies
+                Zombies[0].x = 100
 
