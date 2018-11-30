@@ -166,6 +166,7 @@ class Start_state:
         tutorial.start_time = get_time()
 
 
+
     @staticmethod
     def exit(tutorial , event):
 
@@ -254,7 +255,7 @@ class Stage_state:
         tutorial.stage_time = get_time()
         tutorial.time_bar_time = get_time()
         tutorial.order = 0
-        tutorial.Tutorial_Start_music.set_volume(64)
+        tutorial.Tutorial_Start_music.set_volume(32)
         tutorial.Tutorial_Start_music.play()
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
@@ -264,7 +265,7 @@ class Stage_state:
 
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1400
+            Zombies[i].x = 1800
             Zombies[i].frame = random.randint(0, 17)
             Zombies[i].Line = 2
         for i in range(5):
@@ -275,8 +276,12 @@ class Stage_state:
 
     @staticmethod
     def do(tutorial):
+        if tutorial.zombiecome == False:
+            if(Zombies[0].x < 1500):
+                tutorial.ZombiescomingSound.play()
+                tutorial.zombiecome = True
         if(tutorial.timer - tutorial.stage_time >= 2 and tutorial.order == 0):
-            tutorial.Tutorial_GAME_START.set_volume(64)
+            tutorial.Tutorial_GAME_START.set_volume(32)
             tutorial.Tutorial_GAME_START.repeat_play()
             tutorial.order = 1
 
@@ -403,14 +408,19 @@ class Tutorial:
         self.cards = load_image('Tutorial/cards.png')
         self.arrow = load_image('Tutorial/Tutorial_arrow.png')
         self.time_bar_image = load_image('Tutorial/progress_bar.png')
+        self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
+        self.ZombiescomingSound.set_volume(64)
+        self.zombiecome = False
         self.time_bar = 0
-        self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
+        self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
         self.event_que = [] #이벤트 큐
         self.frame = 0  # 화면을 옮겨주는 프레임
         self.cur_state = Start_state  # 화면을 옮겨주는 순서 정의
         self.cur_state.enter(self, None)
+
+
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
         self.sun_value = 200  # 자원량
