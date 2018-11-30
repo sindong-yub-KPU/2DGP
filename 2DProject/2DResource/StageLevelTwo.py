@@ -346,7 +346,7 @@ class Stage_state:
         stageleveltwo.stage_time = get_time()
         stageleveltwo.time_bar_time = get_time()
         stageleveltwo.order = 0
-        stageleveltwo.stageleveltwo_Start_music.set_volume(64)
+        stageleveltwo.stageleveltwo_Start_music.set_volume(32)
         stageleveltwo.stageleveltwo_Start_music.play()
         stageleveltwo.velocity += CHANGE_SPEED_PPS
         stageleveltwo.game_over_time = 0
@@ -357,7 +357,7 @@ class Stage_state:
             creat_Helmet_Zombie()
         for Zombie in Zombies:
             Zombie.state = 1
-
+            Zombie.x = 1600
 
             Zombie.frame = random.randint(0 , 10)
 
@@ -371,10 +371,13 @@ class Stage_state:
     @staticmethod
     def do(stageleveltwo):
         if (stageleveltwo.timer - stageleveltwo.stage_time >= 2 and stageleveltwo.order == 0):
-            stageleveltwo.stageleveltwo_GAME_START.set_volume(64)
+            stageleveltwo.stageleveltwo_GAME_START.set_volume(32)
             stageleveltwo.stageleveltwo_GAME_START.repeat_play()
             stageleveltwo.order = 1
-
+        if stageleveltwo.zombiecome == False:
+            if (Zombies[0].x < 1500):
+                stageleveltwo.ZombiescomingSound.play()
+                stageleveltwo.zombiecome = True
         if stageleveltwo.order >= 0:
             if (stageleveltwo.timer - stageleveltwo.stage_time > 5):
                 stageleveltwo.stage_time = get_time()  # 20초 마다 자원이 나오게함
@@ -500,8 +503,11 @@ class stageleveltwo:
             self.cards = load_image('Stage1/cards.png')
         if (self.time_bar_image == None ):
             self.time_bar_image = load_image('Stage1/progress_bar.png')
+        self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
+        self.ZombiescomingSound.set_volume(64)
+        self.zombiecome = False
         self.time_bar = 0
-        self.intro_music.set_volume(64)  # 스테이지 들어오면 음악이 바로 재생되게함
+        self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
         self.event_que = [] #이벤트 큐
