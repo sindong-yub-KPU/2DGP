@@ -409,6 +409,9 @@ class Tutorial:
         self.arrow = load_image('Tutorial/Tutorial_arrow.png')
         self.time_bar_image = load_image('Tutorial/progress_bar.png')
         self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
+
+        self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
+        self.Planting_plant.set_volume(64)
         self.ZombiescomingSound.set_volume(64)
         self.zombiecome = False
         self.time_bar = 0
@@ -474,6 +477,7 @@ class Tutorial:
                             creat_Plants(int(i * 140 + 70), int(282), 2 , self.plant_setting)
                             self.select_card = 0
                             self.plant_setting = 0
+                            self.Planting_plant.play()
                             break
                 self.plant_setting = 0
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
