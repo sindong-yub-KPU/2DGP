@@ -78,6 +78,7 @@ class Zombie:
             self.Basic_Zombies_Attack = load_image('Tutorial/Tutorial_Zombie_Attack.png')
         if(self.Attack_sound == None):
             self.Attack_sound = load_wav('Gamesoundeffect/chompsoft.ogg')
+            self.Attack_sound.set_volume(32)
         self.hp = 5
         self.world_time = get_time()
     def update(self):
@@ -165,6 +166,7 @@ class Buket_Zombie(): # 상속
     Basic_Zombies_Die = None
     Attack_sound =None
     def __init__(self):
+
         if(self.Buket_IDLE == None):
             self.Buket_IDLE = load_image('Stage1/Buket_Zombie_Idle.png')
         if (self.Buket_Walk == None):
@@ -177,17 +179,17 @@ class Buket_Zombie(): # 상속
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         if (self.Attack_sound == None):
             self.Attack_sound = load_wav('Gamesoundeffect/chompsoft.ogg')
+            self.Attack_sound.set_volume(32)
+        self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
+        self.frame = random.randint(0, 11)
+        self.Line = 2
+        self.state = self.IDLE
+        self.collide = False
+        self.head = 0
+        self.velocity = Zombie_SPEED_PPS
+        self.Zombie_time = 0
 
-            self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
-            self.frame = random.randint(0, 11)
-            self.Line = 2
-            self.state = self.IDLE
-            self.collide = False
-            self.head = 0
-            self.velocity = Zombie_SPEED_PPS
-            self.Zombie_time = 0
-
-            self.hp = 3
+        self.hp = 3
     def draw(self):
         if (self.state == self.IDLE):
             self.Buket_IDLE.clip_draw(int(self.frame) * 196 , 0, 176, 134, self.x, self.y)
@@ -261,6 +263,7 @@ class Cone_Zombie:
     Basic_Zombies_Die = None
     Attack_sound = None
     def __init__(self):
+
         if(self.Cone_Zombie_IDLE == None):
             self.Cone_Zombie_IDLE = load_image('Stage1/Cone_Zombie_Idle.png')
         if (self.Cone_Zombie_Walk == None):
@@ -272,16 +275,19 @@ class Cone_Zombie:
         if (self.Basic_Zombies_Die == None):
             self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         if (self.Attack_sound == None):
+
             self.Attack_sound = load_wav('Gamesoundeffect/chompsoft.ogg')
-            self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
-            self.frame = random.randint(0, 11)
-            self.Line = 2
-            self.state = self.IDLE
-            self.collide = False
-            self.head = 0
-            self.velocity = Zombie_SPEED_PPS
-            self.Zombie_time = 0
-            self.hp = 5
+            self.Attack_sound.set_volume(32)
+
+        self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
+        self.frame = random.randint(0, 11)
+        self.Line = 2
+        self.state = self.IDLE
+        self.collide = False
+        self.head = 0
+        self.velocity = Zombie_SPEED_PPS
+        self.Zombie_time = 0
+        self.hp = 5
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
@@ -361,6 +367,7 @@ class Helmet_Zombie:
             self.Helmet_Zombie_Die = load_image('Stageleveltwo/Helmet_Zombie_die.png')
         if (self.Attack_sound == None):
             self.Attack_sound =  load_wav('Gamesoundeffect/chompsoft.ogg')
+            self.Attack_sound.set_volume(32)
         self.Basic_Zombies_Die = load_image('Tutorial/Tutorial_Zombie_nohead_Die.png')
         self.x, self.y = random.randint(1700, 1800), random.randint(100, 450)
         self.frame = random.randint(0, 11)

@@ -259,7 +259,7 @@ class Stage_state:
         tutorial.time_bar_time = get_time()
         tutorial.order = 0
         tutorial.Tutorial_Start_music.set_volume(32)
-        tutorial.Tutorial_Start_music.play()
+        tutorial.Tutorial_Start_music.play(1)
         tutorial.velocity += CHANGE_SPEED_PPS
         tutorial.arrow_y = 560 - 100
         tutorial.arrow_x = 0
