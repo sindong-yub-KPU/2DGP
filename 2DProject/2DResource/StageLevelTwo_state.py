@@ -27,11 +27,14 @@ def pause():
 def resume():
     pass
 def handle_events():
+    global StageLevelTwo
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
+            StageLevelTwo.pausego.play()
             game_framework.push_state(pause_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            StageLevelTwo.pausego.play()
             game_framework.push_state(pause_state)
         else :
             StageLevelTwo.handle_event(event)

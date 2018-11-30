@@ -87,16 +87,19 @@ def collide(a, b): #사각형 충돌제크
     if bottom_a > top_b:
         return False
     return True
-def Collide_check(): # 충돌체크 편하기 위해 만듬
+def Collide_check(tutorial): # 충돌체크 편하기 위해 만듬
     global Zombies , Plants , Bullets
     global Plant_Count
 
     for Zombie in Zombies:
-        for Bullet in Bullets:
-            if collide(Bullet, Zombie) and Bullet.state != 1 and Zombie.hp > 0:
 
+        for Bullet in Bullets:
+            if collide(Bullet, Zombie) and Bullet.state == 0 and Zombie.hp > 0 :
+
+                tutorial.splat.play()
                 Zombie.hp -=  1
                 Bullet.state = 1 # 총알을 없에준다
+
                 break;
     for plant in Plants:
          #지금 식물에 대한 상태값을 위해 지금 식물이 맞고 있는중인지 아닌지
@@ -330,7 +333,7 @@ class Stage_state:
 
             tutorial.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
-        Collide_check() #객체들의 충돌 체크
+        Collide_check(tutorial) #객체들의 충돌 체크
 
         Delete_all() # 객체들의 삭제
         global Plant_Count
@@ -418,6 +421,10 @@ class Tutorial:
         self.Planting_plant.set_volume(64)
         self.ZombiescomingSound.set_volume(64)
         self.zombiecome = False
+
+        self.splat = load_wav('Gamesoundeffect/splat1.wav')
+        self.splat.set_volume(64)
+
         self.time_bar = 0
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
