@@ -509,6 +509,8 @@ class stageleveltwo:
         self.time_bar = 0
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)
+        self.getpoint = load_wav('Gamesoundeffect/points.ogg')
+        self.getpoint.set_volume(64)
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
         self.velocity = 0
@@ -592,7 +594,7 @@ class stageleveltwo:
                         Sun_shine.click = 1
                         Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
                         Sun_shine.plus_y = Sun_shine.y
-
+                        self.getpoint.play()
                         Sun.remove(Sun_shine)
                         del Sun_shine  # 누르면 삭제
                         Sun_Count -= 1 # 자원의 개수를 줄여줌
