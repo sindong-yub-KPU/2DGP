@@ -18,6 +18,7 @@ def enter():
     global tutorial
     tutorial = Tutorial()
     game_world.add_object(tutorial, 0)
+
 def exit():
     global tutorial
     game_world.clear()
@@ -28,11 +29,15 @@ def pause():
 def resume():
     pass
 def handle_events():
+    global tutorial
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
+            tutorial.pausego.play()
+
             game_framework.push_state(pause_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            tutorial.pausego.play()
             game_framework.push_state(pause_state)
         else :
             tutorial.handle_event(event)

@@ -6,9 +6,10 @@ from pico2d import *
 
 name = "Pause_state"
 Main_object_esc = None
+pausesound = None
 frame = 0
 def enter():
-    global Main_object_esc
+    global Main_object_esc , pause
     Main_object_esc = load_image('Mainresource/areyousure.png')
 
     pass
@@ -33,7 +34,6 @@ def handle_events():
                 game_framework.pop_state()
 def update():
 
-
     pass
 
 
@@ -48,7 +48,7 @@ def resume():
 
 def draw():
     clear_canvas()
-    print(12)
+
 
     for game_object in game_world.all_objects():
         game_object.draw()

@@ -411,6 +411,8 @@ class Tutorial:
         self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
         self.getpoint = load_wav('Gamesoundeffect/points.ogg')
         self.getpoint.set_volume(64)
+        self.pausego = load_wav('Gamesoundeffect/pause.wav')
+        self.pausego.set_volume(64)
 
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)
