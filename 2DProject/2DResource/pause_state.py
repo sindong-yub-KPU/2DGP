@@ -2,6 +2,7 @@ import game_framework
 import title_state
 import game_world
 import Tutorial_state
+
 from pico2d import *
 import start_state
 name = "Pause_state"
@@ -26,6 +27,10 @@ def handle_events():
             if (event.x < 674 and event.x > 490 and 600 - event.y - 1 < (
                     600 // 4 + 20) + 40 and 600 - event.y - 1 > (
                     600 // 4 + 20) - 40 ):
+                    game_framework.quit()
+
+
+
                     game_framework.change_state(title_state)
             elif (event.x < 895 and event.x > 711 and 600 - event.y - 1 < (
                     600 // 4 + 20) + 40 and 600 - event.y - 1 > (

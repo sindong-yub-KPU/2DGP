@@ -347,10 +347,10 @@ class Stage_state:
                     if (plant.sitting == tutorial.count[i]):
                         tutorial.count.remove(plant.sitting)
                         game_world.remove_object(plant)
+                        Plants.remove(plant)
+                        Plant_Count = Plant_Count - 1
                         break
-                Plants.remove(plant)
-                del plant
-                Plant_Count = Plant_Count - 1
+
         # 다음 스테이지로 넘어감 스테이지 클리어
         if(Zombie_Count == 0 and tutorial.win == 0): # 스테이지 넘어가는 조건
               tutorial.wintime = get_time()
@@ -496,8 +496,28 @@ class Tutorial:
         self.cur_state.draw(self) #현재 상태를 드로우
         pass
     def handle_event(self,event):
+        check = True
         if(self.cur_state == Stage_state
         and event.type == SDL_MOUSEBUTTONDOWN): #마우스 버튼 다운시
+            if (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
+                global Sun_Count , Sun
+                for Sun_shine in Sun:
+
+                    if (event.x > Sun_shine.x - 50 and event.x < Sun_shine.x + 50 and 600 - event.y - 1 > Sun_shine.y - 50 and 600 - event.y - 1 < Sun_shine.y + 50):
+
+                        self.Click_order = 5
+                        Sun_shine.click = 1
+                        Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
+                        Sun_shine.plus_y = Sun_shine.y
+                        self.getpoint.play()
+                        del Sun_shine  # 누르면 삭제
+                        check = False
+                        Sun_Count -= 1 # 자원의 개수를 줄여줌
+
+                        self.sun_value = self.sun_value + 30  # 자원 증가
+                        break
+            if (event.button == SDL_BUTTON_LEFT and event.x > 600 - 50 and event.x < 600 + 50 and 0 + 600 - event.y - 1 < 0 + 600 and 0 + 600 - event.y - 1 > 0 + 600 - 80 and self.select_card == 0 and check == True):
+                self.select_card = 10  # 삽
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1
                 self.buttonclick.play()
@@ -505,8 +525,7 @@ class Tutorial:
                 if(self.Click_order == 0):
                     self.Click_order = 1
                 pass
-            elif(event.button == SDL_BUTTON_LEFT and event.x > 600 -50 and event.x < 600 +50 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and   self.select_card == 0):
-                self.select_card = 10 # 삽
+
 
 
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
@@ -544,23 +563,7 @@ class Tutorial:
                             break
 
                 self.plant_setting = 0
-            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
-                global Sun_Count , Sun
-                for Sun_shine in Sun:
 
-                    if (event.x > Sun_shine.x - 50 and event.x < Sun_shine.x + 50 and 600 - event.y - 1 > Sun_shine.y - 50 and 600 - event.y - 1 < Sun_shine.y + 50):
-
-                        self.Click_order = 5
-                        Sun_shine.click = 1
-                        Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
-                        Sun_shine.plus_y = Sun_shine.y
-                        self.getpoint.play()
-                        del Sun_shine  # 누르면 삭제
-
-                        Sun_Count -= 1 # 자원의 개수를 줄여줌
-
-                        self.sun_value = self.sun_value + 30  # 자원 증가
-                        break
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
                 if(self.select_card == 1):
                     self.sun_value = self.sun_value + 100

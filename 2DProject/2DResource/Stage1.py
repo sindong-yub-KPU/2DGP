@@ -201,7 +201,7 @@ def Delete_all():
             Zombies.remove(Zombie)
             del Zombie
             Zombie_Count = Zombie_Count - 1
-            print(len(Zombies))
+
     for Bullet in Bullets:
         if(Bullet.state == 2):
             Bullets.remove(Bullet)
@@ -281,6 +281,7 @@ class Move_state:
             Buket_Zombie.x += random.randint(100, 200)
     @staticmethod
     def exit(Stage_level_1,event):
+
         for Zombie in Zombies:
             Zombie.state = 1;
             Zombie.y = 300
@@ -407,10 +408,11 @@ class Stage_state:
                     if (plant.sitting == Stage_level_1.count[i]):
                         Stage_level_1.count.remove(plant.sitting)
                         game_world.remove_object(plant)
-                        break
-                Plants.remove(plant)
+                        Plants.remove(plant)
 
-                Plant_Count = Plant_Count - 1
+                        Plant_Count = Plant_Count - 1
+                        break
+
                 break
         # Flower 충돌 체크
         for Flower in Flowers:
@@ -420,11 +422,11 @@ class Stage_state:
                     if (Flower.sitting == Stage_level_1.count[i]):
                         Stage_level_1.count.remove(Flower.sitting)
                         game_world.remove_object(Flower)
+                        Flowers.remove(Flower)
 
+                        Plant_Count = Plant_Count - 1
                         break
-                Flowers.remove(Flower)
 
-                Plant_Count = Plant_Count - 1
                 break
 
         Delete_all() # 객체들의 삭제
@@ -568,6 +570,24 @@ class Stage_level_1:
         pass
     def handle_event(self,event):
         if(self.cur_state == Stage_state and event.type == SDL_MOUSEBUTTONDOWN): #마우스 버튼 다운시
+            # 자원을 얻는것
+            if (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
+                global Sun_Count , Sun
+                for Sun_shine in Sun:
+
+                    if (event.x > Sun_shine.x - 50 and event.x < Sun_shine.x + 50 and 600 - event.y - 1 > Sun_shine.y - 50 and 600 - event.y - 1 < Sun_shine.y + 50):
+
+                        self.Click_order = 5
+                        Sun_shine.click = 1
+                        Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
+                        Sun_shine.plus_y = Sun_shine.y
+                        self.getpoint.play()
+                        Sun.remove(Sun_shine)
+                        del Sun_shine  # 누르면 삭제
+                        Sun_Count -= 1 # 자원의 개수를 줄여줌
+
+                        self.sun_value = self.sun_value + 30  # 자원 증가
+                        break
             #카드 고르기
             if (event.button == SDL_BUTTON_LEFT and event.x > 100 and event.x < 180 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and self.sun_value >= 100 and self.select_card == 0):
                 self.select_card = 1#탄식물
@@ -619,29 +639,12 @@ class Stage_level_1:
                                 self.count.append(self.plant_setting)
                                 self.plant_setting = 0
                                 self.Planting_plant.play()
-                                print(i)
+
                                 count = True
                                 break
                 self.plant_setting = 0
 
-            # 자원을 얻는것
-            elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
-                global Sun_Count , Sun
-                for Sun_shine in Sun:
 
-                    if (event.x > Sun_shine.x - 50 and event.x < Sun_shine.x + 50 and 600 - event.y - 1 > Sun_shine.y - 50 and 600 - event.y - 1 < Sun_shine.y + 50):
-
-                        self.Click_order = 5
-                        Sun_shine.click = 1
-                        Sun_shine.plus_x = Sun_shine.x# 좌표를 보내줌
-                        Sun_shine.plus_y = Sun_shine.y
-                        self.getpoint.play()
-                        Sun.remove(Sun_shine)
-                        del Sun_shine  # 누르면 삭제
-                        Sun_Count -= 1 # 자원의 개수를 줄여줌
-
-                        self.sun_value = self.sun_value + 30  # 자원 증가
-                        break
             #카드 선택 해제
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
                 if(self.select_card == 1):

@@ -29,7 +29,7 @@ def update():
         game_framework.change_state(title_state)
         delay(0.01)
     logo_time += 1
-    print(logo_time)
+
 
 
 
