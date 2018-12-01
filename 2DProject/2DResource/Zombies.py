@@ -143,7 +143,7 @@ class Zombie:
             self.Basic_Zombies.clip_draw(int(self.frame) * 166, 0, 81, 120, self.x , self.y)
         if(self.state == self.WALK):
             self.Basic_Zombies_Walk.clip_draw(int(self.frame) * 166 - 3, 0, 90, 128, self.x, self.y)
-            self.draw_bb()
+
         if (self.state == self.HEAD_DOWN):
             self.Basic_Zombies_NO_Head.clip_draw(int(self.frame) * 181 - 3, 0, 90, 95, self.x, self.y , 90 , 100)
         if (self.state == self.DIE):
@@ -198,7 +198,7 @@ class Buket_Zombie(): # 상속
             self.Buket_IDLE.clip_draw(int(self.frame) * 196 , 0, 176, 134, self.x, self.y)
         if (self.state == self.WALK):
             self.Buket_Walk.clip_draw(int(self.frame) * 196 - 9  ,0, 176, 142, self.x, self.y)
-            self.draw_bb()
+
         if (self.state == self.ATTACK):
             self.Buket_Attack.clip_draw(int(self.frame) * 196 , 0 , 176, 142 , self.x , self.y)
         if (self.state == self.HEAD_DOWN):
@@ -299,7 +299,7 @@ class Cone_Zombie:
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
         if (self.state == self.WALK):
             self.Cone_Zombie_Walk.clip_draw(int(self.frame) * 191, 0, 176, 143, self.x, self.y)
-            self.draw_bb()
+
         if (self.state == self.ATTACK):
             self.Cone_Zombie_Attack.clip_draw(int(self.frame) * 196, 0, 176, 142, self.x, self.y)
         if (self.state == self.HEAD_DOWN):
@@ -393,7 +393,7 @@ class Helmet_Zombie:
             self.Helmet_Zombie_Zombie_IDLE.clip_draw(int(self.frame) * 184, 0, 176, 143, self.x, self.y)
         if (self.state == self.WALK):
             self.Helmet_Zombie_Zombie_Walk.clip_draw(int(self.frame) * 184 - 10, 0, 176, 160, self.x, self.y)
-            self.draw_bb()
+
         if (self.state == self.ATTACK):
             self.Helmet_Zombie_Zombie_Attack.clip_draw(int(self.frame) * 184, 0, 176, 142, self.x, self.y)
         if (self.state == self.DIE):

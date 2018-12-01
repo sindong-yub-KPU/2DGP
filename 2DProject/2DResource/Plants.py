@@ -53,7 +53,7 @@ class plant:
     def draw(self): # 식물을 그려준다
 
         self.basic_plants_image.clip_draw(int(self.frame) * 86 -2 ,  0 , 70 , 90 , self.x , self.y , )
-        self.draw_bb()
+
     def attack(self):
         pass
     def get_bb(self):
@@ -108,7 +108,7 @@ class Flower:
     def draw(self): # 식물을 그려준다
 
         self.basic_flower_image.clip_draw(int(self.frame) * 103 -2 ,  0 , 70 , 90 , self.x , self.y , )
-        self.draw_bb()
+
 
     def get_bb(self):
         return self.x - 42, self.y - 15, self.x + 42, self.y + 15
@@ -158,7 +158,7 @@ class walnut:
     def draw(self):  # 식물을 그려준다
 
         self.basic_walnut_image.clip_draw(int(self.frame) * 95 - 2, 0, 70, 90, self.x, self.y, )
-        self.draw_bb()
+
 
     def get_bb(self):
         return self.x - 42, self.y - 15, self.x + 42, self.y + 15
