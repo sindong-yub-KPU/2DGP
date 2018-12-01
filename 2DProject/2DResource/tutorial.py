@@ -446,6 +446,8 @@ class Tutorial:
         self.cur_state = Start_state  # 화면을 옮겨주는 순서 정의
         self.cur_state.enter(self, None)
 
+        self.win = 0
+        self.wintime = 0
 
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
