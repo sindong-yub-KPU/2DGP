@@ -461,11 +461,11 @@ class Stage_state:
         if (stageleveltwo.game_over == 1):
             stageleveltwo.game_over_time = get_time()
             stageleveltwo.game_over = 2
-        if (stageleveltwo.game_over == 2 and stageleveltwo.timer - stageleveltwo.game_over_time > 8):
-            clear()
-            game_framework.change_state(title_state)
+
+
         # 다음 스테이지로 넘어감 스테이지 클리어
         if(Zombie_Count == 0 and stageleveltwo.win == 0): # 스테이지 넘어가는 조건
+
             stageleveltwo.wintime = get_time()
             stageleveltwo.win = 1
             stageleveltwo.stageleveltwo_GAME_START.pause()
@@ -474,6 +474,10 @@ class Stage_state:
             stageleveltwo.win = 2
 
         if stageleveltwo.win == 2:
+            clear()
+            game_framework.change_state(title_state)
+        if (stageleveltwo.game_over == 2 and stageleveltwo.timer - stageleveltwo.game_over_time > 8):
+
             clear()
             game_framework.change_state(title_state)
 

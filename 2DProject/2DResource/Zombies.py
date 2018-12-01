@@ -189,7 +189,7 @@ class Buket_Zombie(): # 상속
         self.velocity = Zombie_SPEED_PPS
         self.Zombie_time = 0
 
-        self.hp = 3
+        self.hp = 15
     def draw(self):
         if (self.state == self.IDLE):
             self.Buket_IDLE.clip_draw(int(self.frame) * 196 , 0, 176, 134, self.x, self.y)
@@ -287,7 +287,7 @@ class Cone_Zombie:
         self.head = 0
         self.velocity = Zombie_SPEED_PPS
         self.Zombie_time = 0
-        self.hp = 5
+        self.hp = 13
     def draw(self):
         if (self.state == self.IDLE):
             self.Cone_Zombie_IDLE.clip_draw(int(self.frame) * 196, 0, 176, 143, self.x, self.y)
@@ -377,7 +377,7 @@ class Helmet_Zombie:
         self.head = 0
         self.velocity = Helmet_Zombie_SPEED_PPS
         self.Zombie_time = 0
-        self.hp = 4
+        self.hp = 20
     def draw(self):
         if (self.state == self.IDLE):
             self.Helmet_Zombie_Zombie_IDLE.clip_draw(int(self.frame) * 184, 0, 176, 143, self.x, self.y)
