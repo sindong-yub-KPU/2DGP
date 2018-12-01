@@ -67,17 +67,17 @@ class Main_UI:
                 if (event.x < 674  and event.x > 490 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_running = False
 
-                if (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
+                elif (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_menu = False
-                if(change_screen == 1 and event.x > 390 and event.x < 1010 and GAME_HEIGHT - event.y -1 < 490 and GAME_HEIGHT - event.y -1 > 370):
+                elif(change_screen == 1 and event.x > 390 and event.x < 1010 and GAME_HEIGHT - event.y -1 < 490 and GAME_HEIGHT - event.y -1 > 370):
                     change_screen = 2
                     self.start_music.set_volume(64)
                     self.start_music.play()
-                if (change_screen == 1 and event.x > 390 and event.x < 1010 and GAME_HEIGHT - event.y - 1 < 320 and GAME_HEIGHT - event.y - 1 > 200):
+                elif (change_screen == 1 and event.x > 390 and event.x < 1010 and GAME_HEIGHT - event.y - 1 < 320 and GAME_HEIGHT - event.y - 1 > 200):
                     change_screen = 3
                     self.start_music.set_volume(64)
                     self.start_music.play()
-                if (change_screen == 1 and event.x > 390 and event.x < 1010 and GAME_HEIGHT - event.y - 1 < 150 and GAME_HEIGHT - event.y - 1 > 25):
+                elif (change_screen == 1 and event.x > 390 and event.x < 1010 and GAME_HEIGHT - event.y - 1 < 150 and GAME_HEIGHT - event.y - 1 > 25):
                     change_screen = 4
                     self.start_music.set_volume(64)
                     self.start_music.play()
@@ -135,7 +135,12 @@ def draw():
     global MAIN
     MAIN.draw()
 def exit():
-    global MAIN , change_screen
+    global MAIN , change_screen , game_start ,game_running , game_menu
+    game_start = False
+    game_menu = False
+    game_running = True
+    change_screen = 0
+
     change_screen =0
     del MAIN
 
