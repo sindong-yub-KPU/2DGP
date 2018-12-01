@@ -465,8 +465,17 @@ class Stage_state:
             clear()
             game_framework.change_state(title_state)
         # 다음 스테이지로 넘어감 스테이지 클리어
-        if(Zombie_Count == 0): # 스테이지 넘어가는 조건
+        if(Zombie_Count == 0 and stageleveltwo.win == 0): # 스테이지 넘어가는 조건
+            stageleveltwo.wintime = get_time()
+            stageleveltwo.win = 1
+            stageleveltwo.stageleveltwo_GAME_START.pause()
+            stageleveltwo.winsound.play()
+        if stageleveltwo.win == 1 and stageleveltwo.timer - stageleveltwo.wintime > 5:
+            stageleveltwo.win = 2
+
+        if stageleveltwo.win == 2:
             clear()
+            game_framework.change_state(title_state)
 
     @staticmethod
     def draw(stageleveltwo):
@@ -483,7 +492,8 @@ class Stage_state:
         stageleveltwo.time_bar_image.clip_draw_to_origin(0, 60, 300 - stageleveltwo.time_bar, 60, 1080,1)
         if (stageleveltwo.game_over > 0):
             stageleveltwo.font.draw(600, 550, 'GAME OVER.....', (0, 150, 0))
-
+        if(stageleveltwo.win > 0):
+            stageleveltwo.font.draw(600, 550, 'YOU WIN!! ALL CLEAR', (150, 0, 0))
 #박스 그리기
 
 next_state_table = {
@@ -537,6 +547,12 @@ class stageleveltwo:
 
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
         self.intro_music.repeat_play()
+
+        self.win = 0
+        self.wintime = 0
+        self.winsound = load_wav('Gamesoundeffect/winmusic.ogg')
+        self.winsound.set_volume(64)
+
         self.velocity = 0
         self.event_que = [] #이벤트 큐
         self.frame = 0  # 화면을 옮겨주는 프레임
@@ -650,6 +666,7 @@ class stageleveltwo:
             if(event.key == SDLK_2):
                 self.add_event(START)
             if(event.key == SDLK_3):
-                global Zombies
+                global Zombies  , Zombie_Count
                 Zombies[0].x = 100
-
+            if (event.key == SDLK_4):
+                Zombie_Count = 0

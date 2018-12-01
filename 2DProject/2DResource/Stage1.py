@@ -255,7 +255,7 @@ class Start_state:
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
         Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
-        Stage_level_1.font.draw(600, 50, 'Stage 1')
+        Stage_level_1.font.draw(600, 50, 'Stage Level One')
 class Move_state:
     global Zombies , Zombie_Count
     @staticmethod
@@ -463,6 +463,8 @@ class Stage_state:
         Stage_level_1.time_bar_image.clip_draw_to_origin(0, 60, 300 - Stage_level_1.time_bar, 60, 1080,1)
         if (Stage_level_1.game_over > 0):
             Stage_level_1.font.draw(600, 550, 'GAME OVER.....', (0, 150, 0))
+        if(Stage_level_1.win > 0):
+            Stage_level_1.font.draw(600, 550, 'YOU WIN!!', (150, 0, 0))
       #
 #박스 그리기
 

@@ -9,7 +9,7 @@ game_start = False
 game_menu = False
 game_running = True
 change_screen = 0
-
+select_what =0
 MAIN = None
 class Main_UI:
     def __init__(self) :
@@ -18,8 +18,9 @@ class Main_UI:
         self.Main_object = load_image('Mainresource/icono.png');
         self.Main_object_esc = load_image('Mainresource/areyousure.png')
         self.Main_UI = load_image('Mainresource/Main_UI.png')
+        self.Select_stage = load_image('Mainresource/Select_Stage.png')
         self.soundtime = 0
-
+        self.clicksound = load_wav('Game')
         self.start_music = load_music('start_sound.mp3')
         self.bgm = load_music('Mainresource/Plants vs Zombies Soundtrack. [Main Menu].mp3')
         self.bgm.set_volume(64)
@@ -52,10 +53,11 @@ class Main_UI:
 
 
                   # 게임 시작
-                if( game_start == False):
+                if( game_start == False): #게임 스타트가 false일떄 마우스 다운
                     change_screen = 1
-                    self.start_music.set_volume(64)
-                    self.start_music.repeat_play()
+
+                    #self.start_music.set_volume(64)
+                    #self.start_music.play()
                 if (event.x < 674  and event.x > 490 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_running = False
 
@@ -77,14 +79,15 @@ class Main_UI:
         self.Main_UI.draw(700 , 450)
         if(game_menu == True):
             self.Main_object_esc.draw(GAME_WIDTH//2 ,GAME_HEIGHT//2, 510, 380 )
-
+        if(change_screen == 1):
+            self.Select_stage.draw(700 , 300)
         update_canvas()
 
 def update():
     global MAIN
 
 
-    if(change_screen == 1):
+    if(change_screen == 2):
         MAIN.soundtime = MAIN.soundtime + 1
         delay(0.02)
         if(MAIN.soundtime > 140):
