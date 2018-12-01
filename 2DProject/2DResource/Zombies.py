@@ -64,6 +64,7 @@ class Zombie:
         self.head = 0
         self.velocity = Zombie_SPEED_PPS
         self.Zombie_time = 0
+        self.Attack_time =0
         if(self.Basic_Zombies == None):
             self.Basic_Zombies = load_image('Tutorial/basic_zombie_idle.png')
         if (self.Basic_Zombies_Walk == None):
@@ -122,7 +123,9 @@ class Zombie:
                 self.frame = (self.frame + FRAMES_PER_ACTION_Dead * ACTION_PER_TIME_Dead * game_framework.frame_time) % 9
         #좀비 공격
         if (self.state == self.ATTACK):
-            self.Attack_sound.play()
+            if(self.world_time - self.Attack_time > 1):
+                self.Attack_sound.play()
+                self.Attack_time = get_time()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 20
 
         #line 에 따라서 y 값 관리
@@ -188,7 +191,7 @@ class Buket_Zombie(): # 상속
         self.head = 0
         self.velocity = Zombie_SPEED_PPS
         self.Zombie_time = 0
-
+        self.Attack_time = 0
         self.hp = 15
     def draw(self):
         if (self.state == self.IDLE):
@@ -217,8 +220,10 @@ class Buket_Zombie(): # 상속
                 self.head = 1 # 머리가 떨어짐
                 self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
         if (self.state == self.ATTACK):
+            if (self.world_time - self.Attack_time > 1):
+                self.Attack_sound.play()
+                self.Attack_time = get_time()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
-            self.Attack_sound.play()
             self.get_bb()
         for i in range(0, 5):
             if self.Line == i and self.state != self.IDLE:
@@ -287,6 +292,7 @@ class Cone_Zombie:
         self.head = 0
         self.velocity = Zombie_SPEED_PPS
         self.Zombie_time = 0
+        self.Attack_time = 0
         self.hp = 13
     def draw(self):
         if (self.state == self.IDLE):
@@ -314,6 +320,9 @@ class Cone_Zombie:
                 self.Zombie_time = get_time() #머리가 떨어진 시간을 잰다 .
             self.x -= self.velocity * game_framework.frame_time
         if (self.state == self.ATTACK):
+            if (self.world_time - self.Attack_time > 1):
+                self.Attack_sound.play()
+                self.Attack_time = get_time()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
             self.Attack_sound.play()
 
@@ -377,6 +386,7 @@ class Helmet_Zombie:
         self.head = 0
         self.velocity = Helmet_Zombie_SPEED_PPS
         self.Zombie_time = 0
+        self.Attack_time = 0
         self.hp = 20
     def draw(self):
         if (self.state == self.IDLE):
@@ -403,6 +413,9 @@ class Helmet_Zombie:
 
             self.x -= self.velocity * game_framework.frame_time
         if (self.state == self.ATTACK):
+            if (self.world_time - self.Attack_time > 1):
+                self.Attack_sound.play()
+                self.Attack_time = get_time()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 9
             self.Attack_sound.play()
         if (self.state == self.DIE):

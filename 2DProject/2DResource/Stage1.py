@@ -432,9 +432,7 @@ class Stage_state:
         if (Stage_level_1.game_over == 1):
             Stage_level_1.game_over_time = get_time()
             Stage_level_1.game_over = 2
-        if (Stage_level_1.game_over == 2 and Stage_level_1.timer - Stage_level_1.game_over_time > 8):
-            clear()
-            game_framework.change_state(title_state)
+
         # 다음 스테이지로 넘어감 스테이지 클리어
 
         if(Zombie_Count == 0 and Stage_level_1.win == 0): # 스테이지 넘어가는 조건
@@ -448,7 +446,9 @@ class Stage_state:
         if Stage_level_1.win == 2:
             clear()
             game_framework.change_state(StageLevelTwo_state)
-
+        if (Stage_level_1.game_over == 2 and Stage_level_1.timer - Stage_level_1.game_over_time > 8):
+            clear()
+            game_framework.change_state(title_state)
     @staticmethod
     def draw(Stage_level_1):
         Stage_level_1.Stage_level_1_map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌

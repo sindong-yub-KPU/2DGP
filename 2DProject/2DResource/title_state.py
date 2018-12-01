@@ -64,7 +64,7 @@ class Main_UI:
                     self.clicksound.play()
 
 
-                if (event.x < 674  and event.x > 490 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
+                elif (event.x < 674  and event.x > 490 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
                     game_running = False
 
                 elif (event.x < 895 and event.x > 711 and GAME_HEIGHT - event.y - 1 < (GAME_HEIGHT // 4 + 20) + 40 and GAME_HEIGHT - event.y - 1 > (GAME_HEIGHT // 4 + 20) - 40 and game_menu == True):
