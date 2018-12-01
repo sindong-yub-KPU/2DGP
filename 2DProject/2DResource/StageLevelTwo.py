@@ -616,6 +616,8 @@ class stageleveltwo:
                 self.select_card = 3 #walnut
                 self.sun_value = self.sun_value - 50
                 self.buttonclick.play()
+            elif (event.button == SDL_BUTTON_LEFT and event.x > 600 - 50 and event.x < 600 + 50 and 0 + 600 - event.y - 1 < 0 + 600 and 0 + 600 - event.y - 1 > 0 + 600 - 80 and self.select_card == 0):
+                  self.select_card = 10  # 삽
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and 0 +600 - event.y - 1 < 600 and 0 +600 - event.y > 0 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 count = False
@@ -629,6 +631,32 @@ class stageleveltwo:
                             global Plant_Count
                             for k in range(len(self.count)):
                                 if (self.plant_setting == self.count[k]):
+                                    if (self.select_card == 10):
+                                        for plant in Plants:
+                                            if (plant.sitting == self.count[k]):
+                                                self.count.remove(plant.sitting)
+                                                Plants.remove(plant)
+                                                Plant_Count -= 1
+                                                game_world.remove_object(plant)
+                                                self.select_card = 0
+                                                self.Planting_plant.play()
+                                        for Flower in Flowers:
+                                            if (Flower.sitting == self.count[k]):
+                                                self.count.remove(Flower.sitting)
+                                                Flowers.remove(Flower)
+                                                Plant_Count -= 1
+                                                game_world.remove_object(Flower)
+                                                self.select_card = 0
+                                                self.Planting_plant.play()
+                                        for walnut in Walnuts:
+                                            if (walnut.sitting == self.count[k]):
+                                                self.count.remove(walnut.sitting)
+                                                Walnuts.remove(walnut)
+                                                Plant_Count -= 1
+                                                game_world.remove_object(walnut)
+                                                self.select_card = 0
+                                                self.Planting_plant.play()
+
                                     count = True
                                     self.plant_setting = 0
                                     break

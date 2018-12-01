@@ -527,7 +527,7 @@ class Tutorial:
                                             game_world.remove_object(plant)
                                             self.select_card = 0
                                             self.Planting_plant.play()
-                                            
+
                                             break
                                 self.plant_setting = 0
                                 count = True
