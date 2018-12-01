@@ -419,7 +419,7 @@ class Stage_state:
         #타임바 해줘야함
         if(stageleveltwo.timer - stageleveltwo.time_bar_time >= 1):
             if(stageleveltwo.time_bar <= 300):
-                stageleveltwo.time_bar = (25 - Zombie_Count) * 11  #시간바의 이동속도
+                stageleveltwo.time_bar = (28 - Zombie_Count) * 11  #시간바의 이동속도
 
                 stageleveltwo.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
