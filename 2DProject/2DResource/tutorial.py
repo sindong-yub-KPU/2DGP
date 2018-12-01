@@ -344,6 +344,7 @@ class Stage_state:
                 for i in range(len(tutorial.count)):
                     if (plant.sitting == tutorial.count[i]):
                         tutorial.count.remove(plant.sitting)
+                        game_world.remove_object(plant)
                         break
                 Plants.remove(plant)
                 del plant

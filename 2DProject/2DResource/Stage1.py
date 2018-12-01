@@ -404,6 +404,7 @@ class Stage_state:
                 for i in range(len(Stage_level_1.count)):
                     if (plant.sitting == Stage_level_1.count[i]):
                         Stage_level_1.count.remove(plant.sitting)
+                        game_world.remove_object(plant)
                         break
                 Plants.remove(plant)
 
@@ -416,6 +417,8 @@ class Stage_state:
                 for i in range(len(Stage_level_1.count)):
                     if (Flower.sitting == Stage_level_1.count[i]):
                         Stage_level_1.count.remove(Flower.sitting)
+                        game_world.remove_object(Flower)
+
                         break
                 Flowers.remove(Flower)
 

@@ -229,23 +229,27 @@ def Delete_all():
 #객체들이 경우에 따라서 삭제됨
 
 def clear(): #객체 리스트 다 삭제
-    global Zombies, Plants, Bullets , Sun
+    global Zombies, Plants, Bullets , Sun , Flowers , Walnuts
     global Zombie_Count
     global Plant_Count
     global Bullet_Count
+    global Sun_Count
     del Zombies
     del Plants
     del Bullets
     del Sun
-
+    del Flowers
+    del Walnuts
     Zombies = []
     Plants = []
     Sun = []
     Bullets = []  # 객체 리스트
-
+    Flowers = []
+    Walnuts = []
     Plant_Count =0
     Zombie_Count =0
     Bullet_Count=0
+    Sun_Count = 0
 #객체 리스트 다 삭제
 
 class Start_state:
@@ -273,7 +277,7 @@ class Start_state:
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
-        stageleveltwo.font.draw(600, 50, 'Stage 1')
+        stageleveltwo.font.draw(600, 50, 'Stage Level Two')
 class Move_state:
     global Zombies , Zombie_Count
     @staticmethod
@@ -422,6 +426,7 @@ class Stage_state:
                 for i in range(len(stageleveltwo.count)):
                     if (plant.sitting == stageleveltwo.count[i]):
                         stageleveltwo.count.remove(plant.sitting)
+                        game_world.remove_object(plant)
                         break
                 Plants.remove(plant)
 
@@ -434,6 +439,7 @@ class Stage_state:
                 for i in range(len(stageleveltwo.count)):
                     if (Flower.sitting == stageleveltwo.count[i]):
                         stageleveltwo.count.remove(Flower.sitting)
+                        game_world.remove_object(Flower)
                         break
                 Flowers.remove(Flower)
 
@@ -446,6 +452,7 @@ class Stage_state:
                 for i in range(len(stageleveltwo.count)):
                     if (walnut.sitting == stageleveltwo.count[i]):
                         stageleveltwo.count.remove(walnut.sitting)
+                        game_world.remove_object(walnut)
                         break
                 Walnuts.remove(walnut)
                 print(len(Walnuts))
@@ -643,7 +650,7 @@ class stageleveltwo:
                         Sun_shine.plus_y = Sun_shine.y
                         self.getpoint.play()
                         Sun.remove(Sun_shine)
-                        del Sun_shine  # 누르면 삭제
+
                         Sun_Count -= 1 # 자원의 개수를 줄여줌
 
                         self.sun_value = self.sun_value + 30  # 자원 증가

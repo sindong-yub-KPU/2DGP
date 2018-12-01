@@ -324,7 +324,7 @@ class Cone_Zombie:
                 self.Attack_sound.play()
                 self.Attack_time = get_time()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 10
-            self.Attack_sound.play()
+
 
 
 
@@ -417,7 +417,7 @@ class Helmet_Zombie:
                 self.Attack_sound.play()
                 self.Attack_time = get_time()
             self.frame = (self.frame + FRAMES_PER_ACTION_ATTACK * ACTION_PER_TIME_ATTACK * game_framework.frame_time) % 9
-            self.Attack_sound.play()
+
         if (self.state == self.DIE):
             if(self.frame >= 5):
                 if(self.world_time - self.Zombie_time > 5):
