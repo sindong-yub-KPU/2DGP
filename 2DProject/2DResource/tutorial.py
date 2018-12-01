@@ -349,7 +349,16 @@ class Stage_state:
                 del plant
                 Plant_Count = Plant_Count - 1
         # 다음 스테이지로 넘어감 스테이지 클리어
-        if(Zombie_Count == 0): # 스테이지 넘어가는 조건
+        if(Zombie_Count == 0 and tutorial.win == 0): # 스테이지 넘어가는 조건
+              tutorial.wintime = get_time()
+              tutorial.win = 1
+              tutorial.Tutorial_GAME_START.pause()
+              tutorial.winsound.play()
+        if tutorial.win == 1 and tutorial.timer - tutorial.wintime > 5:
+            tutorial.win = 2
+
+        if tutorial.win == 2:
+
             clear()
             game_framework.change_state(Stage1_state)
 
@@ -389,6 +398,9 @@ class Stage_state:
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
+        #게임 승리
+        if(tutorial.win > 0):
+            tutorial.font.draw(600, 550, 'YOU WIN!!', (150, 0, 0))
 
         #게임 오버
         if(tutorial.game_over > 0):
@@ -448,7 +460,8 @@ class Tutorial:
 
         self.win = 0
         self.wintime = 0
-
+        self.winsound = load_wav('Gamesoundeffect/winmusic.ogg')
+        self.winsound.set_volume(64)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
         self.sun_value = 200  # 자원량
@@ -540,6 +553,8 @@ class Tutorial:
             if(event.key == SDLK_2):
                 self.add_event(START)
             if(event.key == SDLK_3):
-                global Zombies
+                global Zombies , Zombie_Count
                 Zombies[0].x = 100
+            if (event.key == SDLK_4):
+                Zombie_Count = 0
 

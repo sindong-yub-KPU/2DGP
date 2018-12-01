@@ -11,6 +11,7 @@ from Bullets import Bullet
 import game_world
 import random
 import title_state
+import StageLevelTwo_state
 
 
 PIXEL_PER_METER = (10.0 / 0.3)
@@ -435,8 +436,18 @@ class Stage_state:
             clear()
             game_framework.change_state(title_state)
         # 다음 스테이지로 넘어감 스테이지 클리어
-        if(Zombie_Count == 0): # 스테이지 넘어가는 조건
+
+        if(Zombie_Count == 0 and Stage_level_1.win == 0): # 스테이지 넘어가는 조건
+            Stage_level_1.wintime = get_time()
+            Stage_level_1.win = 1
+            Stage_level_1.Stage_level_1_GAME_START.pause()
+            Stage_level_1.winsound.play()
+        if Stage_level_1.win == 1 and Stage_level_1.timer - Stage_level_1.wintime > 5:
+            Stage_level_1.win = 2
+
+        if Stage_level_1.win == 2:
             clear()
+            game_framework.change_state(StageLevelTwo_state)
 
     @staticmethod
     def draw(Stage_level_1):
@@ -507,6 +518,13 @@ class Stage_level_1:
 
         self.Planting_plant = load_wav('Gamesoundeffect/plant1.wav')
         self.Planting_plant.set_volume(64)
+
+        self.win = 0
+        self.wintime = 0
+        self.winsound = load_wav('Gamesoundeffect/winmusic.ogg')
+        self.winsound.set_volume(64)
+
+
         self.zombiecome = False
         self.time_bar = 0
         self.intro_music.set_volume(32)  # 스테이지 들어오면 음악이 바로 재생되게함
@@ -613,7 +631,8 @@ class Stage_level_1:
             if(event.key == SDLK_2):
                 self.add_event(START)
             if(event.key == SDLK_3):
-                global Zombies
+                global Zombies , Zombie_Count
                 Zombies[0].x = 100
-
+            if (event.key == SDLK_4):
+                Zombie_Count = 0
 
