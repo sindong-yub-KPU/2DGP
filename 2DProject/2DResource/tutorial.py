@@ -185,6 +185,7 @@ class Start_state:
         tutorial.Tutorial_Map.clip_draw(0 + tutorial.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        tutorial.Impa.draw(600, 560)
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         tutorial.font.draw(600, 50, 'My house...')
 
@@ -245,6 +246,7 @@ class Move_state: # 맵을 움직이는 스테이트
         tutorial.Tutorial_Map.clip_draw(int(tutorial.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        tutorial.Impa.draw(600, 560)
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         tutorial.font.draw(600, 50, 'Defence the Zombies!!' ,(255, 0 , 0) )
     pass
@@ -383,6 +385,7 @@ class Stage_state:
         tutorial.Tutorial_Map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         tutorial.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80) # 보드판
         tutorial.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        tutorial.Impa.draw(600 , 560)
         tutorial.time_bar_image.clip_draw(0, 0, 300, 60, 1230, 30) #스테이지 타임바
         tutorial.time_bar_image.clip_draw_to_origin(0, 60, 300 - tutorial.time_bar, 60, 1080,1)
         if(tutorial.Click_order == 0): # 화살표
@@ -427,6 +430,7 @@ class Tutorial:
         self.cards = load_image('Tutorial/cards.png')
         self.arrow = load_image('Tutorial/Tutorial_arrow.png')
         self.time_bar_image = load_image('Tutorial/progress_bar.png')
+        self.Impa = load_image('Tutorial/lampa.png')
         self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
         self.getpoint = load_wav('Gamesoundeffect/points.ogg')
         self.getpoint.set_volume(64)

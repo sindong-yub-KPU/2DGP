@@ -253,6 +253,7 @@ class Start_state:
         Stage_level_1.Stage_level_1_map.clip_draw(0 + Stage_level_1.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        Stage_level_1.Impa.draw(600, 560)
         Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Stage Level One')
@@ -314,6 +315,7 @@ class Move_state:
         Stage_level_1.Stage_level_1_map.clip_draw(int(Stage_level_1.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        Stage_level_1.Impa.draw(600, 560)
         Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         Stage_level_1.font.draw(28, 532, '%d' % Stage_level_1.sun_value)
         Stage_level_1.font.draw(600, 50, 'Defence the Zombies!!', (255, 0, 0))
@@ -331,18 +333,18 @@ class Stage_state:
         Stage_level_1.Stage_level_1_Start_music.play()
         Stage_level_1.velocity += CHANGE_SPEED_PPS
         Stage_level_1.game_over_time = 0
-        for i in range(10): # 36 마리
+        for i in range(5): # 21 마리
             creat_Zombie()
             creat_Buket_Zombie()
             creat_Cone_Zombie()
         for Zombie in Zombies:
             Zombie.state = 1
-            Zombie.x = 1600
+            Zombie.x = 1700
 
             Zombie.frame = random.randint(0 , 17)
 
         for i in range(Zombie_Count):
-            Zombies[i].x += i * random.randint(100, 400) # 좀비들 거리 띄어줌
+            Zombies[i].x += i * (random.randint(100, 150) + 50) # 좀비들 거리 띄어줌
         #처음에 생산한 좀비들을 처리
 
     @staticmethod
@@ -392,7 +394,7 @@ class Stage_state:
         #타임바 해줘야함
         if(Stage_level_1.timer - Stage_level_1.time_bar_time >= 1):
             if(Stage_level_1.time_bar <= 300):
-                Stage_level_1.time_bar = (36 - Zombie_Count) * 8  #시간바의 이동속도
+                Stage_level_1.time_bar = (21 - Zombie_Count) * 14 #시간바의 이동속도
 
                 Stage_level_1.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
@@ -457,6 +459,7 @@ class Stage_state:
         Stage_level_1.Stage_level_1_map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         Stage_level_1.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)  # 보드판
         Stage_level_1.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        Stage_level_1.Impa.draw(600,560)
         Stage_level_1.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         Plants_Card.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
         Plants_Card2.draw_card(Stage_level_1.select_card, Stage_level_1.mouse_x, Stage_level_1.mouse_y)
@@ -502,6 +505,7 @@ class Stage_level_1:
             self.time_bar_image = load_image('Stage1/progress_bar.png')
         self.ZombiescomingSound = load_wav('Gamesoundeffect/Zombiescoming.wav')
         self.ZombiescomingSound.set_volume(64)
+        self.Impa = load_image('Tutorial/lampa.png')
         self.getpoint = load_wav('Gamesoundeffect/points.ogg')
         self.getpoint.set_volume(64)
 
@@ -541,7 +545,7 @@ class Stage_level_1:
         self.cur_state.enter(self, None)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
-        self.sun_value = 5000  # 자원량
+        self.sun_value = 300  # 자원량
         self.select_card = 0  # 무슨 카드를 선택했는지 아는 변수
         self.timer = 0
         self.mouse_x = 0
@@ -621,9 +625,12 @@ class Stage_level_1:
                         break
             #카드 선택 해제
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
-                self.select_card = 0  # 오른쪽 버튼을 누르면 초기화
-                self.sun_value = self.sun_value + 100
+                if(self.select_card == 1):
+                    self.sun_value += 100
+                if(self.select_card == 2):
+                    self.sun_value += 50
 
+                self.select_card = 0  # 오른쪽 버튼을 누르면 초기화
         # 마우스 모션
         if (self.cur_state == Stage_state
                 and event.type == SDL_MOUSEMOTION):

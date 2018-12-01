@@ -274,6 +274,7 @@ class Start_state:
         stageleveltwo.stageleveltwo_map.clip_draw(0 + stageleveltwo.frame, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         stageleveltwo.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         stageleveltwo.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        stageleveltwo.Impa.draw(600, 560)
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
@@ -295,6 +296,7 @@ class Move_state:
             creat_Buket_Zombie()
             creat_Cone_Zombie()
             creat_Helmet_Zombie()
+
         for Zombie  in Zombies:
 
             Zombie.x += random.randint(100, 200)
@@ -336,6 +338,7 @@ class Move_state:
         stageleveltwo.stageleveltwo_map.clip_draw(int(stageleveltwo.map_x), 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         stageleveltwo.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)
         stageleveltwo.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        stageleveltwo.Impa.draw(600, 560)
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         stageleveltwo.font.draw(28, 532, '%d' % stageleveltwo.sun_value)
@@ -354,11 +357,12 @@ class Stage_state:
         stageleveltwo.stageleveltwo_Start_music.play()
         stageleveltwo.velocity += CHANGE_SPEED_PPS
         stageleveltwo.game_over_time = 0
-        for i in range(10): # 48 마리
+        for i in range(5): # 24 마리
             creat_Zombie()
             creat_Buket_Zombie()
             creat_Cone_Zombie()
             creat_Helmet_Zombie()
+        creat_Helmet_Zombie()
         for Zombie in Zombies:
             Zombie.state = 1
             Zombie.x = 1600
@@ -415,7 +419,7 @@ class Stage_state:
         #타임바 해줘야함
         if(stageleveltwo.timer - stageleveltwo.time_bar_time >= 1):
             if(stageleveltwo.time_bar <= 300):
-                stageleveltwo.time_bar = (48 - Zombie_Count) * 8  #시간바의 이동속도
+                stageleveltwo.time_bar = (25 - Zombie_Count) * 12  #시간바의 이동속도
 
                 stageleveltwo.time_bar_time = get_time() # 아래 게임 시간 바를 그려주는것
 
@@ -493,6 +497,7 @@ class Stage_state:
         stageleveltwo.stageleveltwo_map.clip_draw(250, 0, 800, 600, 700, 300, 1400, 600)  # 맵을 그려줌
         stageleveltwo.board.clip_draw(0, 0, 557, 109, 280, 560, 557, 80)  # 보드판
         stageleveltwo.cards.clip_draw(0, 485, 64, 90, 140, 560, 64, 70)  # 카드
+        stageleveltwo.Impa.draw(600, 560)
         stageleveltwo.cards.clip_draw(62, 485, 70, 90, 210, 560, 64, 70)
         stageleveltwo.cards.clip_draw(191, 485, 70, 90, 280, 560, 64, 70)
         Plants_Card.draw_card(stageleveltwo.select_card, stageleveltwo.mouse_x, stageleveltwo.mouse_y)
@@ -530,6 +535,7 @@ class stageleveltwo:
         self.stageleveltwo_Start_music = load_music('Stage1/Tutorial_start.mp3')  # 초반 도입 음악
         self.stageleveltwo_GAME_START = load_music('Stageleveltwo/Stagelevel2music.mp3')  # 게임 스타트 음악
         self.font = load_font('Stage1/ConsolaMalgun.ttf', 25)
+        self.Impa = load_image('Tutorial/lampa.png')
         if(self.stageleveltwo_Start_logo == None):
             self.stageleveltwo_Start_logo = load_image('Stage1/Turtorial_Start.png')
         if (self.cards == None ):
@@ -571,7 +577,7 @@ class stageleveltwo:
         self.cur_state.enter(self, None)
         # 화면 정지 시간
         self.str = "우리들의 집"  # 글자 출력
-        self.sun_value = 5000  # 자원량
+        self.sun_value = 500  # 자원량
         self.select_card = 0  # 무슨 카드를 선택했는지 아는 변수
         self.timer = 0
         self.mouse_x = 0
