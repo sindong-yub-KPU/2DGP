@@ -13,12 +13,14 @@ FRAMES_PER_ACTION_WALK = 17
 class plant:
     DIE , HIT, ATTACK,IDLE  =4, 3,2 , 1
     basic_plants_image = None
+    Impa = None
     def __init__(self , x, y , line_ ,sit_):
         self.x , self.y = x, y
         self.y = (line_+ 1) * 100 - 10
         if(self.basic_plants_image == None):
             self.basic_plants_image = load_image('Tutorial/Baisc_plants.png')
-
+        if(self.Impa == None):
+            self.Impa = load_image('Tutorial/lampa.png')
         self.Bullet_Count = 0
         self.frame = random.randint(0, 11)
         self.total_frame = random.randint(0, 4)
@@ -46,7 +48,8 @@ class plant:
     def draw_card(self , card_select , mouse_x , mouse_y): # 카드를 그려줌
         if(card_select == 1):
             self.basic_plants_image.clip_draw( 0, 0, 84, 80, mouse_x + 10 , 600 - mouse_y)
-
+        if(card_select == 10):
+            self.Impa.clip_draw(0, 0, 72, 76, mouse_x + 10, 600 - mouse_y)
     def draw(self): # 식물을 그려준다
 
         self.basic_plants_image.clip_draw(int(self.frame) * 86 -2 ,  0 , 70 , 90 , self.x , self.y , )

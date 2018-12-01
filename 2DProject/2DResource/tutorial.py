@@ -357,6 +357,9 @@ class Stage_state:
               tutorial.win = 1
               tutorial.Tutorial_GAME_START.pause()
               tutorial.winsound.play()
+
+
+
         if tutorial.win == 1 and tutorial.timer - tutorial.wintime > 5:
             tutorial.win = 2
 
@@ -399,6 +402,7 @@ class Stage_state:
             tutorial.font.draw(Sun[0].x -350, Sun[0].y , 'Click here!', (255, 255, 0))  # 튜토리얼 화살표와 누르라는 명령
             tutorial.font.draw(600 , 50 , "you can get the money ^^",(255 ,0,0))  # 튜토리얼 화살표와 누르라는 명령
         Plants_Card.draw_card(tutorial.select_card, tutorial.mouse_x, tutorial.mouse_y)
+
         tutorial.font.draw(20, 530, '%d' % tutorial.sun_value)
         if (tutorial.timer - tutorial.stage_time <= 2 and tutorial.order == 0):
             tutorial.Tutorial_Start_logo.draw(700, 300)
@@ -501,6 +505,10 @@ class Tutorial:
                 if(self.Click_order == 0):
                     self.Click_order = 1
                 pass
+            elif(event.button == SDL_BUTTON_LEFT and event.x > 600 -50 and event.x < 600 +50 and 0 +600 - event.y - 1 < 0 +600 and 0 +600 - event.y - 1 > 0 +600 - 80 and   self.select_card == 0):
+                self.select_card = 10 # 삽
+
+
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1300 and event.y < 339 and event.y > 255 and self.select_card > 0):
                 # 여기서부턴 튜토리얼 대지 영역
                 count = False
@@ -510,6 +518,17 @@ class Tutorial:
                         global Plant_Count
                         for j in range(len(self.count)):
                             if(self.count[j] == self.plant_setting):
+                                if (self.select_card == 10):
+                                    for plant in Plants:
+                                        if (plant.sitting == self.count[j]):
+                                            self.count.remove(plant.sitting)
+                                            Plants.remove(plant)
+                                            Plant_Count -= 1
+                                            game_world.remove_object(plant)
+                                            self.select_card = 0
+                                            self.Planting_plant.play()
+                                            
+                                            break
                                 self.plant_setting = 0
                                 count = True
                                 break
@@ -523,6 +542,7 @@ class Tutorial:
                             self.plant_setting = 0
                             self.Planting_plant.play()
                             break
+
                 self.plant_setting = 0
             elif (event.button == SDL_BUTTON_LEFT and event.x >= 0 and event.x <= 1400 and event.y >= 0 and event.y <= 600):
                 global Sun_Count , Sun
@@ -542,8 +562,12 @@ class Tutorial:
                         self.sun_value = self.sun_value + 30  # 자원 증가
                         break
             if (event.button == SDL_BUTTON_RIGHT and self.select_card > 0):
+                if(self.select_card == 1):
+                    self.sun_value = self.sun_value + 100
+
                 self.select_card = 0  # 오른쪽 버튼을 누르면 초기화
-                self.sun_value = self.sun_value + 100
+
+
 
         # 마우스 모션
         if (self.cur_state == Stage_state
