@@ -268,7 +268,7 @@ class Stage_state:
 
             Zombies[i].state = 1;
             Zombies[i].y = 300 # 좌표를 다 300으로 바꿔줌
-            Zombies[i].x = 1800
+            Zombies[i].x = 1600
             Zombies[i].frame = random.randint(0, 17)
             Zombies[i].Line = 2
         for i in range(5):
