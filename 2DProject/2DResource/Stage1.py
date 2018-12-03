@@ -160,6 +160,8 @@ def Collide_check(Stage_level_1): # 충돌체크 편하기 위해 만듬
 
             elif (Zombie.collide != True  and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
+            else:
+                plant.state = 0
          #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
              #   plant.state = 1
 
@@ -174,12 +176,16 @@ def Collide_check(Stage_level_1): # 충돌체크 편하기 위해 만듬
 
             elif (Zombie.collide != True and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
+
         #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
         #   plant.state = 1
 
 
             elif (Zombie.collide != True and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
+
+            else:
+                Flower.state = 1
     for Zombie in Zombies: # 모든 좀비에 대하여
         Zombie.collide = False
         if(Plant_Count == 0  and Zombie.state != 3 and Zombie.state != 4 and  Zombie.state != 5): # 모든 좀비가 죽은 상태가 아니고 식물 숫자가 0이라면
@@ -623,6 +629,7 @@ class Stage_level_1:
                                                 game_world.remove_object(plant)
                                                 self.select_card = 0
                                                 self.Planting_plant.play()
+                                                break
                                         for Flower in Flowers:
                                             if (Flower.sitting == self.count[k]):
                                                 self.count.remove(Flower.sitting)
@@ -631,10 +638,11 @@ class Stage_level_1:
                                                 game_world.remove_object(Flower)
                                                 self.select_card = 0
                                                 self.Planting_plant.play()
+                                                break
                                     count = True
                                     self.plant_setting = 0
                                     break
-                            if(count == False):
+                            if(count == False and self.select_card != 10):
 
                                 creat_Plants(int(j * 140 + 70), i + 1, i + 1, self.select_card , self.plant_setting)
                                 self.select_card = 0

@@ -111,6 +111,8 @@ def Collide_check(tutorial): # 충돌체크 편하기 위해 만듬
 
             elif (Zombie.collide != True  and Zombie.state != 3 and Zombie.state != 4 and Zombie.state != 5):
                 Zombie.state = 1
+            else:
+                plant.state = 1
          #   if(plant_hited != True): #지금 식물이 맞고 있는 중이 아니라면?
              #   plant.state = 1
     for Zombie in Zombies: # 모든 좀비에 대하여
@@ -552,7 +554,7 @@ class Tutorial:
                                 count = True
                                 break
 
-                        if(count == False):
+                        if(count == False and self.select_card != 10):
                             if (self.Click_order < 3):
                                 self.Click_order = 3  # 튜토리얼 표지판 때문에 생성
                             self.count.append(self.plant_setting)

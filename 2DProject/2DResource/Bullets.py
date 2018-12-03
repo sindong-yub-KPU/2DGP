@@ -38,7 +38,7 @@ class Bullet:
             self.basic_plants_bullet.clip_composite_draw(0 , 0 , 29 , 30 , 0 + self.seta,'' ,self.x , self.y , 29 , 30  )
         if self.state == 1:
             self.basic_plants_bullet_BAAM.clip_draw(0 , 0 , 51 , 45 ,self.x , self.y ,29 + self.action , 30 + self.action  )
-        self.draw_bb()
+
     def update(self):
         if self.state == 0:
             self.x += self.velocity * game_framework.frame_time  # 총알 속도

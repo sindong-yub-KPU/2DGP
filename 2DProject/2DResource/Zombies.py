@@ -431,8 +431,8 @@ class Helmet_Zombie:
 
         if (self.state == self.ATTACK):
             if (self.hp <= 0):
-                self.state = self.HEAD_DOWN  # 머리가 떨어져서 걷다가 죽어야함
-                self.head = 1  # 머리가 떨어짐
+                self.state = self.DIE  # 머리가 떨어져서 걷다가 죽어야함
+                self.frame = 0
                 self.Zombie_time = get_time()  # 머리가 떨어진 시간을 잰다 .
 
     def get_bb(self):
